@@ -3,6 +3,8 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { ActionCreators } from '../actions'
 import ReactNative from 'react-native'
+import { Actions } from 'react-native-router-flux'
+
 const {
 	View,
 	Text,
@@ -16,13 +18,16 @@ class Home extends Component {
 	render() {
 		return (
 			<View>
-				<Text style={{marginTop: 20}}>
+				<Text style={{marginTop: 200}}>
 					Hello, World! Count: {this.props.counter}
 				</Text>
 				<TouchableHighlight onPress={() => {this.incrementCounter()}}>
 					<Text>
 						Increment
 					</Text>
+				</TouchableHighlight>
+				<TouchableHighlight onPress={() => { Actions.overview(); }}>                    
+    				<Text>To overview</Text>
 				</TouchableHighlight>
 			</View>
 		)	
