@@ -1,17 +1,11 @@
 import React, { Component } from 'react'
-import { Provider } from 'react-redux'
-import { createStore, applyMiddleware, combineReducers, compose } from 'redux'
+import { Provider, connect } from 'react-redux'
+import { createStore, applyMiddleware, compose } from 'redux'
 import thunkMiddleware from 'redux-thunk'
 import createLogger from 'redux-logger'
-import {
-    Text,
-    AppRegistry,
-	View
-} from 'react-native';
 import reducer from './reducers'
-
-import AppContainer from './containers/AppContainer'
 import styles from './assets/styles/styles'
+import Home from './containers/HomeContainer'
 
 const loggerMiddleware = createLogger({ predicate: (getState, action) => __DEV__ })
 
@@ -27,9 +21,10 @@ function configureStore(initialState) {
 
 const store = configureStore({})
 
-export const App = () => (
-	<Provider store={store}>
-		<AppContainer/>
-	</Provider>
-)
-AppRegistry.registerComponent('packEDU', () => App);
+export default function AppContainer() {
+	return(
+		<Provider store={store}>
+			<Home {...this.props}/>
+		</Provider>
+	)
+}

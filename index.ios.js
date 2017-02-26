@@ -9,6 +9,6 @@ import {
   AppRegistry,
 } from 'react-native';
 
-import { App } from './src/packEDU';
+import AppContainer from './src/';
 
-AppRegistry.registerComponent('packEDU', () => App);
+AppRegistry.registerComponent('packEDU', () => AppContainer);

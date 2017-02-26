@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import { ActionCreators } from '../actions'
 import ReactNative from 'react-native'
 const {
 	View,
@@ -32,4 +34,9 @@ function mapStateToProps(state) {
 		counter: state.counter
 	}
 }
-export default connect(mapStateToProps)(Home)
+
+function mapDispatchToProps(dispatch) {
+	return bindActionCreators(ActionCreators, dispatch)
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home)
