@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 import reducer from './reducers'
 
+import AppContainer from './containers/AppContainer'
 import styles from './assets/styles/styles'
 
 const loggerMiddleware = createLogger({ predicate: (getState, action) => __DEV__ })
@@ -26,21 +27,9 @@ function configureStore(initialState) {
 
 const store = configureStore({})
 
-export class packEDU extends Component {
-
-    render() {
-        return (
-			<View style={styles.rootContainer}>
-    			<View style={styles.displayContainer}></View>
-	    		<View style={styles.inputContainer}></View>
-			</View>
-        )
-    }
-}
-
-const App = () => (
+export const App = () => (
 	<Provider store={store}>
-		<packEDU/>
+		<AppContainer/>
 	</Provider>
 )
 AppRegistry.registerComponent('packEDU', () => App);

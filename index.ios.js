@@ -7,10 +7,8 @@
 import React, { Component } from 'react';
 import {
   AppRegistry,
-  StyleSheet,
-  Text,
-  View
 } from 'react-native';
-import { packEDU } from './src/packEDU';
 
-AppRegistry.registerComponent('packEDU', () => packEDU);
+import { App } from './src/packEDU';
+
+AppRegistry.registerComponent('packEDU', () => App);
