@@ -4,7 +4,6 @@ import { createStore, applyMiddleware, compose } from 'redux'
 import thunkMiddleware from 'redux-thunk'
 import createLogger from 'redux-logger'
 import reducer from './reducers/'
-import styles from './assets/styles/styles'
 import Home from './containers/HomeContainer'
 import Overview from './containers/OverviewContainer'
 import { Actions, ActionConst, Router, Scene } from 'react-native-router-flux';

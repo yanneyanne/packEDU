@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux'
 import { ActionCreators } from '../actions'
 import ReactNative from 'react-native'
 import { Actions } from 'react-native-router-flux'
+import styles from '../assets/styles/home_styles'
 
 const {
 	View,
@@ -17,7 +18,7 @@ class Home extends Component {
 	}
 	render() {
 		return (
-			<View>
+			<View style={styles.displayContainer}>
 				<Text style={{marginTop: 200}}>
 					Hello, World! Count: {this.props.counter}
 				</Text>
