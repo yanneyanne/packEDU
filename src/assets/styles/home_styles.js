@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native';
+import constants from './constants'
 
 var styles = StyleSheet.create({
     rootContainer: {
@@ -7,12 +8,12 @@ var styles = StyleSheet.create({
 
     displayContainer: {
         flex: 2,
-        backgroundColor: '#193441'
+        backgroundColor: constants.bgColor
     },
 
     inputContainer: {
         flex: 8,
-        backgroundColor: '#3E606F'
+        backgroundColor: constants.fgColor
     }
 });
 
