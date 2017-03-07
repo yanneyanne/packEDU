@@ -1,1 +1,2 @@
 export const INCREMENT_COUNTER = 'INCREMENT_COUNTER'
+export const GET_COURSES = 'GET_COURSES'
