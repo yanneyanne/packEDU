@@ -9,12 +9,12 @@ const {
   TouchableHighlight
 } = ReactNative
 
-class Overview extends Component {
+class Courses extends Component {
   render() {
     return (
       <View>
-        <Text style={{marginTop: 20}}>
-          In the overview
+        <Text style={{marginTop: 100}}>
+          In the course list
         </Text>
       </View>
     )	
@@ -29,4 +29,4 @@ function mapDispatchToProps(dispatch) {
   return bindActionCreators(ActionCreators, dispatch)
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Overview)
+export default connect(mapStateToProps, mapDispatchToProps)(Courses)

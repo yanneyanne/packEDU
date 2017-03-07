@@ -5,7 +5,7 @@ import thunkMiddleware from 'redux-thunk'
 import createLogger from 'redux-logger'
 import reducer from './reducers/'
 import Home from './containers/HomeContainer'
-import Overview from './containers/OverviewContainer'
+import Courses from './containers/CoursesContainer'
 import { Actions, ActionConst, Router, Scene } from 'react-native-router-flux';
 
 const loggerMiddleware = createLogger({ predicate: (getState, action) => __DEV__ })
@@ -27,7 +27,7 @@ const store = configureStore({})
 const Scenes = Actions.create(
   <Scene key='root'>
     <Scene key='home' title='Home' component={Home}></Scene>
-    <Scene key='overview' title='Overview' component={Overview}></Scene>
+    <Scene key='courses' title='Courses' component={Courses}></Scene>
   </Scene>
 )
 
