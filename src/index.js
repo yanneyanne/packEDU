@@ -7,6 +7,7 @@ import reducer from './reducers/'
 import Home from './containers/HomeContainer'
 import Overview from './containers/OverviewContainer'
 import { Actions, ActionConst, Router, Scene } from 'react-native-router-flux';
+import './storage/global.js'
 
 const loggerMiddleware = createLogger({ predicate: (getState, action) => __DEV__ })
 
