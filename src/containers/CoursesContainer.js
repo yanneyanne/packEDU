@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import Api from '..'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { ActionCreators } from '../actions'
@@ -14,8 +13,7 @@ const {
 
 class Courses extends Component {
   componentDidMount() {
-    console.log("We loadin up dat course view")
-    this.props.fetchCourses()
+    this.props.fetchRemoteCourses()
   }
 
   render() {
@@ -25,6 +23,11 @@ class Courses extends Component {
           <Text style={{marginTop: 100}}>
             Your courses:
           </Text>
+          <TouchableHighlight onPress={() => {this.testFunc()}}>
+            <Text>
+              Testbtn
+            </Text>
+          </TouchableHighlight>
         </View> 
         <ScrollView>
         </ScrollView>
