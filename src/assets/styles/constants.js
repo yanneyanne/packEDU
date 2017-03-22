@@ -1,5 +1,5 @@
 var constants = {
-	bgColor: '#193441',
+	bgColor: '#e8efff',
 	fgColor: '#3E606F'
 }
 
