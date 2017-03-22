@@ -23,11 +23,6 @@ class Courses extends Component {
           <Text style={{marginTop: 100}}>
             Your courses:
           </Text>
-          <TouchableHighlight onPress={() => {this.testFunc()}}>
-            <Text>
-              Testbtn
-            </Text>
-          </TouchableHighlight>
         </View> 
         <ScrollView>
         </ScrollView>
@@ -43,5 +38,4 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return bindActionCreators(ActionCreators, dispatch)
 }
-
 export default connect(mapStateToProps, mapDispatchToProps)(Courses)
