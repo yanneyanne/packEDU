@@ -1,7 +1,7 @@
 import { AsyncStorage } from 'react-native';
-import {Storage} from 'react-native-storage'
+import Storage from 'react-native-storage'
 
-export var storage = new Storage({
+var storage = new Storage({
   size: 1000,
   storageBackend: AsyncStorage,
   defaultExpires: null,
@@ -10,3 +10,4 @@ export var storage = new Storage({
     // we'll talk about the details later.
   }
 })
+export {storage}
