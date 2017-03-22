@@ -16,6 +16,10 @@ class Courses extends Component {
     this.props.fetchRemoteCourses()
   }
 
+  getRemoteCourse() {
+    return this.props.remoteCourses || {}
+  }
+
   render() {
     return (
       <View>
@@ -24,7 +28,18 @@ class Courses extends Component {
             Your courses:
           </Text>
         </View> 
-        <ScrollView>
+        <ScrollView style={{marginTop: 20}}>
+          {this.getRemoteCourse().map(course => {
+            return (
+              <View>
+                <TouchableHighlight>
+                  <Text>
+                    {course}
+                  </Text>
+                </TouchableHighlight>
+              </View>
+            )
+          })}
         </ScrollView>
       </View>
     )	
@@ -32,7 +47,9 @@ class Courses extends Component {
 }
 
 function mapStateToProps(state) {
-  return {}
+  return {
+    remoteCourses: state.remoteCourses 
+  }
 }
 
 function mapDispatchToProps(dispatch) {
