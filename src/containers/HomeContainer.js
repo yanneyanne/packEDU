@@ -24,7 +24,7 @@ class Home extends Component {
         <TouchableHighlight onPress={() => {this.incrementCounter()}}>
           <Text>Increment</Text>
         </TouchableHighlight>
-        <TouchableHighlight onPress={() => { Actions.courses(); }}>                
+        <TouchableHighlight onPress={() => { Actions.courses() }}>                
           <Text>To overview</Text>
         </TouchableHighlight>
       </View>
