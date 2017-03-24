@@ -22,8 +22,7 @@ class Courses extends Component {
   }
 
   downloadCourse(courseId) {
-    console.log("DL button pressed")
-    console.log(courseId)
+    this.props.downloadRemoteCourse(courseId)
   }
   
   render() {
@@ -37,8 +36,8 @@ class Courses extends Component {
         <ScrollView style={{marginTop: 20}}>
           {this.getRemoteCourses().map(course => {
             // Remote courses are an Immutable.Seq of pairs in the form [id, name]
-            courseId = course[0] 
-            courseName = course[1]
+            let courseId = course[0]
+            let courseName = course[1]
             return (
               <View style={{marginTop: 10}} key={courseId}>
                 <TouchableHighlight>

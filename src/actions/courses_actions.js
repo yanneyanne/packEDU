@@ -16,3 +16,10 @@ export function setRemoteCourses({ courses }) {
     courses
   }
 }
+
+export function downloadRemoteCourse(courseId) {
+  return (dispatch, getState) => {
+    console.log("Dispatching download action for course: ") 
+    console.log(courseId)
+  }
+}
