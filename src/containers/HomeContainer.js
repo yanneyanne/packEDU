@@ -10,6 +10,7 @@ const {
   TouchableHighlight
 } = ReactNative
 import styles from '../assets/styles/home_styles'
+import Courses from './CoursesContainer.js'
 import RemoteCourses from './RemoteCoursesContainer.js'
 
 class Home extends Component {
@@ -22,6 +23,7 @@ class Home extends Component {
         <Text style={{marginTop: 80}}>
           Welcome to APP! 
         </Text>
+        <Courses/>
         <RemoteCourses/>
       </View>
     )	
