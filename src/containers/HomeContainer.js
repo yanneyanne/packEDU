@@ -19,11 +19,8 @@ class Home extends Component {
     return (
       <View style={styles.displayContainer}>
         <Text style={{marginTop: 200}}>
-          Hello, World! Count: {this.props.counter}
+          Hello, World! 
         </Text>
-        <TouchableHighlight onPress={() => {this.incrementCounter()}}>
-          <Text>Increment</Text>
-        </TouchableHighlight>
         <TouchableHighlight onPress={() => { Actions.courses() }}>                
           <Text>To overview</Text>
         </TouchableHighlight>
@@ -34,7 +31,6 @@ class Home extends Component {
 
 function mapStateToProps(state) {
   return {
-    counter: state.counter
   }
 }
 

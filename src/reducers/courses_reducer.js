@@ -22,7 +22,6 @@ export const remoteCourses = createReducer(Map(), {
     storage.load({
       key: action.course.id,
     }).then(ret => {
-      // found data go to then()
       console.log("In storage callback!")
       console.log(ret.courseMaterial);})
     return state 
