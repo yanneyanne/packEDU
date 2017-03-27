@@ -14,19 +14,17 @@ export const remoteCourses = createReducer(Map(), {
     console.log("Firing in reducer")
     console.log("Storing")
     storage.save({
-      key: 'loginState',   // Note: Do not use underscore("_") in key!
+      key: action.course.id,
       rawData: { 
-        from: 'some other site',
-        userid: 'some userid',
-        token: 'some token'
+        courseMaterial: action.course.material
       }
     });
     storage.load({
-      key: 'loginState',
+      key: action.course.id,
     }).then(ret => {
       // found data go to then()
       console.log("In storage callback!")
-      console.log(ret.userid);})
+      console.log(ret.courseMaterial);})
     return state 
   }
 })
