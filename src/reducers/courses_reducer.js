@@ -9,5 +9,10 @@ export const remoteCourses = createReducer(Map(), {
       newRemoteCourses = newRemoteCourses.set(course.id, course.name)
     })
     return newRemoteCourses
+  },
+  [types.DOWNLOAD_REMOTE_COURSE](state, action) {
+    console.log("Firing in reducer")
+    return state 
   }
 })
+

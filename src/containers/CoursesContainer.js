@@ -33,7 +33,7 @@ class Courses extends Component {
             Your courses:
           </Text>
         </View> 
-        <ScrollView style={{marginTop: 20}}>
+        <ScrollView style={{marginTop: 10}}>
           {this.getRemoteCourses().map(course => {
             // Remote courses are an Immutable.Seq of pairs in the form [id, name]
             let courseId = course[0]
