@@ -9,7 +9,7 @@ const {
   View,
   Text,
   TouchableHighlight,
-  Scrollview
+  ScrollView
 } = ReactNative
 
 class Courses extends Component {
@@ -17,13 +17,30 @@ class Courses extends Component {
     console.log("Courses are mounting")
     this.props.loadLocalCourses() 
   }
+  
+  getLocalCourses() {
+    return this.props.localCourses || Map().entrySeq() 
+  }
 
   render() {
     return (
       <View>
         <Text>
-          This is the local course view
+          Local courses:
         </Text>
+        <ScrollView>
+          {this.getLocalCourses().map(course => {
+            let courseId = course[0]
+            let courseName = course[1]                                       
+            return (
+              <View style={{marginTop: 10}} key={courseId}>
+                <Text>
+                  {courseName}
+                </Text>
+              </View>
+            )
+          })} 
+        </ScrollView>
       </View>
     ) 
   }
@@ -31,7 +48,6 @@ class Courses extends Component {
 
 function mapStateToProps(state) {
   return {
-  
   }
 }
 

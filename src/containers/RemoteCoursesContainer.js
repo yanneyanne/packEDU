@@ -30,7 +30,7 @@ class RemoteCourses extends Component {
       <View>
         <View>
           <Text style={{marginTop: 30}}>
-            Your courses:
+            Download more Courses:
           </Text>
         </View> 
         <ScrollView>
