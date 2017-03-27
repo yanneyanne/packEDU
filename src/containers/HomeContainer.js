@@ -4,12 +4,13 @@ import { bindActionCreators } from 'redux'
 import { ActionCreators } from '../actions'
 import ReactNative from 'react-native'
 import { Actions } from 'react-native-router-flux'
-import styles from '../assets/styles/home_styles'
 const {
   View,
   Text,
   TouchableHighlight
 } = ReactNative
+import styles from '../assets/styles/home_styles'
+import RemoteCourses from './RemoteCoursesContainer.js'
 
 class Home extends Component {
   incrementCounter() {
@@ -18,12 +19,10 @@ class Home extends Component {
   render() {
     return (
       <View style={styles.displayContainer}>
-        <Text style={{marginTop: 200}}>
-          Hello, World! 
+        <Text style={{marginTop: 80}}>
+          Welcome to APP! 
         </Text>
-        <TouchableHighlight onPress={() => { Actions.courses() }}>                
-          <Text>To overview</Text>
-        </TouchableHighlight>
+        <RemoteCourses/>
       </View>
     )	
   }

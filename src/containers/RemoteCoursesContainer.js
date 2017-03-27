@@ -12,7 +12,7 @@ const {
   ScrollView
 } = ReactNative
 
-class Courses extends Component {
+class RemoteCourses extends Component {
   componentDidMount() {
     this.props.fetchRemoteCourses()
   }
@@ -29,11 +29,11 @@ class Courses extends Component {
     return (
       <View>
         <View>
-          <Text style={{marginTop: 100}}>
+          <Text style={{marginTop: 30}}>
             Your courses:
           </Text>
         </View> 
-        <ScrollView style={{marginTop: 10}}>
+        <ScrollView>
           {this.getRemoteCourses().map(course => {
             // Remote courses are an Immutable.Seq of pairs in the form [id, name]
             let courseId = course[0]
@@ -71,4 +71,4 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return bindActionCreators(ActionCreators, dispatch)
 }
-export default connect(mapStateToProps, mapDispatchToProps)(Courses)
+export default connect(mapStateToProps, mapDispatchToProps)(RemoteCourses)
