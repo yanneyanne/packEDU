@@ -2,7 +2,7 @@ import createReducer from '../lib/createReducer'
 import * as types from '../actions/types'
 import { Map, List } from 'immutable'
 
-export const courses = createReducer(List(), {
+export const courses = createReducer(Map(), {
   [types.LOAD_LOCAL_COURSES] (state, action) {
     //storage.load({
     //  key: "58c152c4e65a3494544dc833"
@@ -17,12 +17,12 @@ export const courses = createReducer(List(), {
     storage.save({
       key: action.course.id,
       rawData: {
-        courseMaterial: action.course.material 
+        name: action.course.name,
+        material: action.course.material 
       }
     })
-
     let courses = state
-    const newCourses = courses.push(action.course.id)
+    const newCourses = state.set(action.course.id, action.course.name)
     return newCourses
   }
 })
