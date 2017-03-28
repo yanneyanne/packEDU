@@ -18,21 +18,3 @@ export function setRemoteCourses({ courses }) {
   }
 }
 
-export function downloadRemoteCourse(courseId) {
-  return (dispatch, getState) => {
-    console.log("Dispatching download action for course: " + courseId) 
-    const route = '/courseMaterial/' + courseId
-    return Api.get(route).then((resp) => {
-      dispatch(addDownloadedCourse({ course: resp }))
-    }).catch( (err) => { console.log(err)})
-  }
-}
-
-export function addDownloadedCourse({ course }) {
-  console.log("Download complete")
-  console.log(course)
-  return {
-    type: types.DOWNLOAD_REMOTE_COURSE,
-    course
-  }
-}

@@ -19,7 +19,7 @@ class Courses extends Component {
   }
   
   getLocalCourses() {
-    return this.props.localCourses || Map().entrySeq() 
+    return this.props.localCourses || List()
   }
 
   render() {
@@ -30,12 +30,10 @@ class Courses extends Component {
         </Text>
         <ScrollView>
           {this.getLocalCourses().map(course => {
-            let courseId = course[0]
-            let courseName = course[1]                                       
             return (
-              <View style={{marginTop: 10}} key={courseId}>
+              <View style={{marginTop: 10}} key={"" + course}>
                 <Text>
-                  {courseName}
+                {course}
                 </Text>
               </View>
             )
@@ -48,6 +46,7 @@ class Courses extends Component {
 
 function mapStateToProps(state) {
   return {
+    localCourses: state.courses
   }
 }
 
