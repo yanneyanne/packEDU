@@ -1,13 +1,19 @@
 import createReducer from '../lib/createReducer'
 import * as types from '../actions/types'
-import { Map, List } from 'immutable'
+import { Map, List, fromJS } from 'immutable'
 import { AsyncStorage } from 'react-native'
 
 export const courses = createReducer(Map(), {
   [types.LOAD_LOCAL_COURSES] (state, action) {
-    console.log("Action in courses reducer:")
+    
+    console.log("Heres what we're working with")
     console.log(action.courses)
-    return state
+    const newLocalCourses = fromJS(action.courses)
+    console.log("Here is the new state")
+    console.log(newLocalCourses)
+    //return newLocalCourses
+    return newLocalCourses
+
     //AsyncStorage.getItem("courses").then(ret => {
     //  let newCourses = state
     //  const localCourses = JSON.parse(ret)
