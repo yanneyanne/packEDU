@@ -48,7 +48,7 @@ class Courses extends Component {
 
 function mapStateToProps(state) {
   return {
-    localCourses: state.courses.entrySeq()
+    localCourses: state.courses
   }
 }
 

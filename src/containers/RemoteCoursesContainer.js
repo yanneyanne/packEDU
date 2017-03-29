@@ -18,7 +18,7 @@ class RemoteCourses extends Component {
   }
 
   getRemoteCourses() {
-    return this.props.remoteCourses || Map().entrySeq()
+    return this.props.remoteCourses
   }
 
   downloadCourse(courseId) {
@@ -61,10 +61,7 @@ class RemoteCourses extends Component {
 
 function mapStateToProps(state) {
   return {
-    /* Using Immutabel.Map as state child not fully supported. We convert the map to an
-    array of entries in the form [[key1, value1], [key2, value2]], more specifically in
-     this case: [[courseId1, courseName1], [courseId2, courseName2]] */
-    remoteCourses: state.remoteCourses.entrySeq() 
+    remoteCourses: state.remoteCourses
   }
 }
 
