@@ -1,18 +1,41 @@
 import * as types from './types'
 import Api from '../lib/api/api'
+import { AsyncStorage } from 'react-native'
 
-export function fetchRemoteCourses() {
+export function loadLocalCourses() {
   return (dispatch, getState) => {
-    const route = '/courseNames'
-    return Api.get(route).then((resp) => {
-      dispatch(setRemoteCourses({ courses: resp }))
-    }).catch( (err) => { console.log(err)})
+    console.log("Loading local courses in actions")
+    return AsyncStorage.getItem("courses").then((response) => {
+      const localCourses = JSON.parse(response) 
+      dispatch(addLocalCourses({
+        courses: localCourses
+      }))
+    }).catch( (err) => { console.log(err) })
   }
 }
 
-export function setRemoteCourses({ courses }) {
+export function addLocalCourses({ courses }) {
   return {
-    type: types.GET_REMOTE_COURSES,
+    type: types.LOAD_LOCAL_COURSES, 
     courses
   }
 }
+
+export function downloadRemoteCourse(courseId) {
+  return (dispatch, getState) => {
+    const route = '/courseMaterial/' + courseId
+    return Api.get(route).then((resp) => {
+      dispatch(addDownloadedCourse({ 
+        course: resp 
+      })) 
+    }).catch( (err) => { console.log(err) })
+  }
+}
+
+export function addDownloadedCourse({ course }) {
+  return {
+    type: types.DOWNLOAD_REMOTE_COURSE,
+    course
+  }
+}
+  

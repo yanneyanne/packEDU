@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { ActionCreators } from '../actions'
 import ReactNative from 'react-native'
+import { Map } from 'immutable'
 
 const {
   View,
@@ -13,46 +14,46 @@ const {
 
 class Courses extends Component {
   componentDidMount() {
-    this.props.fetchRemoteCourses()
+    console.log("Courses are mounting")
+    this.props.loadLocalCourses() 
   }
-
-  getRemoteCourse() {
-    return this.props.remoteCourses || {}
+  
+  getLocalCourses() {
+    return this.props.localCourses
   }
 
   render() {
     return (
       <View>
-        <View>
-          <Text style={{marginTop: 100}}>
-            Your courses:
-          </Text>
-        </View> 
-        <ScrollView style={{marginTop: 20}}>
-          {this.getRemoteCourse().map(course => {
+        <Text>
+          Local courses:
+        </Text>
+        <ScrollView>
+          {this.getLocalCourses().map(course => {
+            let courseId = course[0]
+            let courseName = course[1]
             return (
-              <View>
-                <TouchableHighlight>
-                  <Text>
-                    {course}
-                  </Text>
-                </TouchableHighlight>
+              <View style={{marginTop: 10}} key={courseId}>
+                <Text>
+                {courseName}
+                </Text>
               </View>
             )
-          })}
+          })} 
         </ScrollView>
       </View>
-    )	
+    ) 
   }
 }
 
 function mapStateToProps(state) {
   return {
-    remoteCourses: state.remoteCourses 
+    localCourses: state.courses
   }
 }
 
 function mapDispatchToProps(dispatch) {
   return bindActionCreators(ActionCreators, dispatch)
 }
+
 export default connect(mapStateToProps, mapDispatchToProps)(Courses)
