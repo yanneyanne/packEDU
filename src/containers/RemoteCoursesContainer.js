@@ -71,4 +71,5 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return bindActionCreators(ActionCreators, dispatch)
 }
+
 export default connect(mapStateToProps, mapDispatchToProps)(RemoteCourses)
