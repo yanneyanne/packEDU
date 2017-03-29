@@ -6,14 +6,10 @@ import createLogger from 'redux-logger'
 import reducer from './reducers/'
 import Home from './containers/HomeContainer'
 import { Actions, ActionConst, Router, Scene } from 'react-native-router-flux';
-import {storage} from './storage/storage.js'
-
 
 const loggerMiddleware = createLogger({ predicate: (getState, action) => __DEV__ })
 
 const RouterWithRedux = connect()(Router)
-
-global.storage = storage
 
 function configureStore(initialState) {
   const enhancer = compose(
