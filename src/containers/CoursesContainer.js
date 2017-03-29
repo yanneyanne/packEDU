@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux'
 import { ActionCreators } from '../actions'
 import ReactNative from 'react-native'
 import { Map } from 'immutable'
+import { Actions } from 'react-native-router-flux'
 
 const {
   View,
@@ -22,6 +23,10 @@ class Courses extends Component {
     return this.props.localCourses
   }
 
+  startCourse(courseId) {
+    Actions.slide();
+  }
+
   render() {
     return (
       <View>
@@ -34,9 +39,11 @@ class Courses extends Component {
             let courseName = course[1]
             return (
               <View style={{marginTop: 10}} key={courseId}>
-                <Text>
-                {courseName}
-                </Text>
+                <TouchableHighlight onPress = {() => {this.startCourse(courseId)}}>
+                  <Text>
+                    {courseName}
+                  </Text>
+                </TouchableHighlight>
               </View>
             )
           })} 
