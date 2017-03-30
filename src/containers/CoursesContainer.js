@@ -24,6 +24,7 @@ class Courses extends Component {
   }
 
   startCourse(courseId) {
+    this.props.setActiveCourse(courseId)
     Actions.slide();
   }
 

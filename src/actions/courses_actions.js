@@ -7,14 +7,14 @@ export function loadLocalCourses() {
     console.log("Loading local courses in actions")
     return AsyncStorage.getItem("courses").then((response) => {
       const localCourses = JSON.parse(response) 
-      dispatch(addLocalCourses({
+      dispatch(dispatchAddLocalCourses({
         courses: localCourses
       }))
     }).catch( (err) => { console.log(err) })
   }
 }
 
-export function addLocalCourses({ courses }) {
+function dispatchAddLocalCourses({ courses }) {
   return {
     type: types.LOAD_LOCAL_COURSES, 
     courses
@@ -25,14 +25,14 @@ export function downloadRemoteCourse(courseId) {
   return (dispatch, getState) => {
     const route = '/courseMaterial/' + courseId
     return Api.get(route).then((resp) => {
-      dispatch(addDownloadedCourse({ 
+      dispatch(dispatchDownloadRemoteCourse({ 
         course: resp 
       })) 
     }).catch( (err) => { console.log(err) })
   }
 }
 
-export function addDownloadedCourse({ course }) {
+function dispatchDownloadRemoteCourse({ course }) {
   return {
     type: types.DOWNLOAD_REMOTE_COURSE,
     course

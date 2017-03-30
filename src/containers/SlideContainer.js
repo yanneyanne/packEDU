@@ -12,11 +12,12 @@ const {
 } = ReactNative
 
 class Slide extends Component {
+
   render() {
     return(
       <View style={{marginTop: 80}}>
         <Text>
-          In a slide!
+        {this.props.activeCourseMaterial}
         </Text>
       </View>
     )
@@ -25,6 +26,7 @@ class Slide extends Component {
 
 function mapStateToProps(state) {
   return {
+    activeCourseMaterial: "Placeholder material"
   }
 }
 
