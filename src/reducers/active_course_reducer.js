@@ -5,8 +5,9 @@ import { Map } from 'immutable'
 export const activeCourse = createReducer(Map(), {
   [types.SET_ACTIVE_COURSE](state, action) {
     console.log("In active course reducer")
-    let newState = state.set('activeCourse', action.courseId) 
-    newState = newState.set('courseMaterial', action.material)
+    console.log(action.course)
+    let newState = state.set('id', action.course.id) 
+    newState = newState.set('material', action.course.material)
     return newState
   }
 })
