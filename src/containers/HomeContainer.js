@@ -14,9 +14,6 @@ import Courses from './CoursesContainer.js'
 import RemoteCourses from './RemoteCoursesContainer.js'
 
 class Home extends Component {
-  incrementCounter() {
-    this.props.incrementCounter()
-  }
   render() {
     return (
       <View style={styles.displayContainer}>

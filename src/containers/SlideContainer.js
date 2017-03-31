@@ -12,11 +12,15 @@ const {
 } = ReactNative
 
 class Slide extends Component {
+  componentDidMount() {
+    this.props.renderSlideAt(0) 
+  } 
+
   render() {
     return(
       <View style={{marginTop: 80}}>
         <Text>
-          {this.props.activeCourseMaterial}
+          {this.props.material}
         </Text>
       </View>
     )
@@ -25,7 +29,8 @@ class Slide extends Component {
 
 function mapStateToProps(state) {
   return {
-    activeCourseMaterial: state.activeCourse.get('material')
+    showingSlideAt: state.activeCourse.get('currentSlideAt'),
+    material: state.activeCourse.get('material')
   }
 }
 
