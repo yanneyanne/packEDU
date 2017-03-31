@@ -16,7 +16,7 @@ class Slide extends Component {
     return(
       <View style={{marginTop: 80}}>
         <Text>
-          In a slide!
+          {this.props.activeCourseMaterial}
         </Text>
       </View>
     )
@@ -25,6 +25,7 @@ class Slide extends Component {
 
 function mapStateToProps(state) {
   return {
+    activeCourseMaterial: state.activeCourse.get('material')
   }
 }
 
