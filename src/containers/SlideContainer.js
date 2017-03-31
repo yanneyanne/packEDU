@@ -12,15 +12,20 @@ const {
 } = ReactNative
 
 class Slide extends Component {
-  componentDidMount() {
-    this.props.renderSlideAt(0) 
-  } 
+
+  componentDidUpdate(prevProps, prevState) {
+    if (prevProps.currentSlidePos != this.props.currentSlidePos) {
+      console.log("In component did update")  
+      console.log(this.props.currentSlideAt)
+      this.props.renderSlideAt(this.props.currentSlidePos)
+    }
+  }
 
   render() {
     return(
       <View style={{marginTop: 80}}>
         <Text>
-          {this.props.material}
+          {this.props.currentSlideMaterial}
         </Text>
       </View>
     )
@@ -29,8 +34,8 @@ class Slide extends Component {
 
 function mapStateToProps(state) {
   return {
-    showingSlideAt: state.activeCourse.get('currentSlideAt'),
-    material: state.activeCourse.get('material')
+    currentSlidePos: state.activeCourse.get('currentSlidePos'),
+    currentSlideMaterial: state.activeCourse.get('currentSlideMaterial')
   }
 }
 

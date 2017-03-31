@@ -6,8 +6,8 @@ export function setActiveCourse(courseId) {
     return AsyncStorage.getItem("courses").then((response) => {
       let courseObj = JSON.parse(response)[courseId]
       courseObj.id= courseId
-      if (typeof courseObj.currentSlideAt == 'undefined')
-        courseObj.currentSlideAt = 0
+      if (typeof courseObj.currentSlidePos == 'undefined')
+        courseObj.currentSlidePos = 0
       dispatch(dispatchSetActiveCourse(courseObj))
     })
   } 
@@ -20,11 +20,12 @@ function dispatchSetActiveCourse(course) {
   }
 }
 
-export function renderSlideAt(slideAt) {
-  console.log("Rendering slide at")
-  console.log(slideAt)
+export function renderSlideAt(pos) {
+  console.log("In actions render slide at")
+  console.log(pos)
+  let dummyContent = "<TouchableHighlight>" + pos + "</TouchableHighlight>"
   return {
-    type: types.RENDER_SLIDE 
+    type: types.RENDER_SLIDE,
+    slideMaterial: dummyContent
   }
 }
-

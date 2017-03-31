@@ -8,7 +8,12 @@ export const activeCourse = createReducer(Map(), {
     console.log(action.course)
     let newState = state.set('id', action.course.id) 
     newState = newState.set('material', action.course.material)
-    newState = newState.set('currentSlideAt', action.course.currentSlideAt)
+    newState = newState.set('currentSlidePos', action.course.currentSlidePos)
+    return newState
+  },
+
+  [types.RENDER_SLIDE](state, action) {
+    let newState = state.set('currentSlideMaterial', action.slideMaterial)
     return newState
   }
 })
