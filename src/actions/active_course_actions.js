@@ -1,5 +1,6 @@
 import * as types from './types'
 import { AsyncStorage } from 'react-native'
+import Parser from '../lib/materialParser'
 
 export function setActiveCourse(courseId) {
   return (dispatch, getState) => {
@@ -23,9 +24,9 @@ function dispatchSetActiveCourse(course) {
 export function renderSlideAt(pos) {
   console.log("In actions render slide at")
   console.log(pos)
-  let dummyContent = "<TouchableHighlight>" + pos + "</TouchableHighlight>"
+  let material = Parser.getSlideMaterial(pos)
   return {
     type: types.RENDER_SLIDE,
-    slideMaterial: dummyContent
+    slideMaterial: material
   }
 }
