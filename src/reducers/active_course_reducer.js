@@ -15,7 +15,7 @@ export const activeCourse = createReducer(Map(), {
     return newState
   },
 
-  [types.NEXT_SLIDE](state, action) {
+  [types.SET_CURRENT_SLIDE_POS](state, action) {
     let newState = state.set('currentSlidePos', action.slidePos) 
     return newState
   }

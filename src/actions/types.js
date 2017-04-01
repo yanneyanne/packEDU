@@ -6,5 +6,4 @@ export const LOAD_LOCAL_COURSES = 'LOAD_LOCAL_COURSES'
 // Actions pertaining to currently active course
 export const SET_ACTIVE_COURSE = 'SET_ACTIVE_COURSE'
 export const RENDER_SLIDE = 'RENDER_SLIDE'
-export const NEXT_SLIDE = 'NEXT_SLIDE'
-export const PREV_SLIDE = 'PREV_SLIDE'
+export const SET_CURRENT_SLIDE_POS = 'SET_CURRENT_SLIDE_POS'

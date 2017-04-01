@@ -32,7 +32,7 @@ export function renderSlideAt(pos, material) {
 export function nextSlide(pos, material) {
   let slidePos = Parser.getNextSlidePosition(pos, material)
   return {
-    type: types.NEXT_SLIDE,
+    type: types.SET_CURRENT_SLIDE_POS,
     slidePos
   }
 }
@@ -40,7 +40,7 @@ export function nextSlide(pos, material) {
 export function previousSlide(pos, material) {
   let slidePos = Parser.getPreviousSlidePosition(pos, material)
   return {
-    type: types.PREV_SLIDE,
+    type: types.SET_CURRENT_SLIDE_POS,
     slidePos
   }
 }

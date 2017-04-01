@@ -9,8 +9,6 @@ class Parser {
 
   static getSlide(pos, material) {
     let endOfSlidePos = material.slice(pos).search(Parser.slideCloser) + pos
-    console.log("Next closer at " + endOfSlidePos)
-    console.log("Slide will be " + material.slice(pos, endOfSlidePos))
     let currentSlide = material.slice(pos, endOfSlidePos).replace(Parser.slideOpener,"")
     return currentSlide
   }
@@ -18,12 +16,12 @@ class Parser {
   static getNextSlidePosition(pos, material) {
     let endOfSlidePos = material.slice(pos).search(Parser.slideCloser) + pos
     let startOfNextSlide = endOfSlidePos + Parser.slideCloser.length
-    console.log("In parser. Start of next slide is:" + startOfNextSlide)
     return startOfNextSlide
   }
 
   static getPreviousSlidePosition(pos, material) {
-    return 0 
+    let startOfPrevSlide = material.slice(0, pos).lastIndexOf(Parser.slideOpener)
+    return startOfPrevSlide
   }
 }
 
