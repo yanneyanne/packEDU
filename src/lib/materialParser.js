@@ -1,6 +1,6 @@
 class Parser {
-  static getSlideMaterial(pos) {
-    return "dummy value from parser"  
+  static getSlide(pos, material) {
+    return material
   }
 }
 

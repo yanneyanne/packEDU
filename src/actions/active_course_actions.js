@@ -21,12 +21,12 @@ function dispatchSetActiveCourse(course) {
   }
 }
 
-export function renderSlideAt(pos) {
+export function renderSlideAt(pos, material) {
   console.log("In actions render slide at")
   console.log(pos)
-  let material = Parser.getSlideMaterial(pos)
+  let slide = Parser.getSlide(pos, material)
   return {
     type: types.RENDER_SLIDE,
-    slideMaterial: material
+    slide: slide
   }
 }

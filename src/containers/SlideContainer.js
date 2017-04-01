@@ -15,9 +15,7 @@ class Slide extends Component {
 
   componentDidUpdate(prevProps, prevState) {
     if (prevProps.currentSlidePos != this.props.currentSlidePos) {
-      console.log("In component did update")  
-      console.log(this.props.currentSlideAt)
-      this.props.renderSlideAt(this.props.currentSlidePos)
+      this.props.renderSlideAt(this.props.currentSlidePos, this.props.material)
     }
   }
 
@@ -35,7 +33,8 @@ class Slide extends Component {
 function mapStateToProps(state) {
   return {
     currentSlidePos: state.activeCourse.get('currentSlidePos'),
-    currentSlideMaterial: state.activeCourse.get('currentSlideMaterial')
+    currentSlideMaterial: state.activeCourse.get('currentSlideMaterial'),
+    material: state.activeCourse.get('material')
   }
 }
 
