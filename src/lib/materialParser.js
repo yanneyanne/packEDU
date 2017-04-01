@@ -16,7 +16,7 @@ class Parser {
   }
 
   static getNextSlidePosition(pos, material) {
-    let endOfSlidePos = material.slice(pos).search(Parser.slideCloser)
+    let endOfSlidePos = material.slice(pos).search(Parser.slideCloser) + pos
     let startOfNextSlide = endOfSlidePos + Parser.slideCloser.length
     console.log("In parser. Start of next slide is:" + startOfNextSlide)
     return startOfNextSlide
