@@ -1,6 +1,8 @@
 class Parser {
   static getSlide(pos, material) {
-    return material
+    let endOfSlidePos = material.slice(pos).search("<\/slide>")
+    let currentSlide = material.slice(pos, endOfSlidePos).replace("<slide>","")
+    return currentSlide
   }
 }
 
