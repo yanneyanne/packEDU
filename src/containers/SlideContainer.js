@@ -25,6 +25,18 @@ class Slide extends Component {
         <Text>
           {this.props.currentSlideMaterial}
         </Text>
+        <TouchableHighlight onPress = {() => this.props.previousSlide(
+            this.props.currentSlidePos, this.props.material)}>
+          <Text>
+            Previous
+          </Text>
+        </TouchableHighlight>
+        <TouchableHighlight onPress = {() => this.props.nextSlide(
+            this.props.currentSlidePos, this.props.material)}>
+          <Text>
+            Next
+          </Text>
+        </TouchableHighlight>
       </View>
     )
   }

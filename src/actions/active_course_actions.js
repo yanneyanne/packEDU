@@ -28,3 +28,19 @@ export function renderSlideAt(pos, material) {
     slide: slide
   }
 }
+
+export function nextSlide(pos, material) {
+  let slidePos = Parser.getNextSlidePosition(pos, material)
+  return {
+    type: types.NEXT_SLIDE,
+    slidePos
+  }
+}
+
+export function previousSlide(pos, material) {
+  let slidePos = Parser.getPreviousSlidePosition(pos, material)
+  return {
+    type: types.PREV_SLIDE,
+    slidePos
+  }
+}
