@@ -56,3 +56,6 @@ fastlane/screenshots
 #
 coverage/*
 jest/*
+
+# Vim edit files
+*.swp
