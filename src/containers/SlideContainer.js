@@ -12,12 +12,31 @@ const {
 } = ReactNative
 
 class Slide extends Component {
+
+  componentDidUpdate(prevProps, prevState) {
+    if (prevProps.currentSlidePos != this.props.currentSlidePos) {
+      this.props.renderSlideAt(this.props.currentSlidePos, this.props.material)
+    }
+  }
+
   render() {
     return(
       <View style={{marginTop: 80}}>
         <Text>
-          {this.props.activeCourseMaterial}
+          {this.props.currentSlideMaterial}
         </Text>
+        <TouchableHighlight onPress = {() => this.props.previousSlide(
+            this.props.currentSlidePos, this.props.material)}>
+          <Text>
+            Previous
+          </Text>
+        </TouchableHighlight>
+        <TouchableHighlight onPress = {() => this.props.nextSlide(
+            this.props.currentSlidePos, this.props.material)}>
+          <Text>
+            Next
+          </Text>
+        </TouchableHighlight>
       </View>
     )
   }
@@ -25,7 +44,9 @@ class Slide extends Component {
 
 function mapStateToProps(state) {
   return {
-    activeCourseMaterial: state.activeCourse.get('material')
+    currentSlidePos: state.activeCourse.get('currentSlidePos'),
+    currentSlideMaterial: state.activeCourse.get('currentSlideMaterial'),
+    material: state.activeCourse.get('material')
   }
 }
 
