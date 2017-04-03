@@ -14,13 +14,13 @@ class Parser {
   }
 
   static getNextSlidePosition(pos, material) {
-    let endOfSlidePos = material.slice(pos).search(Parser.slideCloser) + pos
-    let startOfNextSlide = endOfSlidePos + Parser.slideCloser.length
+    let endOfSlidePos = material.indexOf(Parser.slideCloser, pos)
+    let startOfNextSlide = material.indexOf(Parser.slideOpener, endOfSlidePos)
     return startOfNextSlide
   }
 
   static getPreviousSlidePosition(pos, material) {
-    let startOfPrevSlide = material.slice(0, pos).lastIndexOf(Parser.slideOpener)
+    let startOfPrevSlide = material.lastIndexOf(Parser.slideOpener, pos-1)
     return startOfPrevSlide
   }
 }
