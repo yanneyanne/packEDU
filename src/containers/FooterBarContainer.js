@@ -7,14 +7,18 @@ import { Actions } from 'react-native-router-flux'
 import { Container, Content, Footer, FooterTab, Button, Text } from 'native-base'
 
 class FooterBar extends Component {
+  isActiveTab(tab) {
+    return tab==this.props.activeTab 
+  }
+
   render() {
     return (
       <Footer>
         <FooterTab>
-          <Button>
+          <Button active={this.isActiveTab("home")} onPress = {() => Actions.home()}>
             <Text>Home</Text>
           </Button>
-          <Button onPress = {() => Actions.remotes()}>
+          <Button active={this.isActiveTab("remotes")} onPress = {() => Actions.remotes()}>
             <Text>DL</Text>
           </Button>
           <Button>
@@ -30,7 +34,9 @@ class FooterBar extends Component {
 }
 
 function mapStateToProps(state) {
-  return {}
+  return {
+    activeTab: state.default.scene ? state.default.scene.name : null
+  }
 }
 
 function mapDispatchToProps(dispatch) {

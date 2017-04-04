@@ -10,7 +10,7 @@ import Slide from './containers/SlideContainer'
 import FooterBar from './containers/FooterBarContainer'
 import { Actions, ActionConst, Router, Scene } from 'react-native-router-flux';
 
-import { Container, Content, FooterTab, Button, Icon, Badge, Text } from 'native-base'
+import { Container } from 'native-base'
 const loggerMiddleware = createLogger({ predicate: (getState, action) => __DEV__ })
 
 const RouterWithRedux = connect()(Router)
