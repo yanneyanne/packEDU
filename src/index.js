@@ -7,8 +7,10 @@ import reducer from './reducers/'
 import Home from './containers/HomeContainer'
 import RemoteCourses from './containers/RemoteCoursesContainer'
 import Slide from './containers/SlideContainer'
+import FooterBar from './containers/FooterBarContainer'
 import { Actions, ActionConst, Router, Scene } from 'react-native-router-flux';
 
+import { Container, Content, FooterTab, Button, Icon, Badge, Text } from 'native-base'
 const loggerMiddleware = createLogger({ predicate: (getState, action) => __DEV__ })
 
 const RouterWithRedux = connect()(Router)
@@ -16,8 +18,8 @@ const RouterWithRedux = connect()(Router)
 function configureStore(initialState) {
   const enhancer = compose(
     applyMiddleware(
-    thunkMiddleware,
-    loggerMiddleware,
+      thunkMiddleware,
+      loggerMiddleware,
     )
   )
   return createStore(reducer, initialState, enhancer);
@@ -37,7 +39,10 @@ export default class AppContainer extends Component {
   render() {
     return(
       <Provider store={store}>
-        <RouterWithRedux scenes={Scenes}/>
+        <Container>
+          <RouterWithRedux scenes={Scenes}/>
+          <FooterBar/>
+        </Container>
       </Provider>
     )
   }

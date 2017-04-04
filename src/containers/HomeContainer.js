@@ -8,6 +8,7 @@ const {
   View,
   TouchableHighlight
 } = ReactNative
+
 import { Container, Content, Footer, FooterTab, Button, Icon, Badge, Text } from 'native-base'
 import styles from '../assets/styles/home_styles'
 import Courses from './CoursesContainer.js'
@@ -22,24 +23,7 @@ class Home extends Component {
             Welcome to APP! 
           </Text>
           <Courses/>
-          <RemoteCourses/>
         </View>
-        <Footer>
-          <FooterTab>
-            <Button active>
-              <Text>Home</Text>
-            </Button>
-            <Button onPress={() => Actions.remotes()}>
-              <Text>DL</Text>
-            </Button>
-            <Button>
-              <Text>HEJHEJ</Text>
-            </Button>
-            <Button>
-              <Text>Profile</Text>
-            </Button>
-          </FooterTab>
-        </Footer>
       </Container>
     )
   }
