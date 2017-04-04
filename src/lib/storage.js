@@ -12,16 +12,8 @@ class Storage{
     try {
       const value = await AsyncStorage.getItem('courses')
       var course = JSON.parse(value)[courseId]
-      if(course !== undefined){
-        course.courseId = courseId
-        return course
-      }else{
-        try {
-          throw new Error('missingCourseAsyncStorage');
-        } catch (e) {
-          console.log(e.name + ': ' + e.message);
-        }
-      }
+      course.courseId = courseId
+      return course
     } catch (e){
       console.log(e)
     }
@@ -30,16 +22,8 @@ class Storage{
   static async getCourses(){
     try {
       const value = await AsyncStorage.getItem('courses')
-      if (value !== null) {
-        var courses = JSON.parse(value)
-        return courses
-      } else {
-        try {
-          throw new Error('missingCoursesAsyncStorage')
-        } catch (e) {
-          console.log(e.name + ': ' + e.message)
-        }
-      }
+      var courses = JSON.parse(value)
+      return courses
     } catch (e) {
       console.log(e)
     }
