@@ -1,6 +1,6 @@
 import * as types from './types'
-import Parser from '../lib/materialParser'
 import Storage from '../lib/storage.js'
+import Parser from '../lib/slideCompile/materialParser'
 
 export function setActiveCourse(courseId) {
   return (dispatch, getState) => {

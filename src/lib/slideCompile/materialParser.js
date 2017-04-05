@@ -8,9 +8,26 @@ class Parser {
   }
 
   static getSlide(pos, material) {
+    let slide = this.isolateSlide(pos, material)
+    return slide
+    // First convert the isolated slide string to a DOM object
+    // Convert DOM object into JSX string element
+    // Return the result
+
+  }
+
+  static isolateSlide(pos, material) {
     let endOfSlidePos = material.slice(pos).search(Parser.slideCloser) + pos
     let currentSlide = material.slice(pos, endOfSlidePos).replace(Parser.slideOpener,"")
     return currentSlide
+  }
+
+  static convertToDOM(material) {
+    return 0 
+  }
+
+  static convertToRenderFormat() {
+    return 0 
   }
 
   static getNextSlidePosition(pos, material) {
