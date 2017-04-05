@@ -1,17 +1,15 @@
 import * as types from './types'
-import { AsyncStorage } from 'react-native'
 import Parser from '../lib/materialParser'
+import Storage from '../lib/storage.js'
 
 export function setActiveCourse(courseId) {
   return (dispatch, getState) => {
-    return AsyncStorage.getItem("courses").then((response) => {
-      let courseObj = JSON.parse(response)[courseId]
-      courseObj.id= courseId
+    return Storage.getCourse(courseId).then( (courseObj) => {
       if (typeof courseObj.currentSlidePos == 'undefined')
         courseObj.currentSlidePos = 0
       dispatch(dispatchSetActiveCourse(courseObj))
     })
-  } 
+  }
 }
 
 function dispatchSetActiveCourse(course) {
