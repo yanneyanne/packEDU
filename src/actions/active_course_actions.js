@@ -1,6 +1,6 @@
 import * as types from './types'
 import Storage from '../lib/storage.js'
-import Parser from '../lib/slideCompile/materialParser'
+import SCompile from '../lib/slideCompile/SCompile'
 
 export function setActiveCourse(courseId) {
   return (dispatch, getState) => {
@@ -20,7 +20,7 @@ function dispatchSetActiveCourse(course) {
 }
 
 export function renderSlideAt(pos, material) {
-  let slide = Parser.getSlide(pos, material)
+  let slide = SCompile.getSlide(pos, material)
   return {
     type: types.RENDER_SLIDE,
     slide: slide
@@ -28,7 +28,7 @@ export function renderSlideAt(pos, material) {
 }
 
 export function nextSlide(pos, material) {
-  let slidePos = Parser.getNextSlidePosition(pos, material)
+  let slidePos = SCompile.getNextSlidePosition(pos, material)
   return {
     type: types.SET_CURRENT_SLIDE_POS,
     slidePos
@@ -36,7 +36,7 @@ export function nextSlide(pos, material) {
 }
 
 export function previousSlide(pos, material) {
-  let slidePos = Parser.getPreviousSlidePosition(pos, material)
+  let slidePos = SCompile.getPreviousSlidePosition(pos, material)
   return {
     type: types.SET_CURRENT_SLIDE_POS,
     slidePos
