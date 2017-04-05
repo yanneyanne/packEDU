@@ -1,3 +1,5 @@
+import EduDOM from './EduDOM' 
+
 class Parser {
   static get slideOpener() {
     return "<slide>" 
@@ -13,6 +15,27 @@ class Parser {
     return currentSlide
   }
 
+  /* TODO: This function should convert a string of markup to a
+    DOM tree */
+  static convertToDOM(material, dom = new EduDOM(), parents = []) {
+    let [tagName, attributes] = this.parseTag(material)
+    console.log(tagName)
+    console.log(attributes)
+    return material
+  }
+
+  static parseTag(material) {
+    let tagStart = material.indexOf("<") +1
+    let tagEnd = material.indexOf(">")
+    let tag = material.slice(tagStart, tagEnd).trim().split(" ")
+    let attributes = []
+    let tagName = tag.shift()
+    tag.forEach((attr) => {
+      attributes.push(attr.split("="))
+    })
+    return [tagName, attributes]
+  }
+
   static getNextSlidePosition(pos, material) {
     let endOfSlidePos = material.indexOf(Parser.slideCloser, pos) 
     let startOfNextSlide = material.indexOf(Parser.slideOpener, endOfSlidePos)
@@ -22,13 +45,6 @@ class Parser {
   static getPreviousSlidePosition(pos, material) {
     let startOfPrevSlide = material.lastIndexOf(Parser.slideOpener, pos-1) 
     return startOfPrevSlide
-  }
-
-  /* TODO: This function should convert a string of markup to a
-    DOM tree */
-  static convertToDOM(material) {
-    
-    return material
   }
 }
 
