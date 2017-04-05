@@ -13,9 +13,21 @@ class Parser {
     return currentSlide
   }
 
+  static getNextSlidePosition(pos, material) {
+    let endOfSlidePos = material.indexOf(Parser.slideCloser, pos) 
+    let startOfNextSlide = material.indexOf(Parser.slideOpener, endOfSlidePos)
+    return startOfNextSlide
+  }
+
+  static getPreviousSlidePosition(pos, material) {
+    let startOfPrevSlide = material.lastIndexOf(Parser.slideOpener, pos-1) 
+    return startOfPrevSlide
+  }
+
   /* TODO: This function should convert a string of markup to a
     DOM tree */
   static convertToDOM(material) {
+    
     return material
   }
 }

@@ -11,14 +11,11 @@ class SCompile {
   }
 
   static getNextSlidePosition(pos, material) {
-    let endOfSlidePos = material.indexOf(Parser.slideCloser, pos) 
-    let startOfNextSlide = material.indexOf(Parser.slideOpener, endOfSlidePos)
-    return startOfNextSlide
+    return Parser.getNextSlidePosition(pos, material)
   }
 
   static getPreviousSlidePosition(pos, material) {
-    let startOfPrevSlide = material.lastIndexOf(Parser.slideOpener, pos-1) 
-    return startOfPrevSlide
+    return Parser.getPreviousSlidePosition(pos, material)
   }
 }
 
