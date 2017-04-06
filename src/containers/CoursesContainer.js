@@ -5,15 +5,18 @@ import { ActionCreators } from '../actions'
 import ReactNative from 'react-native'
 import { Map } from 'immutable'
 import { Actions } from 'react-native-router-flux'
+import { Label, Header, Container,ListItem, Content, Left, Right, Text, Body, Button} from 'native-base'
 
 const {
-  View,
-  Text,
-  TouchableHighlight,
-  ScrollView
+  TouchableHighlight
 } = ReactNative
 
 class Courses extends Component {
+
+  constructor(props){
+    super(props)
+    this.startCourse = this.startCourse.bind(this)
+  }
   componentDidMount() {
     console.log("Courses are mounting")
     this.props.loadLocalCourses() 
@@ -29,27 +32,31 @@ class Courses extends Component {
   }
 
   render() {
+
     return (
-      <View>
-        <Text>
-          Local courses:
-        </Text>
-        <ScrollView>
+          <Content>
+          <ListItem itemHeader first>
+          <Right>
+           <Text style={{fontWeight: 'bold'}}>
+             الدورات المحلية
+           </Text>
+           </Right>
+           </ListItem>
           {this.getLocalCourses().map(course => {
             let courseId = course[0]
             let courseName = course[1]
             return (
-              <View style={{marginTop: 10}} key={courseId}>
-                <TouchableHighlight onPress = {() => {this.startCourse(courseId)}}>
-                  <Text>
-                    {courseName}
-                  </Text>
-                </TouchableHighlight>
-              </View>
-            )
+              <ListItem button onPress={ () => {this.startCourse(courseId)}}>
+                  <Right>
+                    <Text>
+                      {courseName}
+                    </Text>
+                  </Right>
+              </ListItem>
+              )
           })} 
-        </ScrollView>
-      </View>
+
+        </Content>
     ) 
   }
 }
