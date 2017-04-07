@@ -2,9 +2,9 @@ import * as types from './elementTypes'
 import React from 'react'
 import ReactNative from 'react-native'
 const {
-  View,
-  Text
+  Text,
 }= ReactNative
+
 class Generator {
   /* TODO: This function takes a DOM tree and converts
      it into JSX to be rendered by React */
@@ -22,6 +22,8 @@ class Generator {
     switch(element.name) {
       case types.TEXT:
         return <Text> { element.content } </Text>
+      case types.INTERACTION:
+            return <Text>Hej</Text>
       default:
         return 
     }
