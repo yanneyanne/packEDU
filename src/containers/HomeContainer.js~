@@ -6,10 +6,9 @@ import ReactNative from 'react-native'
 import { Actions } from 'react-native-router-flux'
 const {
   View,
+  Text,
   TouchableHighlight
 } = ReactNative
-
-import { Container, Content, Footer, FooterTab, Button, Icon, Badge, Text } from 'native-base'
 import styles from '../assets/styles/home_styles'
 import Courses from './CoursesContainer.js'
 import RemoteCourses from './RemoteCoursesContainer.js'
@@ -17,15 +16,14 @@ import RemoteCourses from './RemoteCoursesContainer.js'
 class Home extends Component {
   render() {
     return (
-      <Container>
-        <View style={styles.displayContainer}>
-          <Text style={{marginTop: 80}}>
-            Welcome to APP! 
-          </Text>
-          <Courses/>
-        </View>
-      </Container>
-    )
+      <View style={styles.displayContainer}>
+        <Text style={{marginTop: 80}}>
+          Welcome to APP! 
+        </Text>
+        <Courses/>
+        <RemoteCourses/>
+      </View>
+    )	
   }
 }
 
