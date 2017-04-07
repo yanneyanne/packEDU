@@ -7,3 +7,6 @@ export const LOAD_LOCAL_COURSES = 'LOAD_LOCAL_COURSES'
 export const SET_ACTIVE_COURSE = 'SET_ACTIVE_COURSE'
 export const RENDER_SLIDE = 'RENDER_SLIDE'
 export const SET_CURRENT_SLIDE_POS = 'SET_CURRENT_SLIDE_POS'
+
+// Action regarding alternatating between english/arabic text style.
+export const TOGGLE_TEXT_ORIENTATION = 'TOGGLE_TEXT_ORIENTATION'

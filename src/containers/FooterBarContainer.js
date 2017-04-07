@@ -12,6 +12,8 @@ class FooterBar extends Component {
   }
 
   render() {
+    console.log("In the footer")
+    console.log(this.props.leftAlignment)
     return (
       <Footer>
         <FooterTab>
@@ -35,7 +37,8 @@ class FooterBar extends Component {
 
 function mapStateToProps(state) {
   return {
-    activeTab: state.default.scene ? state.default.scene.name : null
+    activeTab: state.default.scene ? state.default.scene.name : null,
+    leftAlignment: state.settings ? state.settings.get('alignment') : false 
   }
 }
 
