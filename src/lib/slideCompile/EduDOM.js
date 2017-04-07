@@ -1,8 +1,13 @@
 class EduDOM {
 
   constructor() {
-    this.dom = new Map()
-    this.dom.set("root", [])
+    this.dom = []
+  }
+
+  addElement(elt) {
+    this.dom.push(elt)
+    console.log("The dom is currently")
+    console.log(this.dom)
   }
 
 }

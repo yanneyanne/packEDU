@@ -17,23 +17,42 @@ class Parser {
 
   /* TODO: This function should convert a string of markup to a
     DOM tree */
-  static convertToDOM(material, dom = new EduDOM(), parents = []) {
-    let [tagName, attributes] = this.parseTag(material)
-    console.log(tagName)
-    console.log(attributes)
-    return material
+  static convertToDOM(material, dom = new EduDOM()) {
+    while(material.length>0) {
+      let tagObj = this.parseFirstTag(material)
+      let element
+      [element, material] = this.extractElement(tagObj.name, material)
+      tagObj["content"] = element
+      dom.addElement(tagObj)
+    }
+    return dom
   }
 
-  static parseTag(material) {
+  static extractElement(tagName, material) {
+    let openingTagEndPos = material.search(">") + 1
+    let closingTagStartPos = material.search("</\s*" + tagName + "\s*>")
+    let closingTagEndPos = material.indexOf(">", closingTagStartPos) + 1
+    return [material.slice(openingTagEndPos, closingTagStartPos),
+      material.slice(closingTagEndPos)]
+  }
+
+  static parseFirstTag(material) {
     let tagStart = material.indexOf("<") +1
     let tagEnd = material.indexOf(">")
-    let tag = material.slice(tagStart, tagEnd).trim().split(" ")
-    let attributes = []
-    let tagName = tag.shift()
-    tag.forEach((attr) => {
-      attributes.push(attr.split("="))
+    let tagList = material.slice(tagStart, tagEnd).trim().split(" ")
+    let tagObj = this.tagListToObj(tagList)
+    return tagObj
+  }
+
+  static tagListToObj(tagList) {
+    let tagName = tagList.shift()
+    let tagObj = {}
+    tagObj["name"] = tagName
+    tagList.forEach((attr) => {
+      let splitAttr = attr.split("=")
+      tagObj[splitAttr[0]] = splitAttr[1]
     })
-    return [tagName, attributes]
+    return tagObj
   }
 
   static getNextSlidePosition(pos, material) {
