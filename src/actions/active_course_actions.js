@@ -42,3 +42,12 @@ export function previousSlide(pos, material) {
     slidePos
   }
 }
+
+export function validateAnswer(validatorId, answer) {
+  console.log("Answer: " + answer)
+  return {
+    type: types.VALIDATE_QUIZ,
+    answer: answer,
+    validatorId: validatorId
+  }
+}
