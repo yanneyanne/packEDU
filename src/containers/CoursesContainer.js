@@ -21,13 +21,11 @@ class Courses extends Component {
   }
   componentDidMount() {
     console.log("Courses are mounting")
-    console.log
     this.props.loadLocalCourses()
     this.props.toggleTextOrientation()
   }
   
   toggleTextOrientation() {
-    console.log(this.props.settingsAlignment)
     this.props.toggleTextOrientation()
   }
 
@@ -65,7 +63,7 @@ class Courses extends Component {
             </ListItem>
           </View>
           )
-        })} 
+        })}
       </Alignment>
       </Content>
     ) 
