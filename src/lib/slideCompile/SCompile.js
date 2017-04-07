@@ -6,10 +6,8 @@ class SCompile {
   static getSlide(pos, material) {
     let isolatedSlide = Parser.isolateSlide(pos, material) 
     let slideDOM = Parser.convertToDOM(isolatedSlide)
-    console.log("This is the final DOM")
-    console.log(slideDOM)
-    let slide = Generator.convertDOMtoJSX(slideDOM)
-    return isolatedSlide
+    let slideJSX = Generator.convertDOMtoJSX(slideDOM)
+    return slideJSX
   }
 
   static getNextSlidePosition(pos, material) {
