@@ -7,13 +7,13 @@ import {View, Text, Button} from 'native-base'
 class MultipleChoice extends Component {
 
   answer(choice) {
-    let evaluator = 3
-    let ansKey = 5
+    let evaluator = this.props.evaluator
+    let ansKey = this.props.answer
     this.props.evaluateAnswer(choice, evaluator, ansKey)
   }
 
   render() {
-    // The choices are currently being passed in as props
+    // The choices, evaluator and key are currently being passed in as props
     // Is it a better idea to put them in the state?
     return (
       <View>
@@ -31,7 +31,6 @@ class MultipleChoice extends Component {
 
 function mapStateToProps(state) {
   return {
-    evaluator: state.activeCourse.get('evaluator') 
   }
 }
 

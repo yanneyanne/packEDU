@@ -11,6 +11,8 @@ class Generator {
     let jsx = []
     for (let i = 0; i < dom.size(); i++) {
       let element = dom.get(i) 
+      console.log("This is the element!")
+      console.log(element)
       let jsxElement = this.mapElementToJSX(element)
       jsx.push(jsxElement)
     }
@@ -28,7 +30,7 @@ class Generator {
             element.content = element.content.map((choice) => choice.replace("</choice>",""))
             element.content.shift()
             return (
-              <MultipleChoice choices = {element.content} />
+              <MultipleChoice choices = {element.content} evaluator = {element.evaluator} answer = {element.answer}/>
             )
           }
       default:

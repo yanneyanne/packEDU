@@ -19,6 +19,7 @@ export const activeCourse = createReducer(Map(), {
     let newState = state.set('currentSlidePos', action.slidePos) 
     return newState
   },
+
   [types.VALIDATE_QUIZ](state, action) {
     return state 
   }
