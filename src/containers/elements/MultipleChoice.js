@@ -6,8 +6,10 @@ import {View, Text, Button} from 'native-base'
 
 class MultipleChoice extends Component {
 
-  answer(ans) {
-    this.props.validateAnswer(2, ans)
+  answer(choice) {
+    let evaluator = 3
+    let ansKey = 5
+    this.props.evaluateAnswer(choice, evaluator, ansKey)
   }
 
   render() {
@@ -29,7 +31,7 @@ class MultipleChoice extends Component {
 
 function mapStateToProps(state) {
   return {
-    validator: state.activeCourse.get('validator') 
+    evaluator: state.activeCourse.get('evaluator') 
   }
 }
 

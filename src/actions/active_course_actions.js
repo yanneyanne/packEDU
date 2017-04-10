@@ -43,11 +43,12 @@ export function previousSlide(pos, material) {
   }
 }
 
-export function validateAnswer(validatorId, answer) {
-  console.log("Answer: " + answer)
+export function evaluateAnswer(choice, validatorId, answer) {
+  console.log("Chose: " + choice)
   return {
     type: types.VALIDATE_QUIZ,
-    answer: answer,
+    choice: choice,
+    answerKey: answer,
     validatorId: validatorId
   }
 }

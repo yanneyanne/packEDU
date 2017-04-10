@@ -44,6 +44,16 @@ class Storage{
 
   }
 
+  static async hasEvaluator(id) {
+    const evaluators = await AsyncStorage.getItem('evaluators')
+    var retrieved = JSON.parse(value)[id]
+    return typeof retrieved != undefined
+  }
+
+  static async evaluate(validatorId, answer, key) { 
+    console.log("Evaluating from storage")
+  }
+
 }
 
 export default Storage
