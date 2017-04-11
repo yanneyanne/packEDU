@@ -1,24 +1,26 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import {View, Left, Right} from 'native-base'
+import {Content, View, Left, Right, Text, ListItem} from 'native-base'
 import { ActionCreators } from '../actions'
 import { bindActionCreators } from 'redux'
 import { Map } from 'immutable'
+import styles from '../assets/styles/home_styles'
 
 class Alignment extends Component {
 
   render() {
     return (
-      <View>
+        <Content>
       {this.props.alignLeft ? 
-        <Left>
+        <View flex={1} alignItems={'flex-end'}>
           {this.props.children}
-        </Left>
+        </View>
         :
-        <Right>
+        <View flex={1} alignItems={'flex-start'}>
           {this.props.children}
-        </Right>}
-      </View>
+        </View>
+      }
+        </Content>
     )
   }
 }

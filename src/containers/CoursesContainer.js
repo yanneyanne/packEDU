@@ -57,14 +57,14 @@ class Courses extends Component {
           return (
           <View Style = {{marginTop: 10}} key ={courseId}>
             <ListItem button onPress={() => {this.startCourse(courseId)}}>
-              <Text>
+            <Text>
                 {courseName}
               </Text>
             </ListItem>
           </View>
           )
         })}
-      </Alignment>
+    </Alignment>
       </Content>
     ) 
     this.props.children
