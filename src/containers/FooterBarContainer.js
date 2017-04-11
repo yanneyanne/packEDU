@@ -12,7 +12,6 @@ class FooterBar extends Component {
   }
 
   render() {
-    console.log("In the footer")
     return (
       <Footer>
         <FooterTab>
