@@ -14,7 +14,7 @@ class Alignment extends Component {
           <View flex={1} alignItems={'flex-end'}>
             {this.props.children}
           </View>
-        :
+          :
           <View flex={1} alignItems={'flex-start'}>
             {this.props.children}
           </View>
@@ -27,7 +27,8 @@ class Alignment extends Component {
 function mapStateToProps(state) {
   return {
   alignLeft : state.settings ? state.settings.get('alignment') : false
-}}
+  }
+}
 
 function mapDispatchToProps(dispatch) {
   return bindActionCreators(ActionCreators, dispatch)

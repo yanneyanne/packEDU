@@ -46,9 +46,15 @@ class Courses extends Component {
             </Text>
           </Button>
             <ListItem itemHeader first>
+              {this.props.settingsAlignLeft ? 
               <Text style={{fontWeight: 'bold'}}>
                 الدورات المحلية
               </Text>
+              :
+              <Text style={{fontWeight: 'bold'}}>
+                My Courses
+              </Text>
+              }
             </ListItem>
           {this.getLocalCourses().map(course => {
             let courseId = course[0]
@@ -75,8 +81,8 @@ class Courses extends Component {
 function mapStateToProps(state) {
   return {
     localCourses: state.courses,
-    settingsAlignmentLeft: state.settings ? state.settings.get('alignment') : false
-}
+    settingsAlignLeft: state.settings ? state.settings.get('alignment') : false
+  }
 }
 
 function mapDispatchToProps(dispatch) {
