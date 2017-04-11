@@ -5,20 +5,25 @@ import { ActionCreators } from '../actions'
 import ReactNative from 'react-native'
 import { Map } from 'immutable'
 import { Actions } from 'react-native-router-flux'
-
-const {
-  View,
-  Text,
-  TouchableHighlight,
-  ScrollView
-} = ReactNative
+import { View, Label, Header, Container,ListItem, Content, Left, Right, Text, Body, Button} from 'native-base'
+import Alignment from './AlignmentContainer'
 
 class Courses extends Component {
+
+  constructor(props){
+    super(props)
+    this.startCourse = this.startCourse.bind(this)
+  }
   componentDidMount() {
     console.log("Courses are mounting")
-    this.props.loadLocalCourses() 
+    this.props.loadLocalCourses()
+    this.props.toggleTextAlignment()
   }
   
+  toggleTextAlignment() {
+    this.props.toggleTextAlignment()
+  }
+
   getLocalCourses() {
     return this.props.localCourses
   }
@@ -27,36 +32,52 @@ class Courses extends Component {
     this.props.setActiveCourse(courseId)
     Actions.slide();
   }
-
   render() {
     return (
-      <View>
-        <Text>
-          Local courses:
-        </Text>
-        <ScrollView>
+      <Content>
+        <Alignment>
+          <Button full onPress= {() => this.toggleTextAlignment() }>
+            <Text>
+              PLACEHOLDER FOR SETTINGS/TEXTORIENTATION
+            </Text>
+          </Button>
+            <ListItem itemHeader first>
+              {this.props.settingsAlignLeft ? 
+              <Text style={{fontWeight: 'bold'}}>
+                الدورات المحلية
+              </Text>
+              :
+              <Text style={{fontWeight: 'bold'}}>
+                My Courses
+              </Text>
+              }
+            </ListItem>
           {this.getLocalCourses().map(course => {
             let courseId = course[0]
             let courseName = course[1]
             return (
-              <View style={{marginTop: 10}} key={courseId}>
-                <TouchableHighlight onPress = {() => {this.startCourse(courseId)}}>
+              <View Style = {{marginTop: 10}} key ={courseId}>
+                <ListItem button onPress={() => {this.startCourse(courseId)}}>
                   <Text>
                     {courseName}
                   </Text>
-                </TouchableHighlight>
+                </ListItem>
               </View>
             )
-          })} 
-        </ScrollView>
-      </View>
+          })}
+        </Alignment>
+      </Content>
     ) 
+    this.props.children
   }
 }
 
+
+
 function mapStateToProps(state) {
   return {
-    localCourses: state.courses
+    localCourses: state.courses,
+    settingsAlignLeft: state.settings ? state.settings.get('alignment') : false
   }
 }
 
