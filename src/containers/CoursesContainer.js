@@ -8,10 +8,6 @@ import { Actions } from 'react-native-router-flux'
 import { View, Label, Header, Container,ListItem, Content, Left, Right, Text, Body, Button} from 'native-base'
 import Alignment from './AlignmentContainer'
 
-const {
-  TouchableHighlight
-} = ReactNative
-
 class Courses extends Component {
 
   constructor(props){
