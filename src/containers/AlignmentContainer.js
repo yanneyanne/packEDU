@@ -26,7 +26,7 @@ class Alignment extends Component {
 
 function mapStateToProps(state) {
   return {
-  alignLeft : state.settings ? state.settings.get('alignment') : false
+    alignLeft : state.settings ? state.settings.get('alignment') : false
   }
 }
 
