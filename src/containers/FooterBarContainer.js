@@ -13,7 +13,6 @@ class FooterBar extends Component {
 
   render() {
     console.log("In the footer")
-    console.log(this.props.leftAlignment)
     return (
       <Footer>
         <FooterTab>
