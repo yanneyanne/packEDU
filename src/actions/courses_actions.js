@@ -25,25 +25,39 @@ export function downloadRemoteCourse(courseId) {
   return (dispatch, getState) => {
     const route = '/courseMaterial/' + courseId
     return Api.get(route).then((resp) => {
-      retrieveEvaluators(resp.material)
-      while(true){}
-      dispatch(dispatchDownloadRemoteCourse({
-        course: resp
-      }))
+      return retrieveEvaluators(resp.material).then(() =>{
+        dispatch(dispatchDownloadRemoteCourse({
+          course: resp 
+        }))
+      })
     }).catch( (err) => { console.log(err) })
   }
 }
 
-function retrieveEvaluators(material) {
+async function retrieveEvaluators(material) {
   let ids = identifyEvaluators(material)
+  const neededEvaluators = await Storage.evaluatorsToDownload(ids)
+  console.log("The needed evaluators are")
+  console.log(neededEvaluators)
+  downloadNeededEvaluators(neededEvaluators)
+  return 
+}
+
+async function downloadNeededEvaluators(needed) {
+  const route = '/getEvaluators/'
+  needed.forEach((id) => {
+    Api.get(route + id).then((resp) => {
+      Storage.storeEvaluator(resp) 
+    })
+  }) 
 }
 
 function identifyEvaluators(material) {
   //Loop through the material looking for evaluators
-  let idx = 0
   let evaluators = []
   let searchTerm = "evaluator"
   let alphanumeric = /\w+/
+  let idx = 0
   while (idx != -1) {
     idx = material.indexOf(searchTerm, idx)
     if (idx != -1) {
@@ -60,6 +74,7 @@ function identifyEvaluators(material) {
   }
   console.log("These are the evaluators")
   console.log(evaluators)
+  return evaluators
 }
 
 function dispatchDownloadRemoteCourse({ course }) {

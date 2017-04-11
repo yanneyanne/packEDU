@@ -1,3 +1,4 @@
+import Storage from '../lib/storage'
 import createReducer from '../lib/createReducer'
 import * as types from '../actions/types'
 import { Map } from 'immutable'
@@ -21,6 +22,9 @@ export const activeCourse = createReducer(Map(), {
   },
 
   [types.VALIDATE_QUIZ](state, action) {
+    console.log("In reducer!")
+    console.log(action)
+    Storage.evaluate(action.evaluatorId, action.choice, action.answer)
     return state 
   }
 })

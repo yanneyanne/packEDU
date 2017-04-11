@@ -50,6 +50,6 @@ export function evaluateAnswer(choice, validatorId, answer) {
     type: types.VALIDATE_QUIZ,
     choice: choice,
     answer: answer,
-    validatorId: validatorId
+    evaluatorId: validatorId
   }
 }
