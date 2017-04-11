@@ -44,10 +44,10 @@ async function retrieveEvaluators(material) {
 }
 
 async function downloadNeededEvaluators(needed) {
-  const route = '/getEvaluators/'
+  const route = '/getEvaluator/'
   needed.forEach((id) => {
     Api.get(route + id).then((resp) => {
-      Storage.storeEvaluator(resp) 
+      Storage.saveEvaluator(resp.id, resp.script) 
     })
   }) 
 }
@@ -72,8 +72,6 @@ function identifyEvaluators(material) {
       evaluators.push(material.slice(idx, keyEnd))
     }
   }
-  console.log("These are the evaluators")
-  console.log(evaluators)
   return evaluators
 }
 

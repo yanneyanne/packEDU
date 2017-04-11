@@ -22,8 +22,7 @@ export const activeCourse = createReducer(Map(), {
   },
 
   [types.VALIDATE_QUIZ](state, action) {
-    console.log("In reducer!")
-    console.log(action)
+    //This call to storage maybe should be in the actions
     Storage.evaluate(action.evaluatorId, action.choice, action.answer)
     return state 
   }

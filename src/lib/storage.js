@@ -56,19 +56,32 @@ class Storage{
     }
   }
 
-  static async storeEvaluator(evaluatorObj) {
+  static async saveEvaluator(evaluatorId, evaluatorScript) {
     try {
-      await AsyncStorage.mergeItem('evaluators', JSON.stringify(evaluatorObj))  
+      console.log("Storing evaluator")
+      let evalObj = {}
+      evalObj[evaluatorId] = {
+        "script": evaluatorScript 
+      }
+      await AsyncStorage.mergeItem('evaluators', JSON.stringify(evalObj))  
     } catch (e) {
       console.log(e) 
     }
   }
 
   static async evaluate(evaluatorId, choice, key) { 
-    console.log("Evaluating from storage")
-    console.log("Eval id " + evaluatorId)
-    console.log("Choice " + choice)
-    console.log("Key " + key)
+    let evalScript = await this.loadEvaluator(evaluatorId)
+    eval(evalScript)
+  }
+
+  static async loadEvaluator(evaluatorId) {
+    try {
+      const loadedEvals = await AsyncStorage.getItem('evaluators')
+      let evaluators = JSON.parse(loadedEvals)
+      return evaluators[evaluatorId].script
+    } catch (e) {
+      console.log(e) 
+    }
   }
 }
 
