@@ -7,20 +7,19 @@ import { Map } from 'immutable'
 import styles from '../assets/styles/home_styles'
 
 class Alignment extends Component {
-
   render() {
     return (
-        <Content>
-      {this.props.alignLeft ? 
-        <View flex={1} alignItems={'flex-end'}>
-          {this.props.children}
-        </View>
+      <Content>
+        {this.props.alignLeft ? 
+          <View flex={1} alignItems={'flex-end'}>
+            {this.props.children}
+          </View>
         :
-        <View flex={1} alignItems={'flex-start'}>
-          {this.props.children}
-        </View>
-      }
-        </Content>
+          <View flex={1} alignItems={'flex-start'}>
+            {this.props.children}
+          </View>
+        }
+      </Content>
     )
   }
 }
