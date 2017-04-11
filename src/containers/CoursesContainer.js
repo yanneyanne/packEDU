@@ -17,7 +17,6 @@ class Courses extends Component {
   componentDidMount() {
     console.log("Courses are mounting")
     this.props.loadLocalCourses()
-    this.props.toggleTextAlignment()
   }
   
   toggleTextAlignment() {
