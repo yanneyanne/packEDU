@@ -10,10 +10,9 @@ import Slide from './containers/SlideContainer'
 import FooterBar from './containers/FooterBarContainer'
 import Settings from './containers/SettingsContainer'
 import Profile from './containers/ProfileContainer'
-
-import { Actions, ActionConst, Router, Scene } from 'react-native-router-flux';
-
+import { Actions, ActionConst, Router, Scene } from 'react-native-router-flux'
 import { Container } from 'native-base'
+
 const loggerMiddleware = createLogger({ predicate: (getState, action) => __DEV__ })
 
 const RouterWithRedux = connect()(Router)
