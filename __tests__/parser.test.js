@@ -1,4 +1,6 @@
+
 import Parser from '../src/lib/slideCompile/Parser'
+
 
 const slide1 = "Slide 1"
 const slide2 = "Slide 2"

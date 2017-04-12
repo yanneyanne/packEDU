@@ -60,3 +60,4 @@ jest/*
 # Vim edit files
 .*.swp
 .*.swo
+
