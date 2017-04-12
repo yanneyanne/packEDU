@@ -11,8 +11,14 @@ class Lessons extends Component {
     return this.props.lessons || [] 
   }
 
-  startLesson(lesson) {
+  getCourseId() {
+    return this.props.courseId 
+  }
+
+  startLesson(courseId, lesson) {
     console.log("Starting lesson " + lesson) 
+    this.props.setActiveLesson(courseId, lesson)
+    Actions.slide()
   }
 
   render() {
@@ -20,7 +26,7 @@ class Lessons extends Component {
       <Content style={{marginTop: 65}}>
         {this.getLessons().map((lesson) => {
           return (
-            <Button key={lesson} onPress = {() => this.startLesson(lesson)}>
+            <Button key={lesson} onPress = {() => this.startLesson(this.getCourseId(), lesson)}>
               <Text>
                 {lesson}
               </Text>
@@ -34,6 +40,7 @@ class Lessons extends Component {
 
 function mapStateToProps(state) {
   return {
+    courseId: state.activeCourse.get('id'),
     lessons: state.activeCourse.get('lessons')
   }
 }

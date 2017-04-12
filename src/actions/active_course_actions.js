@@ -7,34 +7,43 @@ export function setActiveCourse(courseId) {
     return Storage.getCourse(courseId).then( (courseObj) => {
       let lessons = []
       courseObj.material.forEach((lesson) =>
-        lessons.push(Object.keys(lesson)[0])
+        lessons.push(lesson[0])
       )
-      dispatch(dispatchSetActiveCourse(lessons))
+      dispatch(dispatchSetActiveCourse(courseId, lessons))
     })
   }
 }
 
-function dispatchSetActiveCourse(lessons) {
+function dispatchSetActiveCourse(courseId, lessons) {
   return {
     type: types.SET_ACTIVE_COURSE,
+    courseId,
     lessons
   }
 }
 
-export function setActiveLesson(courseId) {
+export function setActiveLesson(courseId, lessonName) {
   return (dispatch, getState) => {
     return Storage.getCourse(courseId).then( (courseObj) => {
+      let lessonMaterial
+      courseObj.material.forEach((lesson) => {
+        if(lesson[0]===lessonName) {
+          lessonMaterial = lesson[1]
+        }
+      })
+      let currentSlidePos = courseObj.currentSlidePos
       if (typeof courseObj.currentSlidePos == 'undefined')
         courseObj.currentSlidePos = 0
-      dispatch(dispatchSetActiveCourse(courseObj))
+      dispatch(dispatchSetActiveLesson(currentSlidePos, lessonMaterial))
     })
   }
 }
 
-function dispatchSetActiveLesson(course) {
+function dispatchSetActiveLesson(currentSlidePos, lessonMaterial) {
   return {
     type: types.SET_ACTIVE_LESSON,
-    course
+    currentSlidePos,
+    lessonMaterial
   }
 }
 
