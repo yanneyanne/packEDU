@@ -2,18 +2,12 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { ActionCreators } from '../actions'
-import ReactNative from 'react-native'
-import { Map } from 'immutable'
 import { Actions } from 'react-native-router-flux'
-import { View, Label, Header, Container, ListItem, Content, Left, Right, Text, Body, Button} from 'native-base'
+import { View, Header, Container, ListItem, Content, Text, Button} from 'native-base'
 import Alignment from './AlignmentContainer'
 
 class Courses extends Component {
 
-  constructor(props){
-    super(props)
-    this.startCourse = this.startCourse.bind(this)
-  }
   componentDidMount() {
     console.log("Courses are mounting")
     this.props.loadLocalCourses()
@@ -29,8 +23,9 @@ class Courses extends Component {
 
   startCourse(courseId) {
     this.props.setActiveCourse(courseId)
-    Actions.slide();
+    Actions.lessons();
   }
+
   render() {
     return (
       <Content>
@@ -62,11 +57,8 @@ class Courses extends Component {
         </Alignment>
       </Content>
     ) 
-    this.props.children
   }
 }
-
-
 
 function mapStateToProps(state) {
   return {
