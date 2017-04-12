@@ -3,9 +3,8 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { ActionCreators } from '../actions'
 import ReactNative from 'react-native'
-import { Map } from 'immutable'
 import { Actions } from 'react-native-router-flux'
-import { View, Label, Header, Container,ListItem, Content, Left, Right, Text, Body, Button } from 'native-base'
+import { Container, Content, Text, Button } from 'native-base'
 import Alignment from './AlignmentContainer'
 
 class Settings extends Component {
@@ -13,7 +12,6 @@ class Settings extends Component {
   toggleTextAlignment() {
     this.props.toggleTextAlignment()
   }
-  
 
   render() {
     return (
@@ -35,7 +33,6 @@ class Settings extends Component {
     )
   }
 }
-
 
 function mapStateToProps(state) {
   return {
