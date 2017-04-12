@@ -36,13 +36,8 @@ class Courses extends Component {
     return (
       <Content>
         <Alignment>
-          <Button full onPress= {() => this.toggleTextAlignment() }>
-            <Text>
-              PLACEHOLDER FOR SETTINGS/TEXTORIENTATION
-            </Text>
-          </Button>
-            <ListItem itemHeader first>
-              {this.props.settingsAlignRight ? 
+          <ListItem itemHeader first>
+            {this.props.settingsAlignRight ? 
               <Text style={{fontWeight: 'bold'}}>
                 الدورات المحلية
               </Text>
@@ -50,8 +45,8 @@ class Courses extends Component {
               <Text style={{fontWeight: 'bold'}}>
                 My Courses
               </Text>
-              }
-            </ListItem>
+            }
+          </ListItem>
           {this.getLocalCourses().map(course => {
             let courseId = course[0]
             let courseName = course[1]

@@ -10,18 +10,28 @@ import Alignment from './AlignmentContainer'
 
 class Settings extends Component {
 
+  toggleTextAlignment() {
+    this.props.toggleTextAlignment()
+  }
+  
+
   render() {
     return (
-        <Container>
+      <Container marginTop={80}>
         <Content>
-        <View>
-        <Button>
-        <Text> Hejhej
-        </Text>
-        </Button>
-        </View>
+          <Button full onPress ={ () => this.toggleTextAlignment() }>
+            {this.props.settingsAlignRight ? 
+              <Text>
+                Switch to left alignment
+              </Text>
+              :
+              <Text>
+                Switch to right alignment
+              </Text> 
+            }
+          </Button>
         </Content>
-        </Container>
+      </Container>
     )
   }
 }
