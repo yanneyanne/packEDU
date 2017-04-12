@@ -25,8 +25,6 @@ export function downloadRemoteCourse(courseId) {
   return (dispatch, getState) => {
     const route = '/courseMaterial/' + courseId
     return Api.get(route).then((resp) => {
-      console.log("Download response in course action")
-      console.log(resp)
       return retrieveEvaluators(resp.material).then(() =>{
         dispatch(dispatchDownloadRemoteCourse({
           course: resp 
