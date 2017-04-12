@@ -14,17 +14,21 @@ const {
 class Slide extends Component {
 
   componentDidUpdate(prevProps, prevState) {
-    if (prevProps.currentSlidePos != this.props.currentSlidePos) {
+    if (prevProps.currentSlidePos !== this.props.currentSlidePos) {
       this.props.renderSlideAt(this.props.currentSlidePos, this.props.material)
     }
+  }
+
+  getSlideMaterial() {
+    return this.props.currentSlideMaterial || [] 
   }
 
   render() {
     return(
       <View style={{marginTop: 80}}>
-        <Text>
-          {this.props.currentSlideMaterial}
-        </Text>
+        { this.getSlideMaterial().map(elt => {
+          return elt
+        })}
         <TouchableHighlight onPress = {() => this.props.previousSlide(
             this.props.currentSlidePos, this.props.material)}>
           <Text>

@@ -4,23 +4,23 @@ import { bindActionCreators } from 'redux'
 import { ActionCreators } from '../actions'
 import ReactNative from 'react-native'
 import { Actions } from 'react-native-router-flux'
-const {
-  View,
-  TouchableHighlight
-} = ReactNative
-
-import { Container, Content, Footer, FooterTab, Button, Icon, Badge, Text } from 'native-base'
+import { Container, Content, Button, Text } from 'native-base'
 import styles from '../assets/styles/home_styles'
 import Courses from './CoursesContainer.js'
 import RemoteCourses from './RemoteCoursesContainer.js'
 
-class Home extends Component {
+class Profile extends Component {
+
   render() {
     return (
-      <Container style={{marginTop: 63}}>
-        <View style={styles.displayContainer}>
-          <Courses/>
-        </View>
+      <Container marginTop={80}>
+        <Content>
+          <Button full onPress = {() => Actions.settings()}>
+            <Text>
+              Settings
+            </Text>
+          </Button>
+        </Content>
       </Container>
     )
   }
@@ -35,4 +35,4 @@ function mapDispatchToProps(dispatch) {
   return bindActionCreators(ActionCreators, dispatch)
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Home)
+export default connect(mapStateToProps, mapDispatchToProps)(Profile)

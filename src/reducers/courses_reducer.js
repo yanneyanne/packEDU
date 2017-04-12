@@ -1,7 +1,7 @@
 import createReducer from '../lib/createReducer'
 import * as types from '../actions/types'
 import { Map, List, fromJS } from 'immutable'
-import { AsyncStorage } from 'react-native'
+import Storage from '../lib/storage.js'
 
 export const courses = createReducer(List(), {
   [types.LOAD_LOCAL_COURSES] (state, action) {
@@ -16,13 +16,7 @@ export const courses = createReducer(List(), {
     let courseId = action.course.id
     let courseName = action.course.name
     let courseMaterial = action.course.material
-    let courseObj = {}
-    courseObj[courseId] = {
-      "name": courseName,
-      "material": courseMaterial
-    }
-    AsyncStorage.mergeItem("courses", JSON.stringify(courseObj)
-    ).catch( (err) => {console.log(err)})
+    Storage.saveCourse(courseId, courseName, courseMaterial)
     const newCourses = state.push([action.course.id, action.course.name])
     return newCourses
   }
