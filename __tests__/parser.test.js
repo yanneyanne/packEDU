@@ -1,4 +1,4 @@
-import Parser from '../src/lib/materialParser'
+import Parser from '../src/lib/slideCompile/Parser'
 
 const slide1 = "Slide 1"
 const slide2 = "Slide 2"
@@ -10,7 +10,7 @@ test('has correct slide delimiters', () => {
 })
 
 test('get correct material in first slide', () => {
-  expect(Parser.getSlide(0, dummyMaterial)).toBe(slide1)
+  expect(Parser.isolateSlide(0, dummyMaterial)).toBe(slide1)
 })
 
 test('gets correct next slide position', () => {
