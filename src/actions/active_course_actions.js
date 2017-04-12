@@ -5,6 +5,25 @@ import SCompile from '../lib/slideCompile/SCompile'
 export function setActiveCourse(courseId) {
   return (dispatch, getState) => {
     return Storage.getCourse(courseId).then( (courseObj) => {
+      let lessons = []
+      courseObj.material.forEach((lesson) =>
+        lessons.push(Object.keys(lesson)[0])
+      )
+      dispatch(dispatchSetActiveCourse(lessons))
+    })
+  }
+}
+
+function dispatchSetActiveCourse(lessons) {
+  return {
+    type: types.SET_ACTIVE_COURSE,
+    lessons
+  }
+}
+
+export function setActiveLesson(courseId) {
+  return (dispatch, getState) => {
+    return Storage.getCourse(courseId).then( (courseObj) => {
       if (typeof courseObj.currentSlidePos == 'undefined')
         courseObj.currentSlidePos = 0
       dispatch(dispatchSetActiveCourse(courseObj))
@@ -12,9 +31,9 @@ export function setActiveCourse(courseId) {
   }
 }
 
-function dispatchSetActiveCourse(course) {
+function dispatchSetActiveLesson(course) {
   return {
-    type: types.SET_ACTIVE_COURSE,
+    type: types.SET_ACTIVE_LESSON,
     course
   }
 }

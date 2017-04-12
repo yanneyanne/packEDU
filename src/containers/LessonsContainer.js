@@ -3,16 +3,28 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { ActionCreators } from '../actions'
 import { Actions } from 'react-native-router-flux'
-import { Content, Text} from 'native-base'
+import { Content, Button, Text} from 'native-base'
 
 class Lessons extends Component {
 
+  getLessons() {
+    console.log("Getting lessons!")
+    console.log(this.props.lessons)
+    return this.props.lessons || [] 
+  }
+
   render() {
     return (
-      <Content>
-        <Text style={{marginTop: 80}}>
-          Showing lessons!
-        </Text>
+      <Content style={{marginTop: 65}}>
+        {this.getLessons().map((lesson) => {
+          return (
+            <Button>
+              <Text>
+                {lesson}
+              </Text>
+            </Button>
+          )
+        })}
       </Content>
     )
   }
@@ -20,6 +32,7 @@ class Lessons extends Component {
 
 function mapStateToProps(state) {
   return {
+    lessons: state.activeCourse.get('lessons')
   }
 }
 

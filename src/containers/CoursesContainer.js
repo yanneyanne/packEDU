@@ -8,10 +8,6 @@ import Alignment from './AlignmentContainer'
 
 class Courses extends Component {
 
-  constructor(props){
-    super(props)
-    this.startCourse = this.startCourse.bind(this)
-  }
   componentDidMount() {
     console.log("Courses are mounting")
     this.props.loadLocalCourses()
@@ -39,17 +35,15 @@ class Courses extends Component {
               PLACEHOLDER FOR SETTINGS/TEXTORIENTATION
             </Text>
           </Button>
-            <ListItem itemHeader first>
-              {this.props.settingsAlignRight ? 
-              <Text style={{fontWeight: 'bold'}}>
-                الدورات المحلية
-              </Text>
-              :
-              <Text style={{fontWeight: 'bold'}}>
-                My Courses
-              </Text>
-              }
-            </ListItem>
+          {this.props.settingsAlignRight ? 
+            <Text style={{fontWeight: 'bold'}}>
+              الدورات المحلية
+            </Text>
+            :
+            <Text style={{fontWeight: 'bold'}}>
+              My Courses
+            </Text>
+          }
           {this.getLocalCourses().map(course => {
             let courseId = course[0]
             let courseName = course[1]

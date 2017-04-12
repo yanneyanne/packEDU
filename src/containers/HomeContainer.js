@@ -17,11 +17,8 @@ import RemoteCourses from './RemoteCoursesContainer.js'
 class Home extends Component {
   render() {
     return (
-      <Container>
+      <Container style={{marginTop: 63}}>
         <View style={styles.displayContainer}>
-          <Text style={{marginTop: 80}}>
-            Welcome to APP! 
-          </Text>
           <Courses/>
         </View>
       </Container>
