@@ -58,4 +58,5 @@ coverage/*
 jest/*
 
 # Vim edit files
-*.swp
+.*.swp
+.*.swo
