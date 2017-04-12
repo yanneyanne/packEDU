@@ -8,9 +8,11 @@ import { Content, Button, Text} from 'native-base'
 class Lessons extends Component {
 
   getLessons() {
-    console.log("Getting lessons!")
-    console.log(this.props.lessons)
     return this.props.lessons || [] 
+  }
+
+  startLesson(lesson) {
+    console.log("Starting lesson " + lesson) 
   }
 
   render() {
@@ -18,7 +20,7 @@ class Lessons extends Component {
       <Content style={{marginTop: 65}}>
         {this.getLessons().map((lesson) => {
           return (
-            <Button>
+            <Button key={lesson} onPress = {() => this.startLesson(lesson)}>
               <Text>
                 {lesson}
               </Text>
