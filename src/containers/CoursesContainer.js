@@ -5,7 +5,7 @@ import { ActionCreators } from '../actions'
 import ReactNative from 'react-native'
 import { Map } from 'immutable'
 import { Actions } from 'react-native-router-flux'
-import { View, Label, Header, Container,ListItem, Content, Left, Right, Text, Body, Button} from 'native-base'
+import { View, Label, Header, Container, ListItem, Content, Left, Right, Text, Body, Button} from 'native-base'
 import Alignment from './AlignmentContainer'
 
 class Courses extends Component {
@@ -35,13 +35,8 @@ class Courses extends Component {
     return (
       <Content>
         <Alignment>
-          <Button full onPress= {() => this.toggleTextAlignment() }>
-            <Text>
-              PLACEHOLDER FOR SETTINGS/TEXTORIENTATION
-            </Text>
-          </Button>
-            <ListItem itemHeader first>
-              {this.props.settingsAlignRight ? 
+          <ListItem itemHeader first>
+            {this.props.settingsAlignRight ? 
               <Text style={{fontWeight: 'bold'}}>
                 الدورات المحلية
               </Text>
@@ -49,8 +44,8 @@ class Courses extends Component {
               <Text style={{fontWeight: 'bold'}}>
                 My Courses
               </Text>
-              }
-            </ListItem>
+            }
+          </ListItem>
           {this.getLocalCourses().map(course => {
             let courseId = course[0]
             let courseName = course[1]
