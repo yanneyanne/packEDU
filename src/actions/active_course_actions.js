@@ -44,8 +44,6 @@ export function previousSlide(pos, material) {
 }
 
 export function evaluateAnswer(choice, validatorId, answer) {
-  console.log("Chose: " + choice)
-  console.log("Validator: " + validatorId)
   return {
     type: types.VALIDATE_QUIZ,
     choice: choice,

@@ -37,10 +37,7 @@ export function downloadRemoteCourse(courseId) {
 async function retrieveEvaluators(material) {
   let ids = identifyEvaluators(material)
   const neededEvaluators = await Storage.evaluatorsToDownload(ids)
-  console.log("The needed evaluators are")
-  console.log(neededEvaluators)
   downloadNeededEvaluators(neededEvaluators)
-  return 
 }
 
 async function downloadNeededEvaluators(needed) {
