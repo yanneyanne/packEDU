@@ -16,7 +16,6 @@ class Lessons extends Component {
   }
 
   startLesson(courseId, lesson) {
-    console.log("Starting lesson " + lesson) 
     this.props.setActiveLesson(courseId, lesson)
     Actions.slide()
   }

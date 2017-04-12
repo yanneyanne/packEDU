@@ -33,7 +33,7 @@ export function setActiveLesson(courseId, lessonName) {
       })
       let currentSlidePos = courseObj.currentSlidePos
       if (typeof courseObj.currentSlidePos == 'undefined')
-        courseObj.currentSlidePos = 0
+        currentSlidePos = 0
       dispatch(dispatchSetActiveLesson(currentSlidePos, lessonMaterial))
     })
   }
