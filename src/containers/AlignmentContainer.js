@@ -10,7 +10,7 @@ class Alignment extends Component {
   render() {
     return (
       <Content>
-        {this.props.alignLeft ? 
+        {this.props.alignRight ? 
           <View flex={1} alignItems={'flex-end'}>
             {this.props.children}
           </View>
@@ -26,7 +26,7 @@ class Alignment extends Component {
 
 function mapStateToProps(state) {
   return {
-    alignLeft : state.settings ? state.settings.get('alignment') : false
+    alignRight : state.settings ? state.settings.get('alignment') : false
   }
 }
 
