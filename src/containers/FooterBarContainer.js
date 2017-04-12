@@ -8,7 +8,7 @@ import { Container, Content, Footer, FooterTab, Button, Text } from 'native-base
 
 class FooterBar extends Component {
   isActiveTab(tab) {
-    return tab==this.props.activeTab 
+    return tab==this.props.activeTab
   }
 
   render() {
@@ -24,12 +24,12 @@ class FooterBar extends Component {
           <Button>
             <Text>Hej</Text>
           </Button>
-          <Button>
+          <Button active={this.isActiveTab("profile")} onPress = {() => Actions.profile()}>
             <Text>Profile</Text>
           </Button>
         </FooterTab>
       </Footer>
-    ) 
+    )
   }
 }
 
