@@ -71,7 +71,10 @@ class Storage{
 
   static async evaluate(evaluatorId, choice, key) { 
     let evalScript = await this.loadEvaluator(evaluatorId)
-    eval(evalScript)
+    let param = choice
+    let isCorrect = eval(evalScript)
+    console.log("Is the answer correct: " + isCorrect)
+    
   }
 
   static async loadEvaluator(evaluatorId) {
