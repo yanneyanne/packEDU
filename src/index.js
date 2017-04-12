@@ -8,6 +8,7 @@ import Home from './containers/HomeContainer'
 import RemoteCourses from './containers/RemoteCoursesContainer'
 import Slide from './containers/SlideContainer'
 import FooterBar from './containers/FooterBarContainer'
+import Settings from './containers/SettingsContainer'
 import { Actions, ActionConst, Router, Scene } from 'react-native-router-flux';
 
 import { Container } from 'native-base'
@@ -32,6 +33,7 @@ const Scenes = Actions.create(
     <Scene key='home' title='Home' component={Home}></Scene>
     <Scene key='remotes' title='Download' component={RemoteCourses}></Scene>
     <Scene key='slide' title='Course' component={Slide}></Scene>
+    <Scene key='settings' title='Settings' component={Settings}></Scene>
   </Scene>
 )
 
