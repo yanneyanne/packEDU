@@ -8,7 +8,7 @@ import { Container, Content, Footer, FooterTab, Button, Text } from 'native-base
 
 class FooterBar extends Component {
   isActiveTab(tab) {
-    return tab==this.props.activeTab 
+    return tab==this.props.activeTab
   }
   
   constructor(props) {
@@ -36,7 +36,7 @@ class FooterBar extends Component {
       </Button>
    
     this.profilePage = 
-      <Button key={"profile"}>
+      <Button active={this.isActiveTab("profile")} onPress = {() => Actions.profile()} key={"profile"}>
         <Text>
           Profile
         </Text>
@@ -54,7 +54,7 @@ class FooterBar extends Component {
           {pageList}
         </FooterTab>
       </Footer>
-    ) 
+    )
   }
 }
 
