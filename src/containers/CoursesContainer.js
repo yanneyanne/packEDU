@@ -17,7 +17,6 @@ class Courses extends Component {
   componentDidMount() {
     console.log("Courses are mounting")
     this.props.loadLocalCourses()
-    this.props.toggleTextAlignment()
   }
   
   toggleTextAlignment() {
@@ -42,7 +41,7 @@ class Courses extends Component {
             </Text>
           </Button>
             <ListItem itemHeader first>
-              {this.props.settingsAlignLeft ? 
+              {this.props.settingsAlignRight ? 
               <Text style={{fontWeight: 'bold'}}>
                 الدورات المحلية
               </Text>
@@ -77,7 +76,7 @@ class Courses extends Component {
 function mapStateToProps(state) {
   return {
     localCourses: state.courses,
-    settingsAlignLeft: state.settings ? state.settings.get('alignment') : false
+    settingsAlignRight: state.settings ? state.settings.get('alignment') : false
   }
 }
 
