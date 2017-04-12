@@ -25,6 +25,8 @@ export function downloadRemoteCourse(courseId) {
   return (dispatch, getState) => {
     const route = '/courseMaterial/' + courseId
     return Api.get(route).then((resp) => {
+      console.log("Download response in course action")
+      console.log(resp)
       return retrieveEvaluators(resp.material).then(() =>{
         dispatch(dispatchDownloadRemoteCourse({
           course: resp 
@@ -49,26 +51,29 @@ async function downloadNeededEvaluators(needed) {
   }) 
 }
 
-function identifyEvaluators(material) {
+function identifyEvaluators(courseMaterial) {
   //Loop through the material looking for evaluators
   let evaluators = []
   let searchTerm = "evaluator"
   let alphanumeric = /\w+/
   let idx = 0
-  while (idx != -1) {
-    idx = material.indexOf(searchTerm, idx)
-    if (idx != -1) {
-      idx += searchTerm.length
-      while (!alphanumeric.test(material.charAt(idx)) && idx < material.length) {
-        idx++
+  courseMaterial.forEach((lesson) => {
+    let lessonMaterial = lesson[1]
+    while (idx != -1) {
+      idx = lessonMaterial.indexOf(searchTerm, idx)
+      if (idx != -1) {
+        idx += searchTerm.length
+        while (!alphanumeric.test(lessonMaterial.charAt(idx)) && idx < lessonMaterial.length) {
+          idx++
+        }
+        let keyEnd = idx+1
+        while (alphanumeric.test(lessonMaterial.charAt(keyEnd)) && keyEnd < lessonMaterial.length) {
+          keyEnd++
+        }
+        evaluators.push(lessonMaterial.slice(idx, keyEnd))
       }
-      let keyEnd = idx+1
-      while (alphanumeric.test(material.charAt(keyEnd)) && keyEnd < material.length) {
-        keyEnd++
-      }
-      evaluators.push(material.slice(idx, keyEnd))
     }
-  }
+  })
   return evaluators
 }
 
