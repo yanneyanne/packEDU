@@ -13,10 +13,34 @@ class FooterBar extends Component {
   
   constructor(props) {
     super(props)
-    this.homePage = <Button active={this.isActiveTab("home")} onPress = {() => Actions.home()} key={"home"}><Text>Home</Text></Button>
-    this.downloadPage = <Button active={this.isActiveTab("remotes")} onPress = {() => Actions.remotes()} key={"download"}><Text>DL</Text></Button>
-    this.achievementsPage = <Button key={"achievements"}><Text>Achievements</Text></Button>
-    this.profilePage = <Button key={"profile"}><Text>Profile</Text></Button>
+   
+     this.homePage =
+     <Button active={this.isActiveTab("home")} onPress = {() => Actions.home()} key={"home"}>
+      <Text>
+        Home
+      </Text>
+    </Button>
+   
+    this.downloadPage =
+    <Button active={this.isActiveTab("remotes")} onPress = {() => Actions.remotes()} key={"download"}>
+      <Text>
+        DL
+      </Text>
+    </Button>
+   
+    this.achievementsPage =
+    <Button key={"achievements"}>
+      <Text>
+        Achievements
+      </Text>
+    </Button>
+   
+    this.profilePage = 
+    <Button key={"profile"}>
+      <Text>
+        Profile
+      </Text>
+    </Button>
   }
 
  
