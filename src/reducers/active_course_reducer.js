@@ -30,6 +30,11 @@ export const activeCourse = createReducer(Map(), {
     //This call to storage maybe should be in the actions
     Storage.evaluate(action.evaluatorId, action.choice, action.answer)
     return state 
+  },
+
+  [types.SAVE_CURRENT_SLIDE_POS](state, action) {
+    console.log("Got slide pos " + action.currentSlidePos + " in reducer")
+    return state
   }
 })
 

@@ -79,3 +79,11 @@ export function evaluateAnswer(choice, validatorId, answer) {
     evaluatorId: validatorId
   }
 }
+
+export function saveSlidePos(pos) {
+  console.log("Firing saveslidepos action")
+  return {
+    type: types.SAVE_CURRENT_SLIDE_POS,
+    currentSlidePos: pos
+  }
+}
