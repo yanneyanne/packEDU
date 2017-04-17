@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { ActionCreators } from '../actions'
 import { Actions } from 'react-native-router-flux'
-import { Content, Button, Text} from 'native-base'
+import { Content, Button, Text } from 'native-base'
 
 class Lessons extends Component {
 

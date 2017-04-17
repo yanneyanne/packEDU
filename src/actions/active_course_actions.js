@@ -31,17 +31,21 @@ export function setActiveLesson(courseId, lessonName) {
           lessonMaterial = lesson[1]
         }
       })
-      let currentSlidePos = courseObj.currentSlidePos
-      if (typeof courseObj.currentSlidePos == 'undefined')
+      // If no saved slide position exists set to 0, otherwise set to the saved position
+      if (typeof courseObj === 'undefined' ||
+          typeof courseObj[lessonName] === 'undefined')
         currentSlidePos = 0
-      dispatch(dispatchSetActiveLesson(currentSlidePos, lessonMaterial))
+      else 
+        currentSlidePos = courseObj[lessonName]
+      dispatch(dispatchSetActiveLesson(lessonName, currentSlidePos, lessonMaterial))
     })
   }
 }
 
-function dispatchSetActiveLesson(currentSlidePos, lessonMaterial) {
+function dispatchSetActiveLesson(lessonName, currentSlidePos, lessonMaterial) {
   return {
     type: types.SET_ACTIVE_LESSON,
+    lessonName,
     currentSlidePos,
     lessonMaterial
   }
@@ -80,10 +84,12 @@ export function evaluateAnswer(choice, validatorId, answer) {
   }
 }
 
-export function saveSlidePos(pos) {
+export function saveSlidePos(courseId, lessonName, pos) {
   console.log("Firing saveslidepos action")
   return {
     type: types.SAVE_CURRENT_SLIDE_POS,
+    courseId,
+    lessonName,
     currentSlidePos: pos
   }
 }
