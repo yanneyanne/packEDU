@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { ActionCreators } from '../actions'
 import { Actions } from 'react-native-router-flux'
-import { View, Header, Container, ListItem, Content, Text, Button} from 'native-base'
+import { View, Header, Container, ListItem, Content, Text, Button } from 'native-base'
 import Alignment from './AlignmentContainer'
 
 class Courses extends Component {
@@ -23,7 +23,7 @@ class Courses extends Component {
 
   startCourse(courseId) {
     this.props.setActiveCourse(courseId)
-    Actions.lessons();
+    Actions.lessons()
   }
 
   render() {
