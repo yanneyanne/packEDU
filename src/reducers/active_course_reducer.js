@@ -11,8 +11,8 @@ export const activeCourse = createReducer(Map(), {
   },
 
   [types.SET_ACTIVE_LESSON](state, action) {
-    let newState = state.set('material', action.lessonMaterial)
-    newState = newState.set('lessonName', action.lessonName)
+    let newState = state.set('lessonMaterial', action.lessonMaterial)
+    newState = newState.set('activeLesson', action.lessonName)
     newState = newState.set('currentSlidePos', action.currentSlidePos)
     return newState
   },

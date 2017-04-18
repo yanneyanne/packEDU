@@ -31,6 +31,8 @@ export function setActiveLesson(courseId, lessonName) {
           lessonMaterial = lesson[1]
         }
       })
+      console.log("The material being loaded in actions")
+      console.log(lessonMaterial)
       // If no saved slide position exists set to 0, otherwise set to the saved position
       if (typeof courseObj === 'undefined' ||
           typeof courseObj[lessonName] === 'undefined')
