@@ -3,13 +3,7 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { ActionCreators } from '../actions'
 import { Actions } from 'react-native-router-flux'
-import ReactNative from 'react-native'
-
-const {
-  View,
-  Text,
-  TouchableHighlight
-} = ReactNative
+import { View, Container, Text, Button, ProgressBar } from 'native-base'
 
 class Slide extends Component {
 
@@ -30,32 +24,33 @@ class Slide extends Component {
   }
 
   getProgress() {
-    if (this.props.material)
-      return this.props.currentSlidePos / this.props.material.length 
+    //if (this.props.material)
+    //  return this.props.currentSlidePos / this.props.material.length 
+    //else
+    //  return 0
+    return "50"
   }
 
   render() {
     return(
-      <View style={{marginTop: 80}}>
+      <Container style={{marginTop: 80}}>
         { this.getSlideMaterial().map(elt => {
           return elt
         })}
-        <TouchableHighlight onPress = {() => this.props.previousSlide(
+        <Button onPress = {() => this.props.previousSlide(
             this.props.currentSlidePos, this.props.material)}>
           <Text>
             Previous
           </Text>
-        </TouchableHighlight>
-        <TouchableHighlight onPress = {() => this.props.nextSlide(
+        </Button>
+        <Button onPress = {() => this.props.nextSlide(
             this.props.currentSlidePos, this.props.material)}>
           <Text>
             Next
           </Text>
-        </TouchableHighlight>
-        <Text>
-          Progress: {this.getProgress()}
-        </Text>
-      </View>
+        </Button>
+        {/*<ProgressBar />*/}
+      </Container>
     )
   }
 }
