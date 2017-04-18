@@ -34,9 +34,6 @@ export const activeCourse = createReducer(Map(), {
   },
 
   [types.SAVE_CURRENT_SLIDE_POS](state, action) {
-    console.log("Got course id " + action.courseId + " in reducer")
-    console.log("Got lesson name " + action.lessonName + " in reducer")
-    console.log("Got slide pos " + action.currentSlidePos + " in reducer")
     Storage.saveSlidePos(action.courseId, action.lessonName, action.currentSlidePos)
     return state
   }

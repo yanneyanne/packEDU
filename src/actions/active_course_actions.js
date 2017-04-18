@@ -85,7 +85,6 @@ export function evaluateAnswer(choice, validatorId, answer) {
 }
 
 export function saveSlidePos(courseId, lessonName, pos) {
-  console.log("Firing saveslidepos action")
   return {
     type: types.SAVE_CURRENT_SLIDE_POS,
     courseId,
