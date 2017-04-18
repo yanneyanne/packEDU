@@ -5,7 +5,7 @@ import { Map } from 'immutable'
 
 export const activeCourse = createReducer(Map(), {
   [types.SET_ACTIVE_COURSE](state, action) {
-    let newState = state.set('lessonNames', action.lessonNames)
+    let newState = state.set('lessons', action.lessons)
     newState = newState.set('id', action.courseId)
     return newState
   },

@@ -5,20 +5,24 @@ import SCompile from '../lib/slideCompile/SCompile'
 export function setActiveCourse(courseId) {
   return (dispatch, getState) => {
     return Storage.getCourse(courseId).then( (courseObj) => {
-      let lessonNames = []
+      let lessons = []
       courseObj.lessons.forEach((lesson) => {
-        lessonNames.push(lesson.name)
+        let lessonPos = lesson.savedPos || 0
+		let progress = lessonPos / lesson.material.length
+        lessons.push({
+          "name": lesson.name,
+          "progress": progress})
       })
-      dispatch(dispatchSetActiveCourse(courseId, lessonNames))
+      dispatch(dispatchSetActiveCourse(courseId, lessons))
     })
   }
 }
 
-function dispatchSetActiveCourse(courseId, lessonNames) {
+function dispatchSetActiveCourse(courseId, lessons) {
   return {
     type: types.SET_ACTIVE_COURSE,
     courseId,
-    lessonNames
+    lessons
   }
 }
 

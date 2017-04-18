@@ -9,8 +9,8 @@ import Storage from '../lib/storage.js'
 
 class Lessons extends Component {
 
-  getLessonNames() {
-    return this.props.lessonNames || []
+  getLessons() {
+    return this.props.lessons || []
   }
 
   getCourseId() {
@@ -25,16 +25,16 @@ class Lessons extends Component {
   render() {
     return (
       <Content style={{marginTop: 65}}>
-        {this.getLessonNames().map((lesson) => {
+        {this.getLessons().map((lesson) => {
           return (
             // Lesson tuple on the form lesson[0]=lessonName lesson[1]=savedPosition
-            <View key={lesson}>
-              <Button onPress = {() => this.startLesson(this.getCourseId(), lesson)}>
+            <View key={lesson.name}>
+              <Button onPress = {() => this.startLesson(this.getCourseId(), lesson.name)}>
                 <Text>
-                  {lesson}
+                  {lesson.name}
                 </Text>
               </Button>
-              {/*<Bar progress={this.getProgress(lesson[1])}/>*/}
+              <Bar progress={lesson.progress}/>
             </View>
           )
         })}
@@ -46,7 +46,7 @@ class Lessons extends Component {
 function mapStateToProps(state) {
   return {
     courseId: state.activeCourse.get('id'),
-    lessonNames: state.activeCourse.get('lessonNames')
+    lessons: state.activeCourse.get('lessons')
   }
 }
 
