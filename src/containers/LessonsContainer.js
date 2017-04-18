@@ -5,6 +5,7 @@ import { ActionCreators } from '../actions'
 import { Actions } from 'react-native-router-flux'
 import { Container, View, Content, Button, Text } from 'native-base'
 import { Bar } from 'react-native-progress'
+import Storage from '../lib/storage.js'
 
 class Lessons extends Component {
 
@@ -17,7 +18,8 @@ class Lessons extends Component {
   }
 
   getProgress(lesson) {
-    return 0.5 
+    Storage.getSavedLessonProgress(this.getCourseId(), lesson)
+    return 0.5
   }
 
   startLesson(courseId, lesson) {

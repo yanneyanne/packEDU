@@ -99,6 +99,22 @@ class Storage{
       console.log(e) 
     }
   }
+
+  static async getSavedLessonProgress(courseId, lessonName) {
+    try {
+      const value = await AsyncStorage.getItem('courses') 
+      const allCourses = JSON.parse(value) 
+      let pos = allCourses[courseId][lessonName]
+      let length
+      allCourses[courseId].material.forEach((lesson) => {
+        if(lesson[0] === lessonName)
+          length = lesson[1].length
+      })
+      console.log(pos/length)
+    } catch(e) {
+      console.log(e) 
+    }
+  }
 }
 
 export default Storage
