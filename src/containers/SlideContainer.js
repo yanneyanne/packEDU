@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux'
 import { ActionCreators } from '../actions'
 import { Actions } from 'react-native-router-flux'
 import { View, Container, Text, Button, ProgressBar } from 'native-base'
+import { Bar } from 'react-native-progress'
 
 class Slide extends Component {
 
@@ -24,11 +25,10 @@ class Slide extends Component {
   }
 
   getProgress() {
-    //if (this.props.material)
-    //  return this.props.currentSlidePos / this.props.material.length 
-    //else
-    //  return 0
-    return "50"
+    if (this.props.material)
+      return this.props.currentSlidePos / this.props.material.length 
+    else
+      return 0
   }
 
   render() {
@@ -49,7 +49,7 @@ class Slide extends Component {
             Next
           </Text>
         </Button>
-        {/*<ProgressBar />*/}
+        <Bar progress={this.getProgress()} width={200}/>
       </Container>
     )
   }
