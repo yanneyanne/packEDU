@@ -15,8 +15,8 @@ export const courses = createReducer(List(), {
   [types.DOWNLOAD_REMOTE_COURSE](state, action) {
     let courseId = action.course.id
     let courseName = action.course.name
-    let courseMaterial = action.course.material
-    Storage.saveCourse(courseId, courseName, courseMaterial)
+    let lessons = action.course.lessons
+    Storage.saveCourse(courseId, courseName, lessons)
     const newCourses = state.push([action.course.id, action.course.name])
     return newCourses
   }

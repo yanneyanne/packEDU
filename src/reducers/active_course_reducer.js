@@ -5,7 +5,7 @@ import { Map } from 'immutable'
 
 export const activeCourse = createReducer(Map(), {
   [types.SET_ACTIVE_COURSE](state, action) {
-    let newState = state.set('lessons', action.lessons)
+    let newState = state.set('lessonNames', action.lessonNames)
     newState = newState.set('id', action.courseId)
     return newState
   },
@@ -31,6 +31,7 @@ export const activeCourse = createReducer(Map(), {
   // Persistently store the user's position in the lesson
   [types.SAVE_CURRENT_SLIDE_POS](state, action) {
     Storage.saveSlidePos(action.courseId, action.lessonName, action.currentSlidePos)
+    let updatedLessons = state.get('lessons')
     return state
   }
 })

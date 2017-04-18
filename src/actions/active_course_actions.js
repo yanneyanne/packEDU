@@ -5,40 +5,39 @@ import SCompile from '../lib/slideCompile/SCompile'
 export function setActiveCourse(courseId) {
   return (dispatch, getState) => {
     return Storage.getCourse(courseId).then( (courseObj) => {
-      let lessons = []
-      courseObj.material.forEach((lesson) =>
-        lessons.push(lesson[0])
-      )
-      dispatch(dispatchSetActiveCourse(courseId, lessons))
+      let lessonNames = []
+      courseObj.lessons.forEach((lesson) => {
+        lessonNames.push(lesson.name)
+      })
+      dispatch(dispatchSetActiveCourse(courseId, lessonNames))
     })
   }
 }
 
-function dispatchSetActiveCourse(courseId, lessons) {
+function dispatchSetActiveCourse(courseId, lessonNames) {
   return {
     type: types.SET_ACTIVE_COURSE,
     courseId,
-    lessons
+    lessonNames
   }
 }
 
 export function setActiveLesson(courseId, lessonName) {
   return (dispatch, getState) => {
-    return Storage.getCourse(courseId).then( (courseObj) => {
-      let lessonMaterial
-      courseObj.material.forEach((lesson) => {
-        if(lesson[0]===lessonName) {
-          lessonMaterial = lesson[1]
+    return Storage.getCourse(courseId).then((courseObj) => {
+      let activeLesson
+      courseObj.lessons.forEach((lesson) => {
+        if(lesson.name===lessonName) {
+          activeLesson = lesson
         }
       })
-      console.log("The material being loaded in actions")
-      console.log(lessonMaterial)
-      // If no saved slide position exists set to 0, otherwise set to the saved position
-      if (typeof courseObj === 'undefined' ||
-          typeof courseObj[lessonName] === 'undefined')
+      let lessonMaterial = activeLesson.material
+      let currentSlidePos
+      // If no saved slide position exists, set current position to 0. Otherwise set to the saved position
+      if ( typeof activeLesson.savedPos === 'undefined')
         currentSlidePos = 0
-      else 
-        currentSlidePos = courseObj[lessonName]
+      else
+        currentSlidePos = activeLesson.savedPos
       dispatch(dispatchSetActiveLesson(lessonName, currentSlidePos, lessonMaterial))
     })
   }

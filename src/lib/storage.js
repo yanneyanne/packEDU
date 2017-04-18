@@ -29,12 +29,12 @@ class Storage{
     }
   }
 
-  static async saveCourse(courseId, courseName, courseMaterial){
+  static async saveCourse(courseId, courseName, lessons){
     try {
       let courseObj = {}
       courseObj[courseId] = {
         "name": courseName,
-        "material": courseMaterial
+        "lessons": lessons
       }
       await AsyncStorage.mergeItem('courses', JSON.stringify(courseObj))
     } catch (e) {
@@ -92,7 +92,10 @@ class Storage{
     try {
       const value = await AsyncStorage.getItem('courses')
       const allCourses = JSON.parse(value)
-      allCourses[courseId][lessonName]=pos
+      allCourses[courseId].lessons.forEach((lesson) => {
+        if (lesson.name === lessonName)
+          lesson["savedPos"] = pos
+      })
       console.log("Trying to save the object " + JSON.stringify(allCourses))
       await AsyncStorage.mergeItem('courses', JSON.stringify(allCourses)) 
     } catch(e) {
@@ -104,13 +107,14 @@ class Storage{
     try {
       const value = await AsyncStorage.getItem('courses') 
       const allCourses = JSON.parse(value) 
-      let pos = allCourses[courseId][lessonName]
+      let pos
       let length
-      allCourses[courseId].material.forEach((lesson) => {
-        if(lesson[0] === lessonName)
-          length = lesson[1].length
+      allCourses[courseId][lessons].forEach((lesson) => {
+        if (lesson.name === lessonName) 
+          pos = lesson.savedPos
+          length = lesson.material.length
       })
-      console.log(pos/length)
+      return pos/length
     } catch(e) {
       console.log(e) 
     }
