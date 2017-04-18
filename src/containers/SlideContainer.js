@@ -29,6 +29,11 @@ class Slide extends Component {
     return this.props.currentSlideMaterial || [] 
   }
 
+  getProgress() {
+    if (this.props.material)
+      return this.props.currentSlidePos / this.props.material.length 
+  }
+
   render() {
     return(
       <View style={{marginTop: 80}}>
@@ -47,6 +52,9 @@ class Slide extends Component {
             Next
           </Text>
         </TouchableHighlight>
+        <Text>
+          Progress: {this.getProgress()}
+        </Text>
       </View>
     )
   }
