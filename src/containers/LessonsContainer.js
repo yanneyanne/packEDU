@@ -3,7 +3,8 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { ActionCreators } from '../actions'
 import { Actions } from 'react-native-router-flux'
-import { Content, Button, Text } from 'native-base'
+import { Container, View, Content, Button, Text } from 'native-base'
+import { Bar } from 'react-native-progress'
 
 class Lessons extends Component {
 
@@ -13,6 +14,10 @@ class Lessons extends Component {
 
   getCourseId() {
     return this.props.courseId 
+  }
+
+  getProgress(lesson) {
+    return 0.5 
   }
 
   startLesson(courseId, lesson) {
@@ -25,11 +30,14 @@ class Lessons extends Component {
       <Content style={{marginTop: 65}}>
         {this.getLessons().map((lesson) => {
           return (
-            <Button key={lesson} onPress = {() => this.startLesson(this.getCourseId(), lesson)}>
-              <Text>
-                {lesson}
-              </Text>
-            </Button>
+            <View key={lesson}>
+              <Button onPress = {() => this.startLesson(this.getCourseId(), lesson)}>
+                <Text>
+                  {lesson}
+                </Text>
+              </Button>
+              <Bar progress={this.getProgress(lesson)}/>
+            </View>
           )
         })}
       </Content>

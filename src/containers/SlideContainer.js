@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { ActionCreators } from '../actions'
 import { Actions } from 'react-native-router-flux'
-import { View, Container, Text, Button, ProgressBar } from 'native-base'
+import { Container, Text, Button } from 'native-base'
 import { Bar } from 'react-native-progress'
 
 class Slide extends Component {
