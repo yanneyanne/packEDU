@@ -23,8 +23,8 @@ class Slide extends Component {
   }
 
   getProgress() {
-    if (this.props.material)
-      return this.props.currentSlidePos / this.props.material.length 
+    if (this.props.lessonMaterial)
+      return this.props.currentSlidePos / this.props.lessonMaterial.length 
     else
       return 0
   }

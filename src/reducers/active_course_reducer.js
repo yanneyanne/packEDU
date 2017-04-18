@@ -28,6 +28,7 @@ export const activeCourse = createReducer(Map(), {
     return state 
   },
 
+  // Persistently store the user's position in the lesson
   [types.SAVE_CURRENT_SLIDE_POS](state, action) {
     Storage.saveSlidePos(action.courseId, action.lessonName, action.currentSlidePos)
     return state
