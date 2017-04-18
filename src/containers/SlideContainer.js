@@ -5,16 +5,9 @@ import { ActionCreators } from '../actions'
 import { Actions } from 'react-native-router-flux'
 import { Container, Text, Button } from 'native-base'
 import { Bar } from 'react-native-progress'
+import SCompile from '../lib/slideCompile/SCompile'
 
 class Slide extends Component {
-
-  componentDidUpdate(prevProps, prevState) {
-    if (prevProps.currentSlidePos !== this.props.currentSlidePos) {
-      console.log("The current material in slidecontainer")
-      console.log(this.props.lessonMaterial)
-      this.props.renderSlideAt(this.props.currentSlidePos, this.props.lessonMaterial)
-    }
-  }
 
   componentWillUnmount() {
     this.props.saveSlidePos(this.props.courseId, 
@@ -23,7 +16,10 @@ class Slide extends Component {
   }
 
   getSlideMaterial() {
-    return this.props.currentSlideMaterial || [] 
+    if(this.props.lessonMaterial)
+      return SCompile.getSlide(this.props.currentSlidePos, this.props.lessonMaterial)
+    else 
+      return []
   }
 
   getProgress() {
@@ -62,7 +58,6 @@ function mapStateToProps(state) {
     courseId: state.activeCourse.get('id'),
     activeLesson: state.activeCourse.get('activeLesson'),
     currentSlidePos: state.activeCourse.get('currentSlidePos'),
-    currentSlideMaterial: state.activeCourse.get('currentSlideMaterial'),
     lessonMaterial: state.activeCourse.get('lessonMaterial')
   }
 }

@@ -53,14 +53,6 @@ function dispatchSetActiveLesson(lessonName, currentSlidePos, lessonMaterial) {
   }
 }
 
-export function renderSlideAt(pos, material) {
-  let slide = SCompile.getSlide(pos, material)
-  return {
-    type: types.RENDER_SLIDE,
-    slide: slide
-  }
-}
-
 export function nextSlide(pos, material) {
   let slidePos = SCompile.getNextSlidePosition(pos, material)
   return {
