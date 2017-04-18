@@ -77,12 +77,25 @@ class Storage{
     
   }
 
+  // "Private"-ish function only to be used by class itself
   static async loadEvaluator(evaluatorId) {
     try {
       const loadedEvals = await AsyncStorage.getItem('evaluators')
       let evaluators = JSON.parse(loadedEvals)
       return evaluators[evaluatorId].script
     } catch (e) {
+      console.log(e) 
+    }
+  }
+
+  static async saveSlidePos(courseId, lessonName, pos) {
+    try {
+      const value = await AsyncStorage.getItem('courses')
+      const allCourses = JSON.parse(value)
+      allCourses[courseId][lessonName]=pos
+      console.log("Trying to save the object " + JSON.stringify(allCourses))
+      await AsyncStorage.mergeItem('courses', JSON.stringify(allCourses)) 
+    } catch(e) {
       console.log(e) 
     }
   }

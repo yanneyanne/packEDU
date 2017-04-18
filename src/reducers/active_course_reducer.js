@@ -12,6 +12,7 @@ export const activeCourse = createReducer(Map(), {
 
   [types.SET_ACTIVE_LESSON](state, action) {
     let newState = state.set('material', action.lessonMaterial)
+    newState = newState.set('lessonName', action.lessonName)
     newState = newState.set('currentSlidePos', action.currentSlidePos)
     return newState
   },
@@ -30,6 +31,11 @@ export const activeCourse = createReducer(Map(), {
     //This call to storage maybe should be in the actions
     Storage.evaluate(action.evaluatorId, action.choice, action.answer)
     return state 
+  },
+
+  [types.SAVE_CURRENT_SLIDE_POS](state, action) {
+    Storage.saveSlidePos(action.courseId, action.lessonName, action.currentSlidePos)
+    return state
   }
 })
 

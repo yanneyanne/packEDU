@@ -15,8 +15,6 @@ class Parser {
     return currentSlide
   }
 
-  /* TODO: This function should convert a string of markup to a
-    DOM tree */
   static convertToDOM(material, dom = new EduDOM()) {
     while (material.length>0) {
       let tagObj = this.parseFirstTag(material)

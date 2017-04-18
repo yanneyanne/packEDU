@@ -19,6 +19,12 @@ class Slide extends Component {
     }
   }
 
+  componentWillUnmount() {
+    this.props.saveSlidePos(this.props.courseId, 
+        this.props.lessonName, 
+        this.props.currentSlidePos)
+  }
+
   getSlideMaterial() {
     return this.props.currentSlideMaterial || [] 
   }
@@ -48,6 +54,8 @@ class Slide extends Component {
 
 function mapStateToProps(state) {
   return {
+    courseId: state.activeCourse.get('id'),
+    lessonName: state.activeCourse.get('lessonName'),
     currentSlidePos: state.activeCourse.get('currentSlidePos'),
     currentSlideMaterial: state.activeCourse.get('currentSlideMaterial'),
     material: state.activeCourse.get('material')
