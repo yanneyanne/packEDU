@@ -27,14 +27,13 @@ class Lessons extends Component {
       <Content style={{marginTop: 65}}>
         {this.getLessons().map((lesson) => {
           return (
-            // Lesson tuple on the form lesson[0]=lessonName lesson[1]=savedPosition
-            <View key={lesson.name}>
-              <Button onPress = {() => this.startLesson(this.getCourseId(), lesson.name)}>
+            <View key={lesson.get('name')}>
+              <Button onPress = {() => this.startLesson(this.getCourseId(), lesson.get('name'))}>
                 <Text>
-                  {lesson.name}
+                  {lesson.get('name')}
                 </Text>
               </Button>
-              <Bar progress={lesson.progress}/>
+              <Bar progress={lesson.get('progress')}/>
             </View>
           )
         })}

@@ -1,17 +1,19 @@
 import * as types from './types'
 import Storage from '../lib/storage.js'
 import SCompile from '../lib/slideCompile/SCompile'
+import { Map, List } from 'immutable'
 
 export function setActiveCourse(courseId) {
   return (dispatch, getState) => {
     return Storage.getCourse(courseId).then( (courseObj) => {
-      let lessons = []
+      let lessons = List()
       courseObj.lessons.forEach((lesson) => {
         let lessonPos = lesson.savedPos || 0
-		let progress = lessonPos / lesson.material.length
-        lessons.push({
+        let progress = lessonPos / lesson.material.length
+        lessons = lessons.push(Map({
           "name": lesson.name,
-          "progress": progress})
+          "progress": progress
+        }))
       })
       dispatch(dispatchSetActiveCourse(courseId, lessons))
     })
@@ -81,11 +83,12 @@ export function evaluateAnswer(choice, validatorId, answer) {
   }
 }
 
-export function saveSlidePos(courseId, lessonName, pos) {
+export function saveSlidePos(courseId, lessonName, currentSlidePos, lessonLength) {
   return {
     type: types.SAVE_CURRENT_SLIDE_POS,
     courseId,
     lessonName,
-    currentSlidePos: pos
+    currentSlidePos,
+    lessonLength
   }
 }

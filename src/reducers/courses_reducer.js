@@ -5,11 +5,11 @@ import Storage from '../lib/storage.js'
 
 export const courses = createReducer(List(), {
   [types.LOAD_LOCAL_COURSES] (state, action) {
-    let newCourses = List()
+    let newState = List()
     Object.keys(action.courses).forEach((key) => {
-      newCourses = newCourses.push([key, action.courses[key].name])
+      newState = newState.push([key, action.courses[key].name])
     })
-    return newCourses
+    return newState
   },
 
   [types.DOWNLOAD_REMOTE_COURSE](state, action) {
@@ -17,7 +17,7 @@ export const courses = createReducer(List(), {
     let courseName = action.course.name
     let lessons = action.course.lessons
     Storage.saveCourse(courseId, courseName, lessons)
-    const newCourses = state.push([action.course.id, action.course.name])
-    return newCourses
+    const newState = state.push([action.course.id, action.course.name])
+    return newState
   }
 })

@@ -12,7 +12,8 @@ class Slide extends Component {
   componentWillUnmount() {
     this.props.saveSlidePos(this.props.courseId, 
         this.props.activeLesson, 
-        this.props.currentSlidePos)
+        this.props.currentSlidePos,
+        this.props.lessonMaterial.length)
   }
 
   getSlideMaterial() {
