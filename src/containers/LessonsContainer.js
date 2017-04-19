@@ -6,7 +6,7 @@ import { Actions } from 'react-native-router-flux'
 import { Container, View, Content, Button, Text } from 'native-base'
 import { Bar } from 'react-native-progress'
 import Storage from '../lib/storage.js'
-
+import Alignment from './AlignmentContainer'
 class Lessons extends Component {
 
   getLessons() {
@@ -25,6 +25,7 @@ class Lessons extends Component {
   render() {
     return (
       <Content style={{marginTop: 65}}>
+      <Alignment>
         {this.getLessons().map((lesson) => {
           return (
             <View key={lesson.get('name')}>
@@ -37,6 +38,7 @@ class Lessons extends Component {
             </View>
           )
         })}
+        </Alignment>
       </Content>
     )
   }
