@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { ActionCreators } from '../actions'
 import { Actions } from 'react-native-router-flux'
-import { Container, Text, Button, Content, View, Footer, FooterTab } from 'native-base'
+import { Container, Text, Button, Content, Footer, FooterTab } from 'native-base'
 import { Bar } from 'react-native-progress'
 import SCompile from '../lib/slideCompile/SCompile'
 import Alignment from './AlignmentContainer'
@@ -29,6 +29,7 @@ class Slide extends Component {
         </Text>
       </Button>
   }
+
   componentWillUnmount() {
     this.props.saveSlidePos(this.props.courseId, 
         this.props.activeLesson, 
@@ -56,18 +57,18 @@ class Slide extends Component {
     {this.props.settingsAlignRight ? buttonList.reverse() : buttonList }
     return(
       <Container style={{marginTop: 80}}>
-      <Content>
-      <Alignment>
-        { this.getSlideMaterial().map(elt => {
-          return elt
-        })}
-        </Alignment>
-        <Bar progress={this.getProgress()} width={200}/>
+        <Content>
+          <Alignment>
+            { this.getSlideMaterial().map(elt => {
+            return elt
+            })}
+          </Alignment>
+          <Bar progress={this.getProgress()} width={200}/>
         </Content>
         <Footer alignContent={'baseline'}>
-        <FooterTab borderBottomWidth={0}>
-        {buttonList}
-        </FooterTab>
+          <FooterTab borderBottomWidth={0}>
+            {buttonList}
+          </FooterTab>
         </Footer>
       </Container>
     )

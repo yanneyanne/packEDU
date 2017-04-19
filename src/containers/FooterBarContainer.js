@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux'
 import { ActionCreators } from '../actions'
 import { Actions } from 'react-native-router-flux'
 
-import { Container, Content, Footer, FooterTab, Button, Text } from 'native-base'
+import { Container, Footer, FooterTab, Button, Text, View } from 'native-base'
 
 class FooterBar extends Component {
   isActiveTab(tab) {
@@ -46,14 +46,21 @@ class FooterBar extends Component {
 
   render() {
     let pageList = []
-    pageList.push(this.homePage, this.downloadPage, this.achievementsPage, this.profilePage)
+    pageList.push(this.homePage, this.downloadPage, this.achievementsPage,        this.profilePage)
     {this.props.settingsAlignRight ? pageList.reverse() : pageList}
     return (
-      <Footer>
-        <FooterTab>
-          {pageList}
-        </FooterTab>
-      </Footer>
+      <View>
+        {this.props.activeTab != "slide" ? 
+          <Footer>
+            <FooterTab>
+              {pageList}
+            </FooterTab>
+          </Footer>
+          :
+          <View>
+          </View>
+        }
+      </View>
     )
   }
 }
