@@ -60,7 +60,7 @@ class Slide extends Component {
         <Content>
           <Alignment>
             { this.getSlideMaterial().map(elt => {
-            return elt
+              return elt
             })}
           </Alignment>
           <Bar progress={this.getProgress()} width={200}/>

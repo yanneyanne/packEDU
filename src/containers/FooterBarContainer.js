@@ -3,7 +3,6 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { ActionCreators } from '../actions'
 import { Actions } from 'react-native-router-flux'
-
 import { Container, Footer, FooterTab, Button, Text, View } from 'native-base'
 
 class FooterBar extends Component {

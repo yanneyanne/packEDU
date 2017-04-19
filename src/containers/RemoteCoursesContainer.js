@@ -29,13 +29,13 @@ class RemoteCourses extends Component {
   render() {
     return (
       <View marginTop={40}>
-      <Alignment>
-        <View>
-          <Text style={{marginTop: 30}}>
-            Download more Courses:
-          </Text>
-        </View> 
-      </Alignment>
+        <Alignment>
+          <View>
+            <Text style={{marginTop: 30}}>
+              Download more Courses:
+            </Text>
+          </View> 
+        </Alignment>
         <ScrollView>
           <Alignment>
             {this.getRemoteCourses().map(course => {
