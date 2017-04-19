@@ -3,54 +3,63 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { ActionCreators } from '../actions'
 import { Actions } from 'react-native-router-flux'
-import ReactNative from 'react-native'
-
-const {
-  View,
-  Text,
-  TouchableHighlight
-} = ReactNative
+import { Container, Text, Button } from 'native-base'
+import { Bar } from 'react-native-progress'
+import SCompile from '../lib/slideCompile/SCompile'
 
 class Slide extends Component {
 
-  componentDidUpdate(prevProps, prevState) {
-    if (prevProps.currentSlidePos !== this.props.currentSlidePos) {
-      this.props.renderSlideAt(this.props.currentSlidePos, this.props.material)
-    }
+  componentWillUnmount() {
+    this.props.saveSlidePos(this.props.courseId, 
+        this.props.activeLesson, 
+        this.props.currentSlidePos,
+        this.props.lessonMaterial.length)
   }
 
   getSlideMaterial() {
-    return this.props.currentSlideMaterial || [] 
+    if(this.props.lessonMaterial)
+      return SCompile.getSlide(this.props.currentSlidePos, this.props.lessonMaterial)
+    else 
+      return []
+  }
+
+  getProgress() {
+    if (this.props.lessonMaterial)
+      return this.props.currentSlidePos / this.props.lessonMaterial.length 
+    else
+      return 0
   }
 
   render() {
     return(
-      <View style={{marginTop: 80}}>
+      <Container style={{marginTop: 80}}>
         { this.getSlideMaterial().map(elt => {
           return elt
         })}
-        <TouchableHighlight onPress = {() => this.props.previousSlide(
-            this.props.currentSlidePos, this.props.material)}>
+        <Button onPress = {() => this.props.previousSlide(
+            this.props.currentSlidePos, this.props.lessonMaterial)}>
           <Text>
             Previous
           </Text>
-        </TouchableHighlight>
-        <TouchableHighlight onPress = {() => this.props.nextSlide(
-            this.props.currentSlidePos, this.props.material)}>
+        </Button>
+        <Button onPress = {() => this.props.nextSlide(
+            this.props.currentSlidePos, this.props.lessonMaterial)}>
           <Text>
             Next
           </Text>
-        </TouchableHighlight>
-      </View>
+        </Button>
+        <Bar progress={this.getProgress()} width={200}/>
+      </Container>
     )
   }
 }
 
 function mapStateToProps(state) {
   return {
+    courseId: state.activeCourse.get('id'),
+    activeLesson: state.activeCourse.get('activeLesson'),
     currentSlidePos: state.activeCourse.get('currentSlidePos'),
-    currentSlideMaterial: state.activeCourse.get('currentSlideMaterial'),
-    material: state.activeCourse.get('material')
+    lessonMaterial: state.activeCourse.get('lessonMaterial')
   }
 }
 

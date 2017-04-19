@@ -11,6 +11,7 @@ import FooterBar from './containers/FooterBarContainer'
 import Lessons from './containers/LessonsContainer'
 import Settings from './containers/SettingsContainer'
 import Profile from './containers/ProfileContainer'
+import Achievements from './containers/AchievementsContainer'
 import { Actions, ActionConst, Router, Scene } from 'react-native-router-flux'
 import { Container } from 'native-base'
 
@@ -38,6 +39,7 @@ const Scenes = Actions.create(
     <Scene key='slide' title='Course' component={Slide}></Scene>
     <Scene key='settings' title='Settings' component={Settings}></Scene>
     <Scene key='profile' title='Profile' component={Profile}></Scene>
+    <Scene key='achievements' title='Achievements' component={Achievements}></Scene>
   </Scene>
 )
 

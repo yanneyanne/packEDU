@@ -3,12 +3,14 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { ActionCreators } from '../actions'
 import { Actions } from 'react-native-router-flux'
-import { Content, Button, Text} from 'native-base'
+import { Container, View, Content, Button, Text } from 'native-base'
+import { Bar } from 'react-native-progress'
+import Storage from '../lib/storage.js'
 
 class Lessons extends Component {
 
   getLessons() {
-    return this.props.lessons || [] 
+    return this.props.lessons || []
   }
 
   getCourseId() {
@@ -25,11 +27,14 @@ class Lessons extends Component {
       <Content style={{marginTop: 65}}>
         {this.getLessons().map((lesson) => {
           return (
-            <Button key={lesson} onPress = {() => this.startLesson(this.getCourseId(), lesson)}>
-              <Text>
-                {lesson}
-              </Text>
-            </Button>
+            <View key={lesson.get('name')}>
+              <Button onPress = {() => this.startLesson(this.getCourseId(), lesson.get('name'))}>
+                <Text>
+                  {lesson.get('name')}
+                </Text>
+              </Button>
+              <Bar progress={lesson.get('progress')}/>
+            </View>
           )
         })}
       </Content>
