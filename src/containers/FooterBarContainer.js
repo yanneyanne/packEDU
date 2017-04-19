@@ -45,7 +45,7 @@ class FooterBar extends Component {
 
   render() {
     let pageList = []
-    pageList.push(this.homePage, this.downloadPage, this.achievementsPage,        this.profilePage)
+    pageList.push(this.homePage, this.downloadPage, this.achievementsPage, this.profilePage)
     {this.props.settingsAlignRight ? pageList.reverse() : pageList}
     return (
       <View>
