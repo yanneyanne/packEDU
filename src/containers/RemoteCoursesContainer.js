@@ -4,21 +4,23 @@ import { bindActionCreators } from 'redux'
 import { ActionCreators } from '../actions'
 import ReactNative from 'react-native'
 import { Map } from 'immutable'
-
-const {
-  View,
-  Text,
-  TouchableHighlight,
-  ScrollView
-} = ReactNative
+import { Content, View, Text, Button } from 'native-base'
+import Alignment from './AlignmentContainer'
 
 class RemoteCourses extends Component {
   componentDidMount() {
     this.props.fetchRemoteCourses()
   }
 
+  getLocalCourses() {
+    return this.props.localCourses || []
+  }
+
   getRemoteCourses() {
-    return this.props.remoteCourses
+    // Only return the courses which have not yet been downloaded
+    return this.props.remoteCourses.filterNot(course => {
+      return this.getLocalCourses().has(course.get('id')) 
+    })
   }
 
   downloadCourse(courseId) {
@@ -27,41 +29,37 @@ class RemoteCourses extends Component {
   
   render() {
     return (
-      <View>
-        <View>
-          <Text style={{marginTop: 30}}>
+      <Content>
+        <Alignment>
+          <Text style={{marginTop: 65}}>
             Download more Courses:
           </Text>
-        </View> 
-        <ScrollView>
-          {this.getRemoteCourses().map(course => {
-            // Remote courses are an Immutable.Seq of pairs in the form [id, name]
-            let courseId = course[0]
-            let courseName = course[1]
-            return (
-              <View style={{marginTop: 10}} key={courseId}>
-                <TouchableHighlight>
-                  <Text>
-                    {courseName}
-                  </Text>
-                </TouchableHighlight>
-                <TouchableHighlight onPress = {() => {this.downloadCourse(courseId)}}>
-                  <Text>
-                    Download
-                  </Text>
-                </TouchableHighlight>
-              </View>
-            )
-          })}
-        </ScrollView>
-      </View>
+          {this.props.online ? 
+            this.getRemoteCourses().map(course => {
+              return (
+                <View style={{marginTop: 10}} key={course.get('id')}>
+                  <Button onPress = {() => {this.downloadCourse(course.get('id'))}}>
+                    <Text>
+                      {course.get('name')}
+                    </Text>
+                  </Button>
+                </View>
+              )
+            })
+            :
+            <Text>No connection</Text>
+          }
+        </Alignment>
+      </Content>
     )	
   }
 }
 
 function mapStateToProps(state) {
   return {
-    remoteCourses: state.remoteCourses
+    localCourses: state.courses,
+    remoteCourses: state.remoteCourses,
+    online: state.settings.get('online')
   }
 }
 
