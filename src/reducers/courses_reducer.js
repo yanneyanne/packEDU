@@ -6,8 +6,11 @@ import Storage from '../lib/storage.js'
 export const courses = createReducer(List(), {
   [types.LOAD_LOCAL_COURSES] (state, action) {
     let newState = List()
-    Object.keys(action.courses).forEach((key) => {
-      newState = newState.push([key, action.courses[key].name])
+    Object.keys(action.courses).forEach((id) => {
+      newState = newState.push(Map({
+        "id": id, 
+        "name": action.courses[id].name
+      }))
     })
     return newState
   },

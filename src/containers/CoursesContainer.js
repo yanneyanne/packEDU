@@ -42,13 +42,11 @@ class Courses extends Component {
             }
           </ListItem>
           {this.getLocalCourses().map(course => {
-            let courseId = course[0]
-            let courseName = course[1]
             return (
-              <View Style = {{marginTop: 10}} key ={courseId}>
-                <ListItem button onPress={() => {this.startCourse(courseId)}}>
+              <View Style = {{marginTop: 10}} key ={course.get('id')}>
+                <ListItem button onPress={() => {this.startCourse(course.get('id'))}}>
                   <Text>
-                    {courseName}
+                    {course.get('name')}
                   </Text>
                 </ListItem>
               </View>
