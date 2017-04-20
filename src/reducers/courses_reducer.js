@@ -3,11 +3,14 @@ import * as types from '../actions/types'
 import { Map, List, fromJS } from 'immutable'
 import Storage from '../lib/storage.js'
 
-export const courses = createReducer(List(), {
+export const courses = createReducer(Map(), {
   [types.LOAD_LOCAL_COURSES] (state, action) {
-    let newState = List()
-    Object.keys(action.courses).forEach((key) => {
-      newState = newState.push([key, action.courses[key].name])
+    let newState = Map()
+    Object.keys(action.courses).forEach((id) => {
+      newState = newState.set(id, Map({
+        "id": id, 
+        "name": action.courses[id].name
+      }))
     })
     return newState
   },
