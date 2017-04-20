@@ -5,7 +5,7 @@ import * as language from '../assets/styles/language_strings'
 
 export const settings = createReducer(Map(), {
   [types.TOGGLE_TEXT_ALIGNMENT](state, action) {
-    newState = state.set('alignment', !state.get('alignment'))
+    newState = state.set('alignment', !state.get('alignment')) 
     return newState
   },
 
@@ -18,11 +18,7 @@ export const settings = createReducer(Map(), {
   },
 
   [types.TOGGLE_LANGUAGE](state, action) {
-    if (state.get('english') != language.eng) {
-    return state.set('english', language.eng)
-    } else {
-    return state.set('english', language.arabic)
+    return state.set('english', !state.get('english'))
     }
-  }
 })
 

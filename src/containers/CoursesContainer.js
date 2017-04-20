@@ -10,7 +10,6 @@ import * as language from '../assets/styles/language_strings'
 class Courses extends Component {
 
   componentDidMount() {
-    this.props.toggleLanguage()
     console.log("Courses are mounting")
     this.props.loadLocalCourses()
   }
@@ -56,7 +55,7 @@ function mapStateToProps(state) {
   return {
     localCourses: state.courses,
     settingsAlignRight: state.settings ? state.settings.get('alignment') : false,
-    getLanguage: state.settings ? state.settings.get('english') : language.arabic
+    getLanguage: state.settings.get('english') ? language.arabic : language.eng
   }
 }
 
