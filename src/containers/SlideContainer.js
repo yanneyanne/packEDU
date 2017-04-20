@@ -3,11 +3,30 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { ActionCreators } from '../actions'
 import { Actions } from 'react-native-router-flux'
-import { Container, Text, Button } from 'native-base'
+import { Container, Text, Button, Content, View } from 'native-base'
 import { Bar } from 'react-native-progress'
 import SCompile from '../lib/slideCompile/SCompile'
+import Alignment from './AlignmentContainer'
 
 class Slide extends Component {
+  constructor(props) {
+    super(props)
+      this.buttonNext =
+        <Button key={'next'} onPress = {() => this.props.previousSlide(
+            this.props.currentSlidePos, this.props.lessonMaterial)} >
+          <Text>
+            Previous
+          </Text>
+        </Button>
+      
+      this.buttonPrev =
+        <Button key={'prev'} onPress = {() => this.props.nextSlide(
+            this.props.currentSlidePos, this.props.lessonMaterial)}>
+          <Text>
+            Next
+          </Text>
+        </Button>
+}
 
   componentWillUnmount() {
     this.props.saveSlidePos(this.props.courseId, 
@@ -33,22 +52,25 @@ class Slide extends Component {
   render() {
     return(
       <Container style={{marginTop: 80}}>
-        { this.getSlideMaterial().map(elt => {
-          return elt
-        })}
-        <Button onPress = {() => this.props.previousSlide(
-            this.props.currentSlidePos, this.props.lessonMaterial)}>
-          <Text>
-            Previous
-          </Text>
-        </Button>
-        <Button onPress = {() => this.props.nextSlide(
-            this.props.currentSlidePos, this.props.lessonMaterial)}>
-          <Text>
-            Next
-          </Text>
-        </Button>
-        <Bar progress={this.getProgress()} width={200}/>
+        <Content>
+          <Alignment>
+            { this.getSlideMaterial().map(elt => {
+              return elt
+            })}
+          </Alignment>
+          <Bar progress={this.getProgress()} width={200}/>
+          {this.props.settingsAlignRight ? 
+            <View>
+              {this.buttonNext}
+              {this.buttonPrev}
+            </View>
+            :
+            <View>
+              {this.buttonPrev}
+              {this.buttonNext}
+            </View>
+          }
+        </Content>
       </Container>
     )
   }
@@ -59,7 +81,8 @@ function mapStateToProps(state) {
     courseId: state.activeCourse.get('id'),
     activeLesson: state.activeCourse.get('activeLesson'),
     currentSlidePos: state.activeCourse.get('currentSlidePos'),
-    lessonMaterial: state.activeCourse.get('lessonMaterial')
+    lessonMaterial: state.activeCourse.get('lessonMaterial'),
+    settingsAlignRight: state.settings ? state.settings.get('alignment') : false 
   }
 }
 

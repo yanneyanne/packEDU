@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import {Content, View, Left, Right, Text, ListItem} from 'native-base'
+import {Content, View} from 'native-base'
 import { ActionCreators } from '../actions'
 import { bindActionCreators } from 'redux'
 import { Map } from 'immutable'

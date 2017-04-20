@@ -3,8 +3,8 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { ActionCreators } from '../actions'
 import { Actions } from 'react-native-router-flux'
-
-import { Container, Content, Footer, FooterTab, Button, Text } from 'native-base'
+import { Footer, FooterTab, Button, Text, View } from 'native-base'
+import Alignment from './AlignmentContainer'
 
 class FooterBar extends Component {
   isActiveTab(tab) {
@@ -41,19 +41,24 @@ class FooterBar extends Component {
           Profile
         </Text>
       </Button>
-  }
-
+ }
 
   render() {
-    let pageList = []
-    pageList.push(this.homePage, this.downloadPage, this.achievementsPage, this.profilePage)
+    //This could all possibly be done with flexbox
+    let pageList = [this.homePage, this.downloadPage, this.achievementsPage, this.profilePage]
     {this.props.settingsAlignRight ? pageList.reverse() : pageList}
     return (
-      <Footer>
-        <FooterTab>
-          {pageList}
-        </FooterTab>
-      </Footer>
+      <View>
+        {this.props.activeTab != "slide" ?
+          <Footer>  
+            <FooterTab>
+              {pageList}
+            </FooterTab>
+          </Footer>
+          :
+          null
+        }
+      </View>
     )
   }
 }

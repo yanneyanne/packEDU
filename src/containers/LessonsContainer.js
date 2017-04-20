@@ -6,6 +6,7 @@ import { Actions } from 'react-native-router-flux'
 import { Container, View, Content, Button, Text } from 'native-base'
 import { Bar } from 'react-native-progress'
 import Storage from '../lib/storage.js'
+import Alignment from './AlignmentContainer'
 
 class Lessons extends Component {
 
@@ -25,18 +26,20 @@ class Lessons extends Component {
   render() {
     return (
       <Content style={{marginTop: 65}}>
-        {this.getLessons().map((lesson) => {
-          return (
-            <View key={lesson.get('name')}>
-              <Button onPress = {() => this.startLesson(this.getCourseId(), lesson.get('name'))}>
-                <Text>
-                  {lesson.get('name')}
-                </Text>
-              </Button>
-              <Bar progress={lesson.get('progress')}/>
-            </View>
-          )
-        })}
+        <Alignment>
+          {this.getLessons().map((lesson) => {
+            return (
+              <View key={lesson.get('name')}>
+                <Button onPress = {() => this.startLesson(this.getCourseId(), lesson.get('name'))}>
+                  <Text>
+                    {lesson.get('name')}
+                  </Text>
+                </Button>
+                <Bar progress={lesson.get('progress')}/>
+              </View>
+            )
+          })}
+        </Alignment>
       </Content>
     )
   }
