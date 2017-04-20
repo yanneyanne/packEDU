@@ -56,8 +56,7 @@ class FooterBar extends Component {
             </FooterTab>
           </Footer>
           :
-          <View>
-          </View>
+          null
         }
       </View>
     )
