@@ -10,26 +10,6 @@ import Alignment from './AlignmentContainer'
 
 class Slide extends Component {
 
-  constructor(props) {
-    super(props)
-     
-    this.buttonNext =
-      <Button key={'next'} onPress = {() => this.props.previousSlide(
-          this.props.currentSlidePos, this.props.lessonMaterial)} >
-        <Text>
-          Previous
-        </Text>
-      </Button>
-
-    this.buttonPrev =
-      <Button key={'prev'} onPress = {() => this.props.nextSlide(
-          this.props.currentSlidePos, this.props.lessonMaterial)}>
-        <Text>
-          Next
-        </Text>
-      </Button>
-  }
-
   componentWillUnmount() {
     this.props.saveSlidePos(this.props.courseId, 
         this.props.activeLesson, 
@@ -52,9 +32,6 @@ class Slide extends Component {
   }
 
   render() {
-    let buttonList = []
-    buttonList.push(this.buttonNext, this.buttonPrev)
-    {this.props.settingsAlignRight ? buttonList.reverse() : buttonList }
     return(
       <Container style={{marginTop: 80}}>
         <Content>
@@ -65,11 +42,6 @@ class Slide extends Component {
           </Alignment>
           <Bar progress={this.getProgress()} width={200}/>
         </Content>
-        <Footer alignContent={'baseline'}>
-          <FooterTab borderBottomWidth={0}>
-            {buttonList}
-          </FooterTab>
-        </Footer>
       </Container>
     )
   }
