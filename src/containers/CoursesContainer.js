@@ -27,12 +27,13 @@ class Courses extends Component {
   render() {
       console.log("THIS IS PROPS OF GETLANGUAGE *********")
       if (this.props.getLanguage != undefined) {
-    console.log(this.props.getLanguage)}
+        console.log(this.props.getLanguage.home)
+      }
     return (
       <Content>
         <Alignment>
           <ListItem itemHeader first>
-            <Text> This is where I want the props to be  </Text>
+            <Text> {this.props.getLanguage ? this.props.getLanguage.home : null} </Text>
           </ListItem>
           {this.getLocalCourses().map(course => {
             return (
@@ -55,7 +56,7 @@ function mapStateToProps(state) {
   return {
     localCourses: state.courses,
     settingsAlignRight: state.settings ? state.settings.get('alignment') : false,
-    getLanguage: state.settings ? state.settings.get('english') : null 
+    getLanguage: state.settings ? state.settings.get('english') : language.arabic
   }
 }
 
