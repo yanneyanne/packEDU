@@ -3,12 +3,30 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { ActionCreators } from '../actions'
 import { Actions } from 'react-native-router-flux'
-import { Container, Text, Button, Content } from 'native-base'
+import { Container, Text, Button, Content, View } from 'native-base'
 import { Bar } from 'react-native-progress'
 import SCompile from '../lib/slideCompile/SCompile'
 import Alignment from './AlignmentContainer'
 
 class Slide extends Component {
+  constructor(props) {
+    super(props)
+      this.buttonNext =
+        <Button key={'next'} onPress = {() => this.props.previousSlide(
+            this.props.currentSlidePos, this.props.lessonMaterial)} >
+          <Text>
+            Previous
+          </Text>
+        </Button>
+      
+      this.buttonPrev =
+        <Button key={'prev'} onPress = {() => this.props.nextSlide(
+            this.props.currentSlidePos, this.props.lessonMaterial)}>
+          <Text>
+            Next
+          </Text>
+        </Button>
+}
 
   componentWillUnmount() {
     this.props.saveSlidePos(this.props.courseId, 
@@ -41,6 +59,17 @@ class Slide extends Component {
             })}
           </Alignment>
           <Bar progress={this.getProgress()} width={200}/>
+          {this.props.settingsAlignRight ? 
+            <View>
+              {this.buttonNext}
+              {this.buttonPrev}
+            </View>
+            :
+            <View>
+              {this.buttonPrev}
+              {this.buttonNext}
+            </View>
+          }
         </Content>
       </Container>
     )
