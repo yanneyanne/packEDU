@@ -5,16 +5,14 @@ import { ActionCreators } from '../actions'
 import { Actions } from 'react-native-router-flux'
 import { View, Header, Container, ListItem, Content, Text, Button } from 'native-base'
 import Alignment from './AlignmentContainer'
+import * as language from '../assets/styles/language_strings'
 
 class Courses extends Component {
 
   componentDidMount() {
+    this.props.toggleLanguage()
     console.log("Courses are mounting")
     this.props.loadLocalCourses()
-  }
-  
-  toggleTextAlignment() {
-    this.props.toggleTextAlignment()
   }
 
   getLocalCourses() {
@@ -27,19 +25,14 @@ class Courses extends Component {
   }
 
   render() {
+      console.log("THIS IS PROPS OF GETLANGUAGE *********")
+      if (this.props.getLanguage != undefined) {
+    console.log(this.props.getLanguage)}
     return (
       <Content>
         <Alignment>
           <ListItem itemHeader first>
-            {this.props.settingsAlignRight ? 
-              <Text style={{fontWeight: 'bold'}}>
-                الدورات المحلية
-              </Text>
-              :
-              <Text style={{fontWeight: 'bold'}}>
-                My Courses
-              </Text>
-            }
+            <Text> This is where I want the props to be  </Text>
           </ListItem>
           {this.getLocalCourses().map(course => {
             return (
@@ -61,7 +54,8 @@ class Courses extends Component {
 function mapStateToProps(state) {
   return {
     localCourses: state.courses,
-    settingsAlignRight: state.settings ? state.settings.get('alignment') : false
+    settingsAlignRight: state.settings ? state.settings.get('alignment') : false,
+    getLanguage: state.settings ? state.settings.get('english') : null 
   }
 }
 

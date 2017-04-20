@@ -6,3 +6,8 @@ export function toggleTextAlignment() {
   }
 }
 
+export function toggleLanguage() {
+  return {
+    type: types.TOGGLE_LANGUAGE
+  }
+}

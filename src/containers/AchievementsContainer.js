@@ -9,6 +9,7 @@ import styles from '../assets/styles/home_styles'
 import Courses from './CoursesContainer.js'
 import RemoteCourses from './RemoteCoursesContainer.js'
 import Alignment from './AlignmentContainer'
+import * as language from '../assets/styles/language_strings'
 
 class Achievements extends Component {
 
@@ -17,9 +18,15 @@ class Achievements extends Component {
       <Container marginTop={80}>
         <Content>
           <Alignment>
-            <Text>
-              My Achievements
-            </Text>
+            {this.props.settingsAlignRight ?
+              <Text>
+                {language.arabic.achievements}
+              </Text>
+              :
+              <Text>
+                {language.eng.achievements}
+              </Text>
+            }
           </Alignment>
         </Content>
       </Container>
@@ -29,6 +36,8 @@ class Achievements extends Component {
 
 function mapStateToProps(state) {
   return {
+    settingsAlignRight: state.settings ? state.settings.get('alignment')
+    : false
   }
 }
 

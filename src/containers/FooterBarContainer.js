@@ -5,6 +5,7 @@ import { ActionCreators } from '../actions'
 import { Actions } from 'react-native-router-flux'
 import { Footer, FooterTab, Button, Text, View } from 'native-base'
 import Alignment from './AlignmentContainer'
+import * as language from '../assets/styles/language_strings'
 
 class FooterBar extends Component {
   isActiveTab(tab) {
@@ -13,37 +14,65 @@ class FooterBar extends Component {
 
   constructor(props) {
     super(props)
+  }
+
+  activateButtons() {
 
     this.homePage =
       <Button active={this.isActiveTab("home")} onPress = {() => Actions.home()} key={"home"}>
+      {this.props.settingsAlignRight ?
         <Text>
-          Home
+          {language.arabic.home}
         </Text>
+        :
+        <Text>
+          {language.eng.home}
+        </Text>
+      }
       </Button>
 
     this.downloadPage =
       <Button active={this.isActiveTab("remotes")} onPress = {() => Actions.remotes()} key={"download"}>
+        {this.props.settingsAlignRight ?
         <Text>
-          DL
+          {language.arabic.download}
         </Text>
+        :
+        <Text>
+          {language.eng.download}
+        </Text>
+        }
       </Button>
 
     this.achievementsPage =
       <Button active={this.isActiveTab("achievements")} onPress = {() => Actions.achievements()} key={"achievements"}>
+        {this.props.settingsAlignRight ?
         <Text>
-          Achievements
+          {language.arabic.achievements}
         </Text>
+        :
+        <Text>
+          {language.eng.achievements}
+        </Text>
+        }
       </Button>
 
     this.profilePage =
       <Button active={this.isActiveTab("profile")} onPress = {() => Actions.profile()} key={"profile"}>
+        {this.props.settingsAlignRight ?
         <Text>
-          Profile
+          {language.arabic.profile}
         </Text>
+        :
+        <Text>
+          {language.eng.profile}
+        </Text>
+        }
       </Button>
  }
 
   render() {
+    this.activateButtons()
     //This could all possibly be done with flexbox
     let pageList = [this.homePage, this.downloadPage, this.achievementsPage, this.profilePage]
     {this.props.settingsAlignRight ? pageList.reverse() : pageList}
