@@ -30,14 +30,11 @@ class RemoteCourses extends Component {
         </Text>
         {this.props.online ? 
           this.getRemoteCourses().map(course => {
-            // Remote courses are an Immutable.Seq of pairs in the form [id, name]
-            let courseId = course[0]
-            let courseName = course[1]
             return (
-              <View style={{marginTop: 10}} key={courseId}>
-                <Button onPress = {() => {this.downloadCourse(courseId)}}>
+              <View style={{marginTop: 10}} key={course.get('id')}>
+                <Button onPress = {() => {this.downloadCourse(course.get('id'))}}>
                   <Text>
-                    {courseName}
+                    {course.get('name')}
                   </Text>
                 </Button>
               </View>
