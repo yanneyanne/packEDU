@@ -8,6 +8,7 @@ import { Container, Content, Text } from 'native-base'
 import styles from '../assets/styles/home_styles'
 import Courses from './CoursesContainer.js'
 import RemoteCourses from './RemoteCoursesContainer.js'
+import Alignment from './AlignmentContainer'
 
 class Achievements extends Component {
 
@@ -15,9 +16,11 @@ class Achievements extends Component {
     return (
       <Container marginTop={80}>
         <Content>
-          <Text>
-            My Achievements
-          </Text>
+          <Alignment>
+            <Text>
+              My Achievements
+            </Text>
+          </Alignment>
         </Content>
       </Container>
     )
