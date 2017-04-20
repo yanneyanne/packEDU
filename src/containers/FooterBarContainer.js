@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { ActionCreators } from '../actions'
 import { Actions } from 'react-native-router-flux'
-import { Container, Footer, FooterTab, Button, Text, View } from 'native-base'
+import { Footer, FooterTab, Button, Text } from 'native-base'
 import Alignment from './AlignmentContainer'
 
 class FooterBar extends Component {
@@ -44,15 +44,15 @@ class FooterBar extends Component {
 
     this.buttonNext =
       <Button key={'next'} onPress = {() => this.props.previousSlide(
-         this.props.currentSlidePos, this.props.lessonMaterial)} >
-       <Text>
-         Previous
-       </Text>
+          this.props.currentSlidePos, this.props.lessonMaterial)} >
+        <Text>
+          Previous
+        </Text>
       </Button>
     
     this.buttonPrev =
       <Button key={'prev'} onPress = {() => this.props.nextSlide(
-        this.props.currentSlidePos, this.props.lessonMaterial)}>
+          this.props.currentSlidePos, this.props.lessonMaterial)}>
         <Text>
           Next
         </Text>
@@ -60,6 +60,7 @@ class FooterBar extends Component {
  }
 
   render() {
+    //This could all possibly be done with flexbox
     var displayList
     let buttonList = [this.buttonNext, this.buttonPrev]
     let pageList = [this.homePage, this.downloadPage, this.achievementsPage, this.profilePage]
