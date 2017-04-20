@@ -7,27 +7,9 @@ import { Container, Text, Button, Content, View } from 'native-base'
 import { Bar } from 'react-native-progress'
 import SCompile from '../lib/slideCompile/SCompile'
 import Alignment from './AlignmentContainer'
+import NextPrevButtons from './NextPrevButtonsContainer'
 
 class Slide extends Component {
-  constructor(props) {
-    super(props)
-      this.buttonNext =
-        <Button key={'next'} onPress = {() => this.props.previousSlide(
-            this.props.currentSlidePos, this.props.lessonMaterial)} >
-          <Text>
-            Previous
-          </Text>
-        </Button>
-      
-      this.buttonPrev =
-        <Button key={'prev'} onPress = {() => this.props.nextSlide(
-            this.props.currentSlidePos, this.props.lessonMaterial)}>
-          <Text>
-            Next
-          </Text>
-        </Button>
-}
-
   componentWillUnmount() {
     this.props.saveSlidePos(this.props.courseId, 
         this.props.activeLesson, 
@@ -51,27 +33,15 @@ class Slide extends Component {
 
   render() {
     return(
-      <Container style={{marginTop: 80}}>
-        <Content>
-          <Alignment>
-            { this.getSlideMaterial().map(elt => {
-              return elt
-            })}
-          </Alignment>
+      <Content style={{marginTop: 80}}>
+        <Alignment>
+          { this.getSlideMaterial().map(elt => {
+            return elt
+          })}
           <Bar progress={this.getProgress()} width={200}/>
-          {this.props.settingsAlignRight ? 
-            <View>
-              {this.buttonNext}
-              {this.buttonPrev}
-            </View>
-            :
-            <View>
-              {this.buttonPrev}
-              {this.buttonNext}
-            </View>
-          }
-        </Content>
-      </Container>
+          <NextPrevButtons />
+        </Alignment>
+      </Content>
     )
   }
 }
