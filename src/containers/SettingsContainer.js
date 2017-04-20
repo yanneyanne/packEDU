@@ -11,6 +11,7 @@ class Settings extends Component {
 
   toggleTextAlignment() {
     this.props.toggleTextAlignment()
+    this.props.toggleLanguage()
   }
 
   render() {

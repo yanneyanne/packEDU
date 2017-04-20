@@ -18,8 +18,11 @@ export const settings = createReducer(Map(), {
   },
 
   [types.TOGGLE_LANGUAGE](state, action) {
-    let newState = state.set("english", language.eng)
-    return newState
+    if (state.get('english') != language.eng) {
+    return state.set('english', language.eng)
+    } else {
+    return state.set('english', language.arabic)
+    }
   }
 })
 
