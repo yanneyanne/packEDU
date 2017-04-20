@@ -14,8 +14,15 @@ class RemoteCourses extends Component {
     this.props.fetchRemoteCourses()
   }
 
+  getLocalCourses() {
+    return this.props.localCourses || []
+  }
+
   getRemoteCourses() {
-    return this.props.remoteCourses
+    // Only return the courses which have not yet been downloaded
+    return this.props.remoteCourses.filterNot(course => {
+      return this.getLocalCourses().has(course.get('id')) 
+    })
   }
 
   downloadCourse(courseId) {
@@ -50,6 +57,7 @@ class RemoteCourses extends Component {
 
 function mapStateToProps(state) {
   return {
+    localCourses: state.courses,
     remoteCourses: state.remoteCourses,
     online: state.settings.get('online')
   }

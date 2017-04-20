@@ -24,14 +24,12 @@ function setRemoteCourses({ courses }) {
 }
 
 function setConnectionError() {
-  console.log("There was a connection error!")
   return {
     type: types.SET_CONNECTION_ERROR
   }
 }
 
 function removeConnectionError() {
-  console.log("No connection error!")
   return {
     type: types.NO_CONNECTION_ERROR 
   }
