@@ -33,6 +33,6 @@ function setConnectionError() {
 function removeConnectionError() {
   console.log("No connection error!")
   return {
-    type: types.REMOVE_CONNECTION_ERROR 
+    type: types.NO_CONNECTION_ERROR 
   }
 }

@@ -4,20 +4,18 @@ import { Map, List, fromJS } from 'immutable'
 
 export const settings = createReducer(Map(), {
   [types.TOGGLE_TEXT_ALIGNMENT](state, action) {
-    let newState = Map()
-    let current = state.get('alignment')
-    newState = state.set('alignment', !current)
+    newState = state.set('alignment', state.get('alignment'))
     return newState
   },
 
   [types.SET_CONNECTION_ERROR](state, action) {
     console.log("Connection error acknowledged in settings reducer")
-    return state
+    return state.set('online', false)
   },
 
-  [types.REMOVE_CONNECTION_ERROR](state, action) {
+  [types.NO_CONNECTION_ERROR](state, action) {
     console.log("Settings reducer has removed connection error!") 
-    return state
+    return state.set('online', true)
   }
 })
 
