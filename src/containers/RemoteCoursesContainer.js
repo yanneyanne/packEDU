@@ -4,9 +4,8 @@ import { bindActionCreators } from 'redux'
 import { ActionCreators } from '../actions'
 import ReactNative from 'react-native'
 import { Map } from 'immutable'
-import { Content, Text, Button } from 'native-base'
+import { Content, View, Text, Button } from 'native-base'
 import Alignment from './AlignmentContainer'
-const { View } = ReactNative
 
 class RemoteCourses extends Component {
   componentDidMount() {
