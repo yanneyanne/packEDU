@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { ActionCreators } from '../actions'
 import { Actions } from 'react-native-router-flux'
-import { Container, View, Content, Button, Text } from 'native-base'
+import { View, Content, Button, Text } from 'native-base'
 import { Bar } from 'react-native-progress'
 import Storage from '../lib/storage.js'
 

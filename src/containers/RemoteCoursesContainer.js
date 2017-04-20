@@ -4,13 +4,10 @@ import { bindActionCreators } from 'redux'
 import { ActionCreators } from '../actions'
 import ReactNative from 'react-native'
 import { Map } from 'immutable'
+import { Content, Text, Button } from 'native-base'
 
-const {
-  View,
-  Text,
-  TouchableHighlight,
-  ScrollView
-} = ReactNative
+const { View } = ReactNative
+
 
 class RemoteCourses extends Component {
   componentDidMount() {
@@ -27,41 +24,37 @@ class RemoteCourses extends Component {
   
   render() {
     return (
-      <View>
-        <View>
-          <Text style={{marginTop: 30}}>
-            Download more Courses:
-          </Text>
-        </View> 
-        <ScrollView>
-          {this.getRemoteCourses().map(course => {
+      <Content>
+        <Text style={{marginTop: 65}}>
+          Download more Courses:
+        </Text>
+        {this.props.online ? 
+          this.getRemoteCourses().map(course => {
             // Remote courses are an Immutable.Seq of pairs in the form [id, name]
             let courseId = course[0]
             let courseName = course[1]
             return (
               <View style={{marginTop: 10}} key={courseId}>
-                <TouchableHighlight>
+                <Button onPress = {() => {this.downloadCourse(courseId)}}>
                   <Text>
                     {courseName}
                   </Text>
-                </TouchableHighlight>
-                <TouchableHighlight onPress = {() => {this.downloadCourse(courseId)}}>
-                  <Text>
-                    Download
-                  </Text>
-                </TouchableHighlight>
+                </Button>
               </View>
             )
-          })}
-        </ScrollView>
-      </View>
+          })
+          :
+          <Text>No connection</Text>
+        }
+      </Content>
     )	
   }
 }
 
 function mapStateToProps(state) {
   return {
-    remoteCourses: state.remoteCourses
+    remoteCourses: state.remoteCourses,
+    online: state.settings.get('online')
   }
 }
 
