@@ -52,7 +52,6 @@ function mapStateToProps(state) {
     activeLesson: state.activeCourse.get('activeLesson'),
     currentSlidePos: state.activeCourse.get('currentSlidePos'),
     lessonMaterial: state.activeCourse.get('lessonMaterial'),
-    settingsAlignRight: state.settings ? state.settings.get('alignment') : false 
   }
 }
 

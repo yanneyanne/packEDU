@@ -5,6 +5,7 @@ import { ActionCreators } from '../actions'
 import { Actions } from 'react-native-router-flux'
 import { View, Header, Container, ListItem, Content, Text, Button } from 'native-base'
 import Alignment from './AlignmentContainer'
+import styles from '../assets/styles/container_styles'
 
 class Courses extends Component {
 
@@ -28,7 +29,7 @@ class Courses extends Component {
 
   render() {
     return (
-      <Content>
+      <Content style={{marginTop: 65}}>
         <Alignment>
           <ListItem itemHeader first>
             {this.props.settingsAlignRight ? 
