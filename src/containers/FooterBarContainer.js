@@ -20,54 +20,30 @@ class FooterBar extends Component {
 
     this.homePage =
       <Button active={this.isActiveTab("home")} onPress = {() => Actions.home()} key={"home"}>
-      {this.props.settingsAlignRight ?
         <Text>
-          {language.arabic.home}
+          {this.props.getLanguage.home} 
         </Text>
-        :
-        <Text>
-          {language.eng.home}
-        </Text>
-      }
       </Button>
 
     this.downloadPage =
       <Button active={this.isActiveTab("remotes")} onPress = {() => Actions.remotes()} key={"download"}>
-        {this.props.settingsAlignRight ?
         <Text>
-          {language.arabic.download}
+          {this.props.getLanguage.download}
         </Text>
-        :
-        <Text>
-          {language.eng.download}
-        </Text>
-        }
       </Button>
 
     this.achievementsPage =
       <Button active={this.isActiveTab("achievements")} onPress = {() => Actions.achievements()} key={"achievements"}>
-        {this.props.settingsAlignRight ?
         <Text>
-          {language.arabic.achievements}
+          {this.props.getLanguage.achievements}
         </Text>
-        :
-        <Text>
-          {language.eng.achievements}
-        </Text>
-        }
       </Button>
 
     this.profilePage =
       <Button active={this.isActiveTab("profile")} onPress = {() => Actions.profile()} key={"profile"}>
-        {this.props.settingsAlignRight ?
         <Text>
-          {language.arabic.profile}
+          {this.props.getLanguage.profile}
         </Text>
-        :
-        <Text>
-          {language.eng.profile}
-        </Text>
-        }
       </Button>
  }
 
@@ -95,7 +71,8 @@ class FooterBar extends Component {
 function mapStateToProps(state) {
   return {
     activeTab: state.default.scene ? state.default.scene.name : null,
-    settingsAlignRight: state.settings ? state.settings.get('alignment') : false
+    settingsAlignRight: state.settings ? state.settings.get('alignment') : false,
+    getLanguage : state.settings.get('english') ? language.arabic : language.eng
   }
 }
 

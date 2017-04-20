@@ -8,6 +8,7 @@ import { Container, Content, Button, Text } from 'native-base'
 import styles from '../assets/styles/home_styles'
 import Courses from './CoursesContainer.js'
 import RemoteCourses from './RemoteCoursesContainer.js'
+import * as language from '../assets/styles/language_strings'
 
 class Profile extends Component {
 
@@ -17,7 +18,7 @@ class Profile extends Component {
         <Content>
           <Button full onPress = {() => Actions.settings()}>
             <Text>
-              Settings
+              {this.props.getLanguage.settings}
             </Text>
           </Button>
         </Content>
@@ -28,6 +29,7 @@ class Profile extends Component {
 
 function mapStateToProps(state) {
   return {
+    getLanguage : state.settings.get('english') ? language.arabic : language.eng
   }
 }
 

@@ -32,7 +32,9 @@ class Courses extends Component {
       <Content>
         <Alignment>
           <ListItem itemHeader first>
-            <Text> {this.props.getLanguage ? this.props.getLanguage.home : null} </Text>
+            <Text> 
+              {this.props.getLanguage.home} 
+            </Text>
           </ListItem>
           {this.getLocalCourses().map(course => {
             return (

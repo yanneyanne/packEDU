@@ -3,7 +3,10 @@ export let eng= {
 	achievements: 'Achievements',
 	home: 'Home',
 	download: 'Download',
-	profile: 'Profile'
+	profile: 'Profile',
+	settings: 'Settings',
+	next: 'Next',
+	previous: 'Previous'
 }
 
 export let arabic = {
@@ -11,6 +14,9 @@ export let arabic = {
 	achievements: 'موهلات',
 	home: 'الصفحة الرئيسية',
 	download: 'تحميل',
-	profile: 'الملف الشخصي'
+	profile: 'الملف الشخصي',
+	settings: 'خيارات',
+	next: 'بعد ذلك مباشرة',
+	previous: 'سابق'
 }
 

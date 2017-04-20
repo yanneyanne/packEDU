@@ -18,15 +18,9 @@ class Achievements extends Component {
       <Container marginTop={80}>
         <Content>
           <Alignment>
-            {this.props.settingsAlignRight ?
-              <Text>
-                {language.arabic.achievements}
-              </Text>
-              :
-              <Text>
-                {language.eng.achievements}
-              </Text>
-            }
+            <Text>
+              {this.props.getLanguage.achievements}
+            </Text>
           </Alignment>
         </Content>
       </Container>
@@ -37,7 +31,8 @@ class Achievements extends Component {
 function mapStateToProps(state) {
   return {
     settingsAlignRight: state.settings ? state.settings.get('alignment')
-    : false
+    : false,
+    getLanguage: state.settings.get('english') ? language.arabic : language.eng
   }
 }
 

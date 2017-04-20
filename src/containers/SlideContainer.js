@@ -7,23 +7,24 @@ import { Container, Text, Button, Content, View } from 'native-base'
 import { Bar } from 'react-native-progress'
 import SCompile from '../lib/slideCompile/SCompile'
 import Alignment from './AlignmentContainer'
+import * as language from '../assets/styles/language_strings'
 
 class Slide extends Component {
   constructor(props) {
     super(props)
-      this.buttonNext =
+      this.buttonPrev =
         <Button key={'next'} onPress = {() => this.props.previousSlide(
             this.props.currentSlidePos, this.props.lessonMaterial)} >
           <Text>
-            Previous
+            {this.props.getLanguage.previous}
           </Text>
         </Button>
       
-      this.buttonPrev =
+      this.buttonNext =
         <Button key={'prev'} onPress = {() => this.props.nextSlide(
             this.props.currentSlidePos, this.props.lessonMaterial)}>
           <Text>
-            Next
+           {this.props.getLanguage.next}
           </Text>
         </Button>
 }
@@ -82,7 +83,8 @@ function mapStateToProps(state) {
     activeLesson: state.activeCourse.get('activeLesson'),
     currentSlidePos: state.activeCourse.get('currentSlidePos'),
     lessonMaterial: state.activeCourse.get('lessonMaterial'),
-    settingsAlignRight: state.settings ? state.settings.get('alignment') : false 
+    settingsAlignRight: state.settings ? state.settings.get('alignment') : false,
+    getLanguage: state.settings.get('english') ? language.arabic : language.eng
   }
 }
 
