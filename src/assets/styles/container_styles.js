@@ -7,12 +7,29 @@ var styles = StyleSheet.create({
     },
 
     content: {
-        marginTop: dimensions.headerHeight
+        marginTop: dimensions.headerHeight,
+        alignItems: 'center'
     },
 
-    footer: {
-        bottom: 0
+    slideContent: {
+        marginTop: dimensions.headerHeight,
+    },
+
+    progressContainer: {
+        flex: 1,
+        alignItems: 'center'
+    },
+
+    progress: {
+        alignSelf: 'center'
+    },
+
+    nextPrev: {
+        position: 'absolute',
+        bottom: 0,
+        backgroundColor: '#FF0000',
+        justifyContent: 'space-between'
     }
 });
 
-export default styles;
+export default styles

@@ -4,16 +4,17 @@ import { bindActionCreators } from 'redux'
 import { ActionCreators } from '../actions'
 import ReactNative from 'react-native'
 import { Actions } from 'react-native-router-flux'
-import { Content, View, Text } from 'native-base'
+import { Content, Text } from 'native-base'
 import Courses from './CoursesContainer.js'
 import styles from '../assets/styles/container_styles'
+const {
+  View
+} = ReactNative
 
 class Home extends Component {
   render() {
     return (
-      <Content>
-        <Courses/>
-      </Content>
+      <Courses/>
     )
   }
 }

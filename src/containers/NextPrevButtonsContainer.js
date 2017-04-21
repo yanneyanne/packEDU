@@ -2,27 +2,30 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { ActionCreators } from '../actions'
-import { View, Text, Button, Footer } from 'native-base'
+import { Content, Text, Button } from 'native-base'
 import styles from '../assets/styles/container_styles'
+import { View } from 'react-native'
+import { StyleSheet } from 'react-native'
 
 class NextPrevButtons extends Component {
 
   render() {
+    let flexDir = this.props.alignRight ? 'row' : 'row-reverse'
     return (
-      <Footer>
-        <Button key={'prev'} onPress = {() => this.props.previousSlide(
-            this.props.currentSlidePos, this.props.lessonMaterial)} >
-          <Text>
-            Previous
-          </Text>
-        </Button>
+      <View style={styles.nextPrev}>
         <Button key={'next'} onPress = {() => this.props.nextSlide(
             this.props.currentSlidePos, this.props.lessonMaterial)}>
           <Text>
             Next
           </Text>
         </Button>
-      </Footer>
+        <Button key={'prev'} onPress = {() => this.props.previousSlide(
+            this.props.currentSlidePos, this.props.lessonMaterial)} >
+          <Text>
+            Previous
+          </Text>
+        </Button>
+      </View>
     ) 
   }
 }

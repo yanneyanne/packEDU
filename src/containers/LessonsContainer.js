@@ -3,10 +3,15 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { ActionCreators } from '../actions'
 import { Actions } from 'react-native-router-flux'
-import { View, Content, Button, Text } from 'native-base'
+import { Content, Button, Text } from 'native-base'
 import { Bar } from 'react-native-progress'
 import Storage from '../lib/storage.js'
 import Alignment from './AlignmentContainer'
+import ReactNative from 'react-native'
+import styles from '../assets/styles/container_styles'
+const {
+  View
+} = ReactNative
 
 class Lessons extends Component {
 
@@ -25,22 +30,20 @@ class Lessons extends Component {
 
   render() {
     return (
-      <Content style={{marginTop: 65}}>
-        <Alignment>
-          {this.getLessons().map((lesson) => {
-            return (
-              <View key={lesson.get('name')}>
-                <Button onPress = {() => this.startLesson(this.getCourseId(), lesson.get('name'))}>
-                  <Text>
-                    {lesson.get('name')}
-                  </Text>
-                </Button>
-                <Bar progress={lesson.get('progress')}/>
-              </View>
-            )
-          })}
-        </Alignment>
-      </Content>
+      <View style={styles.content}>
+        {this.getLessons().map((lesson) => {
+          return (
+            <View key={lesson.get('name')}>
+              <Button onPress = {() => this.startLesson(this.getCourseId(), lesson.get('name'))}>
+                <Text>
+                  {lesson.get('name')}
+                </Text>
+              </Button>
+              <Bar progress={lesson.get('progress')}/>
+            </View>
+          )
+        })}
+      </View>
     )
   }
 }

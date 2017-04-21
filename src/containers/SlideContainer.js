@@ -3,13 +3,16 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { ActionCreators } from '../actions'
 import { Actions } from 'react-native-router-flux'
-import { Container, Text, Button, Content, View } from 'native-base'
+import { View } from 'react-native'
+import { Container, Content, Text, Button } from 'native-base'
 import { Bar } from 'react-native-progress'
 import SCompile from '../lib/slideCompile/SCompile'
 import Alignment from './AlignmentContainer'
 import NextPrevButtons from './NextPrevButtonsContainer'
-
+import styles from '../assets/styles/container_styles'
+import { StyleSheet } from 'react-native'
 class Slide extends Component {
+
   componentWillUnmount() {
     this.props.saveSlidePos(this.props.courseId, 
         this.props.activeLesson, 
@@ -33,15 +36,15 @@ class Slide extends Component {
 
   render() {
     return(
-      <Content style={{marginTop: 80}}>
+      <Container style={StyleSheet.flatten(styles.slideContent)}>
         <Alignment>
           { this.getSlideMaterial().map(elt => {
             return elt
           })}
-          <Bar progress={this.getProgress()} width={200}/>
-          <NextPrevButtons />
+          <Bar progress={this.getProgress()} width={200} style={styles.progress}/>
         </Alignment>
-      </Content>
+        <NextPrevButtons />
+      </Container>
     )
   }
 }
