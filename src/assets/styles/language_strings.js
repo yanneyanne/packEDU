@@ -6,7 +6,8 @@ export let eng= {
 	profile: 'Profile',
 	settings: 'Settings',
 	next: 'Next',
-	previous: 'Previous'
+	previous: 'Previous',
+	change_lang: 'Change language to Arabic'
 }
 
 export let arabic = {
@@ -17,6 +18,7 @@ export let arabic = {
 	profile: 'الملف الشخصي',
 	settings: 'خيارات',
 	next: 'بعد ذلك مباشرة',
-	previous: 'سابق'
+	previous: 'سابق',
+	change_lang: 'تغيير اللغة إلى اللغة الإنجليزية'
 }
 

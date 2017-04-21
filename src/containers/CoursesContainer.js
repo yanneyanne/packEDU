@@ -29,7 +29,7 @@ class Courses extends Component {
         <Alignment>
           <ListItem itemHeader first>
             <Text> 
-              {this.props.getLanguage.home} 
+              {this.props.getLanguage.mycourses} 
             </Text>
           </ListItem>
           {this.getLocalCourses().map(course => {
