@@ -2,33 +2,29 @@ import { StyleSheet } from 'react-native';
 import { dimensions } from './constants'
 
 var styles = StyleSheet.create({
-    rootContainer: {
-        flex: 1
-    },
-
     content: {
         marginTop: dimensions.headerHeight,
         alignItems: 'center'
     },
 
     slideContent: {
-        marginTop: dimensions.headerHeight,
+        flex: 1,
+        marginTop: dimensions.headerHeight
     },
 
-    progressContainer: {
-        flex: 1,
-        alignItems: 'center'
+    slideFooter: {
+        position: 'absolute',
+        bottom: 0,
+        left: 0,
+        right: 0
     },
 
     progress: {
         alignSelf: 'center'
     },
 
-    nextPrev: {
-        position: 'absolute',
-        bottom: 0,
-        backgroundColor: '#FF0000',
-        justifyContent: 'space-between'
+    nextPrevButtons: {
+        justifyContent: 'center'
     }
 });
 

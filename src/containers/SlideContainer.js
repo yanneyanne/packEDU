@@ -11,6 +11,7 @@ import Alignment from './AlignmentContainer'
 import NextPrevButtons from './NextPrevButtonsContainer'
 import styles from '../assets/styles/container_styles'
 import { StyleSheet } from 'react-native'
+
 class Slide extends Component {
 
   componentWillUnmount() {
@@ -36,15 +37,15 @@ class Slide extends Component {
 
   render() {
     return(
-      <Container style={StyleSheet.flatten(styles.slideContent)}>
-        <Alignment>
-          { this.getSlideMaterial().map(elt => {
-            return elt
-          })}
-          <Bar progress={this.getProgress()} width={200} style={styles.progress}/>
-        </Alignment>
-        <NextPrevButtons />
-      </Container>
+      <View style={StyleSheet.flatten(styles.slideContent)}>
+        { this.getSlideMaterial().map(elt => {
+          return elt
+        })}
+        <View style={styles.slideFooter}>
+          <Bar progress={this.getProgress()} width={300} style={styles.progress}/>
+          <NextPrevButtons />
+        </View>
+      </View>
     )
   }
 }
