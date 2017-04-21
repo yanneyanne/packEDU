@@ -9,31 +9,41 @@ import { StyleSheet } from 'react-native'
 
 class NextPrevButtons extends Component {
 
+  isFirstSlide() {
+    return this.props.currentSlidePos === 0
+  }
+
+  isLastSlide() {
+    return this.props.lessonMaterial.indexOf(
+        "<slide>", this.props.currentSlidePos + 1) < 0
+  }
+
   render() {
     let flexDir = this.props.alignRight ? 'row' : 'row-reverse'
     return (
       <View style={styles.nextPrev}>
-        <Button key={'next'} onPress = {() => this.props.nextSlide(
-            this.props.currentSlidePos, this.props.lessonMaterial)}>
+        <Button key={'next'} disabled={this.isLastSlide()} 
+            onPress = {() => this.props.nextSlide(
+                this.props.currentSlidePos, this.props.lessonMaterial)}>
           <Text>
             Next
           </Text>
         </Button>
-        <Button key={'prev'} onPress = {() => this.props.previousSlide(
-            this.props.currentSlidePos, this.props.lessonMaterial)} >
+        <Button key={'prev'} disabled={this.isFirstSlide()} 
+            onPress = {() => this.props.previousSlide(
+                this.props.currentSlidePos, this.props.lessonMaterial)} >
           <Text>
             Previous
           </Text>
         </Button>
       </View>
-    ) 
+    )
   }
-}
 
 function mapStateToProps(state) {
   return {
     currentSlidePos: state.activeCourse.get('currentSlidePos'),
-    lessonMaterial: state.activeCourse.get('lessonMaterial'),
+    lessonMaterial: state.activeCourse.get('lessonMaterial') || "",
     alignRight: state.settings ? state.settings.get('alignment') : false
   }
 }
