@@ -24,10 +24,6 @@ class Courses extends Component {
   }
 
   render() {
-      console.log("THIS IS PROPS OF GETLANGUAGE *********")
-      if (this.props.getLanguage != undefined) {
-        console.log(this.props.getLanguage.home)
-      }
     return (
       <Content>
         <Alignment>
