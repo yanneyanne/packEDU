@@ -10,7 +10,7 @@ import SCompile from '../lib/slideCompile/SCompile'
 import Alignment from './AlignmentContainer'
 import NextPrevButtons from './NextPrevButtonsContainer'
 import styles from '../assets/styles/slide_styles'
-import { StyleSheet } from 'react-native'
+import { StyleSheet, Dimensions } from 'react-native'
 
 class Slide extends Component {
 
@@ -36,13 +36,17 @@ class Slide extends Component {
   }
 
   render() {
+    let {height, width} = Dimensions.get('window')
     return(
-      <View style={StyleSheet.flatten(styles.slideContent)}>
-        { this.getSlideMaterial().map(elt => {
-          return elt
-        })}
-        <View style={styles.slideFooter}>
-          <Bar progress={this.getProgress()} width={300} style={StyleSheet.flatten(styles.progress)}/>
+      <View style={styles.content}>
+        <Bar progress={this.getProgress()}
+          width={width} borderRadius={0} style={styles.progress}/>
+        <View style={StyleSheet.flatten(styles.slideElements)}>
+          { this.getSlideMaterial().map(elt => {
+            return elt
+          })}
+        </View>
+        <View style={styles.footer}>
           <NextPrevButtons />
         </View>
       </View>

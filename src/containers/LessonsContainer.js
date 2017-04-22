@@ -9,6 +9,8 @@ import Storage from '../lib/storage.js'
 import Alignment from './AlignmentContainer'
 import ReactNative from 'react-native'
 import styles from '../assets/styles/lessons_styles'
+import { StyleSheet } from 'react-native'
+
 const {
   View
 } = ReactNative
@@ -30,7 +32,7 @@ class Lessons extends Component {
 
   render() {
     return (
-      <View style={styles.content}>
+      <View style={StyleSheet.flatten(styles.content)}>
         {this.getLessons().map((lesson) => {
           return (
             <View key={lesson.get('name')} style={styles.lessonButton}>

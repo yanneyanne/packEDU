@@ -1,21 +1,17 @@
 import { StyleSheet } from 'react-native';
 import { dimensions } from './constants'
+import general from './general_styles'
 
 var styles = StyleSheet.create({
-    content: {
-        marginTop: dimensions.headerHeight,
-        alignItems: 'center'
-    },
+    content: 
+        general.content,
 
     lessonButton: {
         marginBottom: 10
     },
 
-    slideContent: {
-        flex: 1,
-        alignItems:'center',
-        justifyContent:'center'
-    },
+
+
 });
 
 export default styles

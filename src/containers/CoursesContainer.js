@@ -34,7 +34,7 @@ class Courses extends Component {
 
   render() {
     return (
-      <View style={styles.content}>
+      <View style={StyleSheet.flatten(styles.content)}>
         <ListItem itemHeader first>
           {this.props.settingsAlignRight ? 
             <Text style={{fontWeight: 'bold'}}>
