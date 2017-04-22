@@ -24,7 +24,7 @@ var styles = StyleSheet.create({
     },
 
     nextPrevButtons: {
-        justifyContent: 'center'
+        justifyContent: 'space-between'
     }
 });
 

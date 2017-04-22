@@ -10,7 +10,7 @@ import { StyleSheet } from 'react-native'
 class NextPrevButtons extends Component {
 
   isFirstSlide() {
-    return this.props.currentSlidePos < 0
+    return this.props.currentSlidePos < 1
   }
 
   isLastSlide() {
@@ -20,13 +20,11 @@ class NextPrevButtons extends Component {
 
   render() {
     let flexDir = this.props.alignRight ? 'row' : 'row-reverse'
-    console.log("Is last slide: " +this.isLastSlide())
-    console.log("Is first slide: " + this.isFirstSlide())
     return (
-      <View>
+      <View style={StyleSheet.flatten([styles.nextPrevButtons, {flexDirection: flexDir}])}>
         {this.isLastSlide() ?
-            null :
-          <Button key={'next'} full onPress = {() => this.props.nextSlide(
+          null :
+          <Button key={'next'} onPress = {() => this.props.nextSlide(
               this.props.currentSlidePos, this.props.lessonMaterial)}>
             <Text>
               Next
@@ -34,8 +32,8 @@ class NextPrevButtons extends Component {
           </Button>
         }
         {this.isFirstSlide() ? 
-            null :
-          <Button key={'prev'} full onPress = {() => this.props.previousSlide(
+          null :
+          <Button key={'prev'} onPress = {() => this.props.previousSlide(
               this.props.currentSlidePos, this.props.lessonMaterial)} >
             <Text>
               Previous
