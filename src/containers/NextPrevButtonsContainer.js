@@ -21,7 +21,7 @@ class NextPrevButtons extends Component {
   render() {
     let flexDir = this.props.alignRight ? 'row' : 'row-reverse'
     return (
-      <View style={StyleSheet.flatten([styles.nextPrevButtons, {flexDirection: flexDir}])}>
+      <View style = {StyleSheet.flatten([styles.nextPrevButtons, {flexDirection: flexDir}])}>
         {this.isLastSlide() ?
           <View/>:
           <Button key={'next'} onPress = {() => this.props.nextSlide(
