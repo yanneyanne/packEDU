@@ -5,7 +5,7 @@ import { ActionCreators } from '../actions'
 import { Actions } from 'react-native-router-flux'
 import { Header, Container, ListItem, Content, Text, Button } from 'native-base'
 import Alignment from './AlignmentContainer'
-import styles from '../assets/styles/container_styles'
+import styles from '../assets/styles/courses_styles'
 import { StyleSheet } from 'react-native'
 import ReactNative from 'react-native'
 const {

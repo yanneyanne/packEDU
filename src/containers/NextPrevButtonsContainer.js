@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { ActionCreators } from '../actions'
 import { Content, Text, Button } from 'native-base'
-import styles from '../assets/styles/container_styles'
+import styles from '../assets/styles/slide_styles'
 import { View } from 'react-native'
 import { StyleSheet } from 'react-native'
 

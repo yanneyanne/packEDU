@@ -9,7 +9,7 @@ import { Bar } from 'react-native-progress'
 import SCompile from '../lib/slideCompile/SCompile'
 import Alignment from './AlignmentContainer'
 import NextPrevButtons from './NextPrevButtonsContainer'
-import styles from '../assets/styles/container_styles'
+import styles from '../assets/styles/slide_styles'
 import { StyleSheet } from 'react-native'
 
 class Slide extends Component {
@@ -42,7 +42,7 @@ class Slide extends Component {
           return elt
         })}
         <View style={styles.slideFooter}>
-          <Bar progress={this.getProgress()} width={300} style={styles.progress}/>
+          <Bar progress={this.getProgress()} width={300} style={StyleSheet.flatten(styles.progress)}/>
           <NextPrevButtons />
         </View>
       </View>

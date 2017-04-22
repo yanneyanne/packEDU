@@ -7,27 +7,15 @@ var styles = StyleSheet.create({
         alignItems: 'center'
     },
 
+    lessonButton: {
+        marginBottom: 10
+    },
+
     slideContent: {
         flex: 1,
         alignItems:'center',
         justifyContent:'center'
     },
-
-    slideFooter: {
-        position: 'absolute',
-        bottom: 5,
-        left: 5,
-        right: 5
-    },
-
-    progress: {
-        alignSelf: 'center'
-    },
-
-    nextPrevButtons: {
-        justifyContent: 'space-between',
-        marginTop: 5
-    }
 });
 
 export default styles

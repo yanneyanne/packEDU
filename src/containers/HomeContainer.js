@@ -6,10 +6,7 @@ import ReactNative from 'react-native'
 import { Actions } from 'react-native-router-flux'
 import { Content, Text } from 'native-base'
 import Courses from './CoursesContainer.js'
-import styles from '../assets/styles/container_styles'
-const {
-  View
-} = ReactNative
+import styles from '../assets/styles/home_styles'
 
 class Home extends Component {
   render() {

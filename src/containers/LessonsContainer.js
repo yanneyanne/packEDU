@@ -8,7 +8,7 @@ import { Bar } from 'react-native-progress'
 import Storage from '../lib/storage.js'
 import Alignment from './AlignmentContainer'
 import ReactNative from 'react-native'
-import styles from '../assets/styles/container_styles'
+import styles from '../assets/styles/lessons_styles'
 const {
   View
 } = ReactNative
@@ -33,13 +33,13 @@ class Lessons extends Component {
       <View style={styles.content}>
         {this.getLessons().map((lesson) => {
           return (
-            <View key={lesson.get('name')}>
+            <View key={lesson.get('name')} style={styles.lessonButton}>
               <Button onPress = {() => this.startLesson(this.getCourseId(), lesson.get('name'))}>
                 <Text>
                   {lesson.get('name')}
                 </Text>
               </Button>
-              <Bar progress={lesson.get('progress')}/>
+              <Bar style={styles.progress} progress={lesson.get('progress')}/>
             </View>
           )
         })}
