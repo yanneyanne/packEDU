@@ -14,9 +14,9 @@ var styles = StyleSheet.create({
 
     slideFooter: {
         position: 'absolute',
-        bottom: 0,
-        left: 0,
-        right: 0
+        bottom: 5,
+        left: 5,
+        right: 5
     },
 
     progress: {
@@ -24,7 +24,8 @@ var styles = StyleSheet.create({
     },
 
     nextPrevButtons: {
-        justifyContent: 'space-between'
+        justifyContent: 'space-between',
+        marginTop: 5
     }
 });
 
