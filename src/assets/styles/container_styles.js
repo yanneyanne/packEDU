@@ -9,7 +9,8 @@ var styles = StyleSheet.create({
 
     slideContent: {
         flex: 1,
-        marginTop: dimensions.headerHeight
+        alignItems:'center',
+        justifyContent:'center'
     },
 
     slideFooter: {
