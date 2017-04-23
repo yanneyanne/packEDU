@@ -4,7 +4,7 @@ import Api from '../lib/api/api'
 export function fetchRemoteCourses() {
   console.log("Fetching remote courses...")
   return (dispatch, getState) => {
-    const route = '/courseNames'
+    const route = '/course/names'
     return Api.get(route).then((resp) => {
       dispatch(setRemoteCourses({ courses: resp }))
       dispatch((removeConnectionError()))
