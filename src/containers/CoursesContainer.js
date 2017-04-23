@@ -3,8 +3,14 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { ActionCreators } from '../actions'
 import { Actions } from 'react-native-router-flux'
-import { View, Header, Container, ListItem, Content, Text, Button} from 'native-base'
+import { Header, Container, ListItem, Content, Text, Button } from 'native-base'
 import Alignment from './AlignmentContainer'
+import styles from '../assets/styles/courses_styles'
+import { StyleSheet } from 'react-native'
+import ReactNative from 'react-native'
+const {
+  View
+} = ReactNative
 
 class Courses extends Component {
 
@@ -23,39 +29,36 @@ class Courses extends Component {
 
   startCourse(courseId) {
     this.props.setActiveCourse(courseId)
-    Actions.lessons();
+    Actions.lessons()
   }
 
   render() {
     return (
-      <Content>
-        <Alignment>
-          <ListItem itemHeader first>
-            {this.props.settingsAlignRight ? 
-              <Text style={{fontWeight: 'bold'}}>
-                الدورات المحلية
-              </Text>
-              :
-              <Text style={{fontWeight: 'bold'}}>
-                My Courses
-              </Text>
-            }
-          </ListItem>
-          {this.getLocalCourses().map(course => {
-            let courseId = course[0]
-            let courseName = course[1]
-            return (
-              <View Style = {{marginTop: 10}} key ={courseId}>
-                <ListItem button onPress={() => {this.startCourse(courseId)}}>
-                  <Text>
-                    {courseName}
-                  </Text>
-                </ListItem>
-              </View>
-            )
-          })}
-        </Alignment>
-      </Content>
+      <View style={StyleSheet.flatten(styles.content)}>
+        <ListItem itemHeader first>
+          {this.props.settingsAlignRight ? 
+            <Text style={{fontWeight: 'bold'}}>
+              الدورات المحلية
+            </Text>
+            :
+            <Text style={{fontWeight: 'bold'}}>
+              My Courses
+            </Text>
+          }
+        </ListItem>
+        {this.getLocalCourses().map(course => {
+          return (
+            <View Style = {{marginTop: 10}} key ={course.get('id')}>
+              <Button bordered style={StyleSheet.flatten(styles.courseButton)}
+                onPress={() => {this.startCourse(course.get('id'))}}>
+                <Text>
+                  {course.get('name')}
+                </Text>
+              </Button>
+            </View>
+          )
+        })}
+      </View>
     ) 
   }
 }

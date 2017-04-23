@@ -4,14 +4,20 @@ import { bindActionCreators } from 'redux'
 import { ActionCreators } from '../actions'
 import ReactNative from 'react-native'
 import { Actions } from 'react-native-router-flux'
-import { Content, Text } from 'native-base'
-import Courses from './CoursesContainer.js'
-import styles from '../assets/styles/home_styles'
+import { Container, Content, Text } from 'native-base'
+import Alignment from './AlignmentContainer'
 
-class Home extends Component {
+class Achievements extends Component {
+
   render() {
     return (
-      <Courses/>
+      <Content>
+        <Alignment>
+          <Text>
+            My Achievements
+          </Text>
+        </Alignment>
+      </Content>
     )
   }
 }
@@ -25,4 +31,4 @@ function mapDispatchToProps(dispatch) {
   return bindActionCreators(ActionCreators, dispatch)
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Home)
+export default connect(mapStateToProps, mapDispatchToProps)(Achievements)
