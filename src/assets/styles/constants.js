@@ -1,6 +1,9 @@
-var constants = {
-	bgColor: '#e8efff',
-	fgColor: '#3E606F'
+export var colors = {
+	background: '#e8efff',
+	foreground: '#3E606F'
 }
 
-export default constants
+export var dimensions = {
+	headerHeight: 65
+}
+
