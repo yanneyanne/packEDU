@@ -15,3 +15,4 @@ export const SAVE_CURRENT_SLIDE_POS = 'SAVE_CURRENT_SLIDE_POS'
 
 // Action regarding alternatating between english/arabic text style.
 export const TOGGLE_TEXT_ALIGNMENT = 'TOGGLE_TEXT_ALIGNMENT'
+export const TOGGLE_LANGUAGE = 'TOGGLE_LANGUAGE'

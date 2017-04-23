@@ -5,9 +5,11 @@ import { ActionCreators } from '../actions'
 import { Actions } from 'react-native-router-flux'
 import { Header, Container, ListItem, Content, Text, Button } from 'native-base'
 import Alignment from './AlignmentContainer'
+import * as language from '../assets/styles/language_strings'
 import styles from '../assets/styles/courses_styles'
 import { StyleSheet } from 'react-native'
 import ReactNative from 'react-native'
+
 const {
   View
 } = ReactNative
@@ -17,10 +19,6 @@ class Courses extends Component {
   componentDidMount() {
     console.log("Courses are mounting")
     this.props.loadLocalCourses()
-  }
-  
-  toggleTextAlignment() {
-    this.props.toggleTextAlignment()
   }
 
   getLocalCourses() {
@@ -36,15 +34,9 @@ class Courses extends Component {
     return (
       <View style={StyleSheet.flatten(styles.content)}>
         <ListItem itemHeader first>
-          {this.props.settingsAlignRight ? 
-            <Text style={{fontWeight: 'bold'}}>
-              الدورات المحلية
-            </Text>
-            :
-            <Text style={{fontWeight: 'bold'}}>
-              My Courses
-            </Text>
-          }
+          <Text style={{fontWeight: 'bold'}}>
+            {this.props.getLanguage.mycourses} 
+          </Text>
         </ListItem>
         {this.getLocalCourses().map(course => {
           return (
@@ -66,7 +58,8 @@ class Courses extends Component {
 function mapStateToProps(state) {
   return {
     localCourses: state.courses,
-    settingsAlignRight: state.settings ? state.settings.get('alignment') : false
+    settingsAlignRight: state.settings ? state.settings.get('alignment') : false,
+    getLanguage: state.settings.get('english') ? language.arabic : language.eng
   }
 }
 
