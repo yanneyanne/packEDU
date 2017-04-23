@@ -1,8 +1,9 @@
 import * as types from './elementTypes'
 import React from 'react'
 import ReactNative from 'react-native'
-import { View, Text, Button } from 'native-base'
+import { View, Button } from 'native-base'
 import MultipleChoice from '../../containers/elements/MultipleChoice'
+import Text from '../../containers/elements/Text'
 
 class Generator {
   /* TODO: This function takes a DOM tree and converts

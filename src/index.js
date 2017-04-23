@@ -13,7 +13,10 @@ import Settings from './containers/SettingsContainer'
 import Profile from './containers/ProfileContainer'
 import Achievements from './containers/AchievementsContainer'
 import { Actions, ActionConst, Router, Scene } from 'react-native-router-flux'
+import { dimensions } from './assets/styles/constants'
 import { Container } from 'native-base'
+import ReactNative from 'react-native'
+const { View } = ReactNative
 
 const loggerMiddleware = createLogger({ predicate: (getState, action) => __DEV__ })
 
@@ -48,7 +51,9 @@ export default class AppContainer extends Component {
     return(
       <Provider store={store}>
         <Container>
-          <RouterWithRedux scenes={Scenes}/>
+          <RouterWithRedux 
+            navigationBarStyle={{height: dimensions.headerHeight}} 
+            scenes={Scenes}/>
           <FooterBar/>
         </Container>
       </Provider>
