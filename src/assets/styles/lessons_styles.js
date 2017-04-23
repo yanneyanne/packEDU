@@ -6,12 +6,19 @@ var styles = StyleSheet.create({
     content: 
         general.content,
 
-    lessonButton: {
+    lessonButtonContainer: {
         marginBottom: 10
     },
 
+    lessonButton: {
+        width: 230,
+        borderRadius: 0,
+        justifyContent: 'center'
+    },
 
-
+    progress: {
+        marginTop: 2
+    }
 });
 
 export default styles

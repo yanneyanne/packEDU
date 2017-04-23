@@ -35,13 +35,15 @@ class Lessons extends Component {
       <View style={StyleSheet.flatten(styles.content)}>
         {this.getLessons().map((lesson) => {
           return (
-            <View key={lesson.get('name')} style={styles.lessonButton}>
-              <Button onPress = {() => this.startLesson(this.getCourseId(), lesson.get('name'))}>
+            <View key={lesson.get('name')} style={styles.lessonButtonContainer}>
+              <Button bordered style={StyleSheet.flatten(styles.lessonButton)}
+                onPress = {() => this.startLesson(this.getCourseId(), lesson.get('name'))}>
                 <Text>
                   {lesson.get('name')}
                 </Text>
               </Button>
-              <Bar style={styles.progress} progress={lesson.get('progress')}/>
+              <Bar style={styles.progress} height={3} borderRadius={0} borderWidth={0} 
+                progress={lesson.get('progress')}/>
             </View>
           )
         })}

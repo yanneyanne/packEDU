@@ -24,7 +24,7 @@ class NextPrevButtons extends Component {
       <View style = {StyleSheet.flatten([styles.nextPrevButtons, {flexDirection: flexDir}])}>
         {this.isLastSlide() ?
           <View/>:
-          <Button key={'next'} onPress = {() => this.props.nextSlide(
+          <Button large key={'next'} onPress = {() => this.props.nextSlide(
               this.props.currentSlidePos, this.props.lessonMaterial)}>
             <Text>
               Next
@@ -33,7 +33,7 @@ class NextPrevButtons extends Component {
         }
         {this.isFirstSlide() ? 
           <View/> :
-          <Button key={'prev'} onPress = {() => this.props.previousSlide(
+          <Button large key={'prev'} onPress = {() => this.props.previousSlide(
               this.props.currentSlidePos, this.props.lessonMaterial)} >
             <Text>
               Previous
