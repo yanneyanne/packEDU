@@ -5,6 +5,7 @@ import { ActionCreators } from '../actions'
 import { Actions } from 'react-native-router-flux'
 import { Footer, FooterTab, Button, Text, View } from 'native-base'
 import Alignment from './AlignmentContainer'
+import * as language from '../assets/styles/language_strings'
 
 class FooterBar extends Component {
 
@@ -12,37 +13,36 @@ class FooterBar extends Component {
     return tab===this.props.activeTab
   }
 
-  render() {
+ render() {  
     let homePage =
       <Button active={this.isActiveTab("home")} onPress = {() => Actions.home()} key={"home"}>
         <Text>
-          Home
+          {this.props.getLanguage.home} 
         </Text>
       </Button>
 
     let downloadPage =
       <Button active={this.isActiveTab("remotes")} onPress = {() => Actions.remotes()} key={"download"}>
         <Text>
-          DL
+          {this.props.getLanguage.download}
         </Text>
       </Button>
 
     let achievementsPage =
       <Button active={this.isActiveTab("achievements")} onPress = {() => Actions.achievements()} key={"achievements"}>
         <Text>
-          Achievements
+          {this.props.getLanguage.achievements}
         </Text>
       </Button>
 
     let profilePage =
       <Button active={this.isActiveTab("profile")} onPress = {() => Actions.profile()} key={"profile"}>
         <Text>
-          Profile
+          {this.props.getLanguage.profile}
         </Text>
       </Button>
 
-    //This alignment could all possibly be done with flexbox and styling
-    let pageList = [homePage, downloadPage, achievementsPage, profilePage]
+    let pageList =[homePage, downloadPage, achievementsPage, profilePage]
     {this.props.settingsAlignRight ? pageList.reverse() : pageList}
     return (
       <View>
@@ -63,7 +63,8 @@ class FooterBar extends Component {
 function mapStateToProps(state) {
   return {
     activeTab: state.default.scene ? state.default.scene.name : null,
-    settingsAlignRight: state.settings ? state.settings.get('alignment') : false
+    settingsAlignRight: state.settings ? state.settings.get('alignment') : false,
+    getLanguage : state.settings.get('english') ? language.arabic : language.eng
   }
 }
 
