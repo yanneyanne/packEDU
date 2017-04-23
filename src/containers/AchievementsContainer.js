@@ -5,24 +5,19 @@ import { ActionCreators } from '../actions'
 import ReactNative from 'react-native'
 import { Actions } from 'react-native-router-flux'
 import { Container, Content, Text } from 'native-base'
-import styles from '../assets/styles/home_styles'
-import Courses from './CoursesContainer.js'
-import RemoteCourses from './RemoteCoursesContainer.js'
 import Alignment from './AlignmentContainer'
 
 class Achievements extends Component {
 
   render() {
     return (
-      <Container marginTop={80}>
-        <Content>
-          <Alignment>
-            <Text>
-              My Achievements
-            </Text>
-          </Alignment>
-        </Content>
-      </Container>
+      <Content>
+        <Alignment>
+          <Text>
+            My Achievements
+          </Text>
+        </Alignment>
+      </Content>
     )
   }
 }
