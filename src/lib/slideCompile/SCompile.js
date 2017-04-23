@@ -6,6 +6,7 @@ class SCompile {
   static getSlide(pos, material) {
     let isolatedSlide = Parser.isolateSlide(pos, material) 
     let slideDOM = Parser.convertToDOM(isolatedSlide)
+    console.log(slideDOM)
     let slideJSX = Generator.convertDOMtoJSX(slideDOM)
     return slideJSX
   }

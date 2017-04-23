@@ -3,59 +3,57 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { ActionCreators } from '../actions'
 import { Actions } from 'react-native-router-flux'
-import { Footer, FooterTab, Button, Text, View } from 'native-base'
-import Alignment from './AlignmentContainer'
+
+import { Container, Content, Footer, FooterTab, Button, Text } from 'native-base'
 
 class FooterBar extends Component {
-
   isActiveTab(tab) {
-    return tab===this.props.activeTab
+    return tab==this.props.activeTab
   }
-
-  render() {
-    let homePage =
+  
+  constructor(props) {
+    super(props)
+      
+    this.homePage =
       <Button active={this.isActiveTab("home")} onPress = {() => Actions.home()} key={"home"}>
         <Text>
           Home
         </Text>
       </Button>
-
-    let downloadPage =
+   
+    this.downloadPage =
       <Button active={this.isActiveTab("remotes")} onPress = {() => Actions.remotes()} key={"download"}>
         <Text>
           DL
         </Text>
       </Button>
-
-    let achievementsPage =
-      <Button active={this.isActiveTab("achievements")} onPress = {() => Actions.achievements()} key={"achievements"}>
+   
+    this.achievementsPage =
+      <Button key={"achievements"}>
         <Text>
           Achievements
         </Text>
       </Button>
-
-    let profilePage =
+   
+    this.profilePage = 
       <Button active={this.isActiveTab("profile")} onPress = {() => Actions.profile()} key={"profile"}>
         <Text>
           Profile
         </Text>
       </Button>
+  }
 
-    //This alignment could all possibly be done with flexbox and styling
-    let pageList = [homePage, downloadPage, achievementsPage, profilePage]
+ 
+  render() {
+    let pageList = []
+    pageList.push(this.homePage, this.downloadPage, this.achievementsPage, this.profilePage)
     {this.props.settingsAlignRight ? pageList.reverse() : pageList}
     return (
-      <View>
-        {this.props.activeTab != "slide" ?
-          <Footer>  
-            <FooterTab>
-              {pageList}
-            </FooterTab>
-          </Footer>
-          :
-          null
-        }
-      </View>
+      <Footer>
+        <FooterTab>
+          {pageList}
+        </FooterTab>
+      </Footer>
     )
   }
 }
@@ -63,7 +61,7 @@ class FooterBar extends Component {
 function mapStateToProps(state) {
   return {
     activeTab: state.default.scene ? state.default.scene.name : null,
-    settingsAlignRight: state.settings ? state.settings.get('alignment') : false
+    settingsAlignRight: state.settings ? state.settings.get('alignment') : false 
   }
 }
 
