@@ -11,12 +11,8 @@ import FooterBar from './containers/FooterBarContainer'
 import Lessons from './containers/LessonsContainer'
 import Settings from './containers/SettingsContainer'
 import Profile from './containers/ProfileContainer'
-import Achievements from './containers/AchievementsContainer'
 import { Actions, ActionConst, Router, Scene } from 'react-native-router-flux'
-import { dimensions } from './assets/styles/constants'
 import { Container } from 'native-base'
-import ReactNative from 'react-native'
-const { View } = ReactNative
 
 const loggerMiddleware = createLogger({ predicate: (getState, action) => __DEV__ })
 
@@ -42,7 +38,6 @@ const Scenes = Actions.create(
     <Scene key='slide' title='Course' component={Slide}></Scene>
     <Scene key='settings' title='Settings' component={Settings}></Scene>
     <Scene key='profile' title='Profile' component={Profile}></Scene>
-    <Scene key='achievements' title='Achievements' component={Achievements}></Scene>
   </Scene>
 )
 
@@ -51,9 +46,7 @@ export default class AppContainer extends Component {
     return(
       <Provider store={store}>
         <Container>
-          <RouterWithRedux 
-            navigationBarStyle={{height: dimensions.headerHeight}} 
-            scenes={Scenes}/>
+          <RouterWithRedux scenes={Scenes}/>
           <FooterBar/>
         </Container>
       </Provider>

@@ -4,14 +4,24 @@ import { bindActionCreators } from 'redux'
 import { ActionCreators } from '../actions'
 import ReactNative from 'react-native'
 import { Actions } from 'react-native-router-flux'
-import { Content, Text } from 'native-base'
-import Courses from './CoursesContainer.js'
+const {
+  View,
+  TouchableHighlight
+} = ReactNative
+
+import { Container, Content, Footer, FooterTab, Button, Icon, Badge, Text } from 'native-base'
 import styles from '../assets/styles/home_styles'
+import Courses from './CoursesContainer.js'
+import RemoteCourses from './RemoteCoursesContainer.js'
 
 class Home extends Component {
   render() {
     return (
-      <Courses/>
+      <Container style={{marginTop: 63}}>
+        <View style={styles.displayContainer}>
+          <Courses/>
+        </View>
+      </Container>
     )
   }
 }
