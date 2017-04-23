@@ -34,9 +34,9 @@ class Courses extends Component {
     return (
       <View style={StyleSheet.flatten(styles.content)}>
         <ListItem itemHeader first>
-            <Text style={{fontWeight: 'bold'}}>
-              {this.props.getLanguage.mycourses} 
-            </Text>
+          <Text style={{fontWeight: 'bold'}}>
+            {this.props.getLanguage.mycourses} 
+          </Text>
         </ListItem>
         {this.getLocalCourses().map(course => {
           return (
