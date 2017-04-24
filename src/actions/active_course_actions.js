@@ -83,6 +83,29 @@ export function evaluateAnswer(choice, validatorId, answer) {
   }
 }
 
+export function setLastSession(courseId) {
+  return (dispatch, getState) => {
+    return Storage.setLastSession(courseId).then(() => {
+      dispatch(dispatchSetLastSession(courseId))
+    })
+  }
+}
+
+function dispatchSetLastSession(courseId) {
+  return {
+    type: types.SET_LAST_SESSION,
+    courseId
+  }
+}
+
+export function getLastSession() {
+  return (dispatch, getState) => {
+    return Storage.getLastSession().then((courseId) => {
+      dispatch(dispatchSetLastSession(courseId))
+    })
+  }
+}
+
 export function saveSlidePos(courseId, lessonName, currentSlidePos, lessonLength) {
   return {
     type: types.SAVE_CURRENT_SLIDE_POS,

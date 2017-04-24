@@ -52,7 +52,7 @@ class Storage{
       })
       return neededEvaluators
     } catch (e) {
-      console.log(e) 
+      console.log(e)
     }
   }
 
@@ -61,20 +61,20 @@ class Storage{
       console.log("Storing evaluator")
       let evalObj = {}
       evalObj[evaluatorId] = {
-        "script": evaluatorScript 
+        "script": evaluatorScript
       }
-      await AsyncStorage.mergeItem('evaluators', JSON.stringify(evalObj))  
+      await AsyncStorage.mergeItem('evaluators', JSON.stringify(evalObj))
     } catch (e) {
-      console.log(e) 
+      console.log(e)
     }
   }
 
-  static async evaluate(evaluatorId, choice, key) { 
+  static async evaluate(evaluatorId, choice, key) {
     let evalScript = await this.loadEvaluator(evaluatorId)
     let param = choice
     let isCorrect = eval(evalScript)
     console.log("Is the answer correct: " + isCorrect)
-    
+
   }
 
   // "Private"-ish function only to be used by class itself
@@ -84,7 +84,7 @@ class Storage{
       let evaluators = JSON.parse(loadedEvals)
       return evaluators[evaluatorId].script
     } catch (e) {
-      console.log(e) 
+      console.log(e)
     }
   }
 
@@ -97,28 +97,46 @@ class Storage{
           lesson["savedPos"] = pos
       })
       console.log("Trying to save the object " + JSON.stringify(allCourses))
-      await AsyncStorage.mergeItem('courses', JSON.stringify(allCourses)) 
+      await AsyncStorage.mergeItem('courses', JSON.stringify(allCourses))
     } catch(e) {
-      console.log(e) 
+      console.log(e)
     }
   }
 
   static async getSavedLessonProgress(courseId, lessonName) {
     try {
-      const value = await AsyncStorage.getItem('courses') 
-      const allCourses = JSON.parse(value) 
+      const value = await AsyncStorage.getItem('courses')
+      const allCourses = JSON.parse(value)
       let pos
       let length
       allCourses[courseId][lessons].forEach((lesson) => {
-        if (lesson.name === lessonName) 
+        if (lesson.name === lessonName)
           pos = lesson.savedPos
           length = lesson.material.length
       })
       return pos/length
     } catch(e) {
-      console.log(e) 
+      console.log(e)
     }
   }
+
+  static async getLastSession(){
+    try {
+      const session = await AsyncStorage.getItem('lastSession')
+      return session
+    } catch(e) {
+      console.log(e)
+    }
+  }
+
+  static async setLastSession(courseId){
+    try {
+      await AsyncStorage.setItem('lastSession', courseId)
+    } catch(e) {
+      console.log(e)
+    }
+  }
+
 }
 
 export default Storage

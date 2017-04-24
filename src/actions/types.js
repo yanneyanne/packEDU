@@ -12,6 +12,8 @@ export const RENDER_SLIDE = 'RENDER_SLIDE'
 export const SET_CURRENT_SLIDE_POS = 'SET_CURRENT_SLIDE_POS'
 export const VALIDATE_QUIZ = 'VALIDATE_QUIZ'
 export const SAVE_CURRENT_SLIDE_POS = 'SAVE_CURRENT_SLIDE_POS'
+export const SET_LAST_SESSION = 'SET_LAST_SESSION'
+export const GET_LAST_SESSION = 'GET_LAST_SESSION'
 
 // Action regarding alternatating between english/arabic text style.
 export const TOGGLE_TEXT_ALIGNMENT = 'TOGGLE_TEXT_ALIGNMENT'
