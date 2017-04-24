@@ -21,21 +21,21 @@ class NextPrevButtons extends Component {
   render() {
     let flexDir = this.props.alignRight ? 'row' : 'row-reverse'
     return (
-      <View style = {StyleSheet.flatten([styles.nextPrevButtons, {flexDirection: flexDir}])}>
+      <View style = {StyleSheet.flatten([styles.nextPrevButtonsContainer, {flexDirection: flexDir}])}>
         {this.isLastSlide() ?
           <View/>:
-          <Button large key={'next'} onPress = {() => this.props.nextSlide(
-              this.props.currentSlidePos, this.props.lessonMaterial)}>
-            <Text>
+          <Button large bordered key={'next'} style={StyleSheet.flatten(styles.nextPrevButton)} 
+            onPress = {() => this.props.nextSlide(this.props.currentSlidePos, this.props.lessonMaterial)}>
+            <Text style={StyleSheet.flatten(styles.nextPrevButtonText)}>
               Next
             </Text>
           </Button>
         }
         {this.isFirstSlide() ? 
           <View/> :
-          <Button large key={'prev'} onPress = {() => this.props.previousSlide(
-              this.props.currentSlidePos, this.props.lessonMaterial)} >
-            <Text>
+            <Button large bordered key={'prev'} style={StyleSheet.flatten(styles.nextPrevButton)} 
+              onPress = {() => this.props.previousSlide(this.props.currentSlidePos, this.props.lessonMaterial)} >
+            <Text style={StyleSheet.flatten(styles.nextPrevButtonText)}>
               Previous
             </Text>
           </Button>

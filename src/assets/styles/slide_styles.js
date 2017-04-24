@@ -24,8 +24,17 @@ var styles = StyleSheet.create({
         right: 5
     },
 
-    nextPrevButtons: {
+    nextPrevButtonsContainer: {
         justifyContent: 'space-between'
+    },
+
+    nextPrevButton: {
+        borderRadius: 0,
+        borderColor: 'white'
+    },
+
+    nextPrevButtonText: {
+        color: 'white'
     }
 })
 
