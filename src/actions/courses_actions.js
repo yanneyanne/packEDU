@@ -23,7 +23,7 @@ function dispatchAddLocalCourses({ courses }) {
 
 export function downloadRemoteCourse(courseId) {
   return (dispatch, getState) => {
-    const route = '/courseMaterial/' + courseId
+    const route = '/course/material/' + courseId
     return Api.get(route).then((resp) => {
       return retrieveEvaluators(resp.lessons).then(() =>{
         dispatch(dispatchDownloadRemoteCourse({
@@ -48,7 +48,7 @@ async function retrieveEvaluators(lessons) {
 }
 
 async function downloadNeededEvaluators(needed) {
-  const route = '/getEvaluator/'
+  const route = '/course/getEvaluator/'
   needed.forEach((id) => {
     Api.get(route + id).then((resp) => {
       Storage.saveEvaluator(resp.id, resp.script) 
