@@ -15,7 +15,15 @@ class MultipleChoice extends Component {
   getChoiceStyle() {
     return {
       alignSelf: 'center',
-      margin: 5
+      margin: 5,
+      borderRadius: 0,
+      borderColor: 'white'
+    } 
+  }
+
+  getChoiceTextStyle() {
+    return {
+      color: 'white' 
     } 
   }
 
@@ -25,8 +33,8 @@ class MultipleChoice extends Component {
     return (
       <View style={{alignSelf: 'center'}}>
         {this.props.choices.map((choice) =>
-            <Button key={choice} style={this.getChoiceStyle()} onPress={() => this.answer(choice)}>
-              <Text>
+            <Button bordered key={choice} style={this.getChoiceStyle()} onPress={() => this.answer(choice)}>
+              <Text style={this.getChoiceTextStyle()}>
                 {choice}
               </Text>
             </Button>
