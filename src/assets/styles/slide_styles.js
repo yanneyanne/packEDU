@@ -26,7 +26,7 @@ var styles = StyleSheet.create({
 
     nextPrevButtons: {
         justifyContent: 'space-between'
-    }
+    },
 })
 
 export default styles

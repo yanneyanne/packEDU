@@ -41,7 +41,7 @@ class Slide extends Component {
     let {height, width} = Dimensions.get('window')
     return(
       <LinearGradient colors={['#f4a791', '#f3818a']} style={styles.content}>
-        <Bar progress={this.getProgress()}
+        <Bar progress={this.getProgress()} borderWidth={0} color={'rgba(255,255,255,1)'}
           width={width} borderRadius={0} style={styles.progress}/>
         <View style={StyleSheet.flatten(styles.slideElements)}>
           { this.getSlideMaterial().map(elt => {
