@@ -48,7 +48,7 @@ class Storage{
       var evaluators = JSON.parse(loaded) || []
       // Filter out evaluators we already have downloaded
       let neededEvaluators = idList.filter((evalId) => {
-        return evaluators.indexOf(evalId) < 0
+        return !evaluators.hasOwnProperty(evalId)
       })
       console.log("The evaluators needed are " + neededEvaluators)
       return neededEvaluators
@@ -74,8 +74,8 @@ class Storage{
     let evalScript = await this.loadEvaluator(evaluatorId)
     let param = choice
     let isCorrect = eval(evalScript)
-    console.log("Is the answer correct: " + isCorrect)
-    
+    console.log(isCorrect)
+    return isCorrect
   }
 
   // "Private"-ish function only to be used by class itself
