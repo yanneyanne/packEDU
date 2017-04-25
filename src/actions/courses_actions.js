@@ -43,11 +43,12 @@ function dispatchDownloadRemoteCourse({ course }) {
 
 async function retrieveEvaluators(lessons) {
   let ids = identifyEvaluators(lessons)
-  const neededEvaluators = await Storage.evaluatorsToDownload(ids)
   downloadNeededEvaluators(neededEvaluators)
+  const neededEvaluators = await Storage.evaluatorsToDownload(ids)
 }
 
 async function downloadNeededEvaluators(needed) {
+  if (!needed) return
   const route = '/course/getEvaluator/'
   needed.forEach((id) => {
     Api.get(route + id).then((resp) => {
