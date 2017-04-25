@@ -50,6 +50,7 @@ class Storage{
       let neededEvaluators = idList.filter((evalId) => {
         return evaluators.indexOf(evalId) < 0
       })
+      console.log("The evaluators needed are " + neededEvaluators)
       return neededEvaluators
     } catch (e) {
       console.log(e) 
