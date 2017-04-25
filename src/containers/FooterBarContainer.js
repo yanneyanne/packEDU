@@ -13,11 +13,11 @@ class FooterBar extends Component {
     return tab===this.props.activeTab
   }
 
- render() {  
+ render() {
     let homePage =
       <Button active={this.isActiveTab("home")} onPress = {() => Actions.home()} key={"home"}>
         <Text>
-          {this.props.getLanguage.home} 
+          {this.props.getLanguage.home}
         </Text>
       </Button>
 
@@ -46,8 +46,8 @@ class FooterBar extends Component {
     {this.props.settingsAlignRight ? pageList.reverse() : pageList}
     return (
       <View>
-        {this.props.activeTab != "slide" ?
-          <Footer>  
+        {this.props.activeTab != "slide" && this.props.activeTab != "finishedLesson" ?
+          <Footer>
             <FooterTab>
               {pageList}
             </FooterTab>

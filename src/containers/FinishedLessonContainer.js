@@ -4,61 +4,54 @@ import { bindActionCreators } from 'redux'
 import { ActionCreators } from '../actions'
 import { Actions } from 'react-native-router-flux'
 import { View } from 'react-native'
-import { Container, Content, Text, Button } from 'native-base'
+import { Container, Content, Button } from 'native-base'
+import Text from './elements/Text'
 import { Bar } from 'react-native-progress'
 import SCompile from '../lib/slideCompile/SCompile'
 import Alignment from './AlignmentContainer'
 import * as language from '../assets/styles/language_strings'
-import NextPrevButtons from './NextPrevButtonsContainer'
 import styles from '../assets/styles/slide_styles'
 import LinearGradient from 'react-native-linear-gradient'
 import { StyleSheet, Dimensions } from 'react-native'
 
-class Slide extends Component {
+class FinishedLesson extends Component {
 
-  componentWillUnmount() {
-    this.props.saveSlidePos(this.props.courseId,
-        this.props.activeLesson,
-        this.props.currentSlidePos,
-        this.props.lessonMaterial.length)
-  }
-
-  getSlideMaterial() {
-    if(this.props.lessonMaterial)
-      return SCompile.getSlide(this.props.currentSlidePos, this.props.lessonMaterial)
-    else
-      return []
-  }
-
-  getProgress() {
-    if (this.props.lessonMaterial){
-      return this.props.currentSlidePos / this.props.lessonMaterial.length
-    }else{
-      return 0
-    }
-  }
-
-  finishLesson(){
-    Actions.finishedLesson()
-  }
-
-  render() {
+  render() {
     let {height, width} = Dimensions.get('window')
-    return(
+    let flexDir = this.props.alignRight ? 'row' : 'row-reverse'
+    return (
       <LinearGradient colors={['#f4a791', '#f3818a']} style={styles.content}>
-        <Bar progress={this.getProgress()} borderWidth={0} color={'rgba(255,255,255,1)'}
+
+        <Bar progress={1} borderWidth={0} color={'rgba(255,255,255,1)'}
           width={width} borderRadius={0} style={styles.progress}/>
+
         <View style={StyleSheet.flatten(styles.slideElements)}>
-          { this.getSlideMaterial().map(elt => {
-            return elt
-          })}
+          <Text>
+            Congratulations! You just completed {this.props.activeLesson}
+          </Text>
         </View>
+
         <View style={styles.footer}>
-          <NextPrevButtons onFinnish={this.finishLesson}/>
+
+          <View style = {StyleSheet.flatten([styles.nextPrevButtonsContainer], {flexDirection: flexDir})}>
+
+            <Button full bordered key={'done'} style={StyleSheet.flatten(styles.nextPrevButton)}
+              onPress={() => console.log("FINNISHED NOW RETURN")}>
+
+              <Text style={StyleSheet.flatten(styles.nextPrevButtonText)}>
+                Pick another lesson
+              </Text>
+
+            </Button>
+
+          </View>
+
         </View>
+
       </LinearGradient>
     )
   }
+
 }
 
 function mapStateToProps(state) {
@@ -67,6 +60,7 @@ function mapStateToProps(state) {
     activeLesson: state.activeCourse.get('activeLesson'),
     currentSlidePos: state.activeCourse.get('currentSlidePos'),
     lessonMaterial: state.activeCourse.get('lessonMaterial'),
+    alignRight: state.settings ? state.settings.get('alignment') : false
   }
 }
 
@@ -74,4 +68,4 @@ function mapDispatchToProps(dispatch) {
   return bindActionCreators(ActionCreators, dispatch)
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Slide)
+export default connect(mapStateToProps, mapDispatchToProps)(FinishedLesson)
