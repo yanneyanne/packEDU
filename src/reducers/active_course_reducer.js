@@ -36,8 +36,8 @@ export const activeCourse = createReducer(Map(), {
     return newState
   },
 
+  // Notify the state that there is an interaction that hasn't yet received input from the user
   [types.ADD_INTERACTION](state, action) {
-    console.log("Adding an interaction to state!")  
     let interactionsLeft = state.get('interactionsLeft', 0)
     return state.set('interactionsLeft', interactionsLeft + 1)
   },

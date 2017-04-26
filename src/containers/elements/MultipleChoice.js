@@ -7,19 +7,16 @@ import { View, Text, Button} from 'native-base'
 class MultipleChoice extends Component {
 
   componentDidMount() {
-    console.log("Interaction component mounting")
     this.props.addInteraction() 
   }
 
   answer(choice) {
-    console.log("IN MULTIPLE CHOICE")
     let evaluator = this.props.evaluator
     let ansKey = this.props.answer
-    console.log("Choice: " + choice + "    Answer key: " + ansKey)
     this.props.evaluateAnswer(choice, evaluator, ansKey)
   }
 
-  getChoiceStyle() {
+  getBaseChoiceStyle() {
     return {
       alignSelf: 'center',
       margin: 5,
@@ -28,19 +25,42 @@ class MultipleChoice extends Component {
     } 
   }
 
+  getStandardChoiceStyle() {
+    let style = {
+      borderColor: 'white'
+    }
+    return Object.assign(style, this.getBaseChoiceStyle())
+  }
+
+  getIncorrectChoiceStyle() {
+    let style = {
+      borderColor: 'red',
+      backgroundColor: 'red'
+    }
+    return Object.assign(style, this.getBaseChoiceStyle())
+  }
+
+  getCorrectChoiceStyle() {
+    let style = {
+      borderColor: 'green',
+      backgroundColor: 'green'
+    }
+    return Object.assign(style, this.getBaseChoiceStyle())
+  }
+
   getChoiceTextStyle() {
     return {
       color: 'white' 
-    } 
+    }
   }
 
   render() {
     // The choices, evaluator and key are currently being passed in as props
-    // Is it a better idea to put them in the state?
+    // Is it a better idea to put them in the redux state?
     return (
       <View style={{alignSelf: 'center'}}>
         {this.props.choices.map((choice) =>
-            <Button bordered key={choice} style={this.getChoiceStyle()} onPress={() => this.answer(choice)}>
+            <Button bordered key={choice} style={this.getStandardChoiceStyle()} onPress={() => this.answer(choice)}>
               <Text style={this.getChoiceTextStyle()}>
                 {choice}
               </Text>

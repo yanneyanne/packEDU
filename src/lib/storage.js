@@ -74,10 +74,6 @@ class Storage{
     let evalScript = await this.loadEvaluator(evaluatorId)
     let param = choice
     let isCorrect = eval(evalScript)
-    console.log("This is the current eval script")
-    console.log(evalScript)
-    console.log("EvalId: " + evaluatorId + "    Choice: " + choice + "     Key: " + key)
-    console.log(isCorrect)
     return isCorrect
   }
 
@@ -100,7 +96,6 @@ class Storage{
         if (lesson.name === lessonName)
           lesson["savedPos"] = pos
       })
-      console.log("Trying to save the object " + JSON.stringify(allCourses))
       await AsyncStorage.mergeItem('courses', JSON.stringify(allCourses)) 
     } catch(e) {
       console.log(e) 
