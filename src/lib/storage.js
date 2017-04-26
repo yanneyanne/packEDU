@@ -74,6 +74,9 @@ class Storage{
     let evalScript = await this.loadEvaluator(evaluatorId)
     let param = choice
     let isCorrect = eval(evalScript)
+    console.log("This is the current eval script")
+    console.log(evalScript)
+    console.log("EvalId: " + evaluatorId + "    Choice: " + choice + "     Key: " + key)
     console.log(isCorrect)
     return isCorrect
   }

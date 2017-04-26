@@ -12,8 +12,10 @@ class MultipleChoice extends Component {
   }
 
   answer(choice) {
+    console.log("IN MULTIPLE CHOICE")
     let evaluator = this.props.evaluator
     let ansKey = this.props.answer
+    console.log("Choice: " + choice + "    Answer key: " + ansKey)
     this.props.evaluateAnswer(choice, evaluator, ansKey)
   }
 
@@ -51,7 +53,6 @@ class MultipleChoice extends Component {
 
 function mapStateToProps(state) {
   return {
-    interactionsLeft: state.activeCourse.get('interactionsLeft') || 0
   }
 }
 

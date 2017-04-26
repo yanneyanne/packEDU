@@ -24,13 +24,22 @@ export const activeCourse = createReducer(Map(), {
 
   [types.VALIDATE_QUIZ](state, action) {
     //This call to storage maybe should be in the actions
-    let answerCorrect = Storage.evaluate(action.evaluatorId, action.choice, action.answer)
-    return state.set('evaluated', answerCorrect)
+    let interactionsLeft = state.get('interactionsLeft')
+    let newState = state.set('interactionsLeft', interactionsLeft - 1)
+    if (action.isCorrect) {
+      let correctAnswers = newState.get('correctAnswers', 0)
+      newState = newState.set('correctAnswers', correctAnswers + 1)
+    } else {
+      let wrongAnswers = newState.get('wrongAnswers', 0)
+      newState = newState.set('wrongAnswers', wrongAnswers + 1)
+    }
+    return newState
   },
 
   [types.ADD_INTERACTION](state, action) {
     console.log("Adding an interaction to state!")  
-    return state
+    let interactionsLeft = state.get('interactionsLeft', 0)
+    return state.set('interactionsLeft', interactionsLeft + 1)
   },
 
   // Persistently store the user's position in the lesson and add the new progress to lesson state

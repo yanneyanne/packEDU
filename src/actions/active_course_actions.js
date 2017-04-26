@@ -75,12 +75,17 @@ export function previousSlide(pos, material) {
 }
 
 export function evaluateAnswer(choice, validatorId, answer) {
-  let answerCorrect = Storage.evaluate(validatorId)
+  return (dispatch, getState) => {
+    return Storage.evaluate(validatorId, choice, answer).then((isCorrect) => {
+      dispatch(dispatchEvaluateAnswer(isCorrect))
+    })
+  }
+}
+
+function dispatchEvaluateAnswer(isCorrect) {
   return {
     type: types.VALIDATE_QUIZ,
-    choice: choice,
-    answer: answer,
-    evaluatorId: validatorId
+    isCorrect
   }
 }
 
