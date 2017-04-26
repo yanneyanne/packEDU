@@ -10,7 +10,8 @@ var styles = StyleSheet.create({
     slideElements: {
         flex: 1,
         alignItems:'center',
-        justifyContent:'center'
+        justifyContent:'center',
+        padding: 15
     },
 
     progress: {

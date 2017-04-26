@@ -6,6 +6,11 @@ import { View, Text, Button} from 'native-base'
 
 class MultipleChoice extends Component {
 
+  componentDidMount() {
+    console.log("Interaction component mounting")
+    this.props.addInteraction() 
+  }
+
   answer(choice) {
     let evaluator = this.props.evaluator
     let ansKey = this.props.answer
@@ -46,6 +51,7 @@ class MultipleChoice extends Component {
 
 function mapStateToProps(state) {
   return {
+    interactionsLeft: state.activeCourse.get('interactionsLeft') || 0
   }
 }
 

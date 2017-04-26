@@ -75,11 +75,18 @@ export function previousSlide(pos, material) {
 }
 
 export function evaluateAnswer(choice, validatorId, answer) {
+  let answerCorrect = Storage.evaluate(validatorId)
   return {
     type: types.VALIDATE_QUIZ,
     choice: choice,
     answer: answer,
     evaluatorId: validatorId
+  }
+}
+
+export function addInteraction() {
+  return {
+    type: types.ADD_INTERACTION 
   }
 }
 

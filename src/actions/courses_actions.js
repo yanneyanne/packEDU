@@ -43,8 +43,8 @@ function dispatchDownloadRemoteCourse({ course }) {
 
 async function retrieveEvaluators(lessons) {
   let ids = identifyEvaluators(lessons)
-  downloadNeededEvaluators(neededEvaluators)
   const neededEvaluators = await Storage.evaluatorsToDownload(ids)
+  downloadNeededEvaluators(neededEvaluators)
 }
 
 async function downloadNeededEvaluators(needed) {
