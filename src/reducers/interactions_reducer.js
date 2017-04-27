@@ -5,23 +5,23 @@ import { List, Map } from 'immutable'
 
 export const interactions = createReducer(Map(), {
   [types.ADD_INTERACTION](state, action) {
-    let interactionsLeft = state.get('interactionsLeft', 0) 
-    return state.set('interactionsLeft', interactionsLeft + 1)
+    return state.set(action.currentSlidePos, Map())
   },
 
   [types.VALIDATE_INTERACTION](state, action) {
     //This call to storage maybe should be in the actions
-    let interactionsLeft = state.get('interactionsLeft')
-    let newState = state.set('interactionsLeft', interactionsLeft - 1)
-    if (action.isCorrect) {
-      let correctAnswers = newState.get('correctAnswers', 0)
-      newState = newState.set('correctAnswers', correctAnswers + 1)
-    } else {
-      let wrongAnswers = newState.get('wrongAnswers', 0)
-      newState = newState.set('wrongAnswers', wrongAnswers + 1)
-    }
-    newState = newState.set('latestInteractionResult', action.isCorrect)
-    newState = newState.set('input', action.input)
+    let interactionState = state.get(action.currentSlidePos)
+    console.log("This is the state of the interaction")
+    console.log(interactionState)
+    let newInteractionState = interactionState.set('input', action.input)
+    console.log("The interaction state after setting input")
+    console.log(newInteractionState)
+    newInteractionState = newInteractionState.set('isCorrect', action.isCorrect)
+    console.log("And after setting if its correct")
+    console.log(newInteractionState)
+    let newState = state.set(action.currentSlidePos, newInteractionState)
+    console.log("This is new the state of the interaction")
+    console.log(newState.get(action.currentSlidePos))
     return newState
   }
 

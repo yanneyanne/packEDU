@@ -7,17 +7,18 @@ import { View, Text, Button} from 'native-base'
 class MultipleChoice extends Component {
 
   componentDidMount() {
-    this.props.addInteraction() 
+    this.props.addInteraction(this.props.currentSlidePos) 
   }
 
   answer(input) {
     let evaluator = this.props.evaluator
     let ansKey = this.props.answer
-    this.props.validateInteraction(input, evaluator, ansKey)
+    let currentSlidePos = this.props.currentSlidePos
+    this.props.validateInteraction(currentSlidePos, input, evaluator, ansKey)
   }
 
   isAnswered() {
-    return !(typeof this.props.input === 'undefined')
+    return typeof this.props.input !== 'undefined'
   }
 
   getBaseChoiceStyle() {
@@ -64,7 +65,7 @@ class MultipleChoice extends Component {
     return (
       <View style={{alignSelf: 'center'}}>
         {this.props.choices.map((choice) => {
-          let style = this.props.latestInteractionResult ? this.getCorrectChoiceStyle() : this.getIncorrectChoiceStyle()
+          let style = this.props.isCorrect ? this.getCorrectChoiceStyle() : this.getIncorrectChoiceStyle()
           let choiceStyle = this.props.input === choice ?  style : this.getStandardChoiceStyle()
           return (
             <Button bordered disabled={this.isAnswered()} key={choice} style={choiceStyle} onPress={() => this.answer(choice)}>
@@ -80,9 +81,11 @@ class MultipleChoice extends Component {
 }
 
 function mapStateToProps(state) {
+  let currentSlidePos = state.activeCourse.get('currentSlidePos')
   return {
-    latestInteractionResult: state.interactions.get('latestInteractionResult'),
-    input: state.interactions.get('input')
+    currentSlidePos: currentSlidePos,
+    isCorrect: state.interactions.getIn([currentSlidePos, 'isCorrect'], undefined),
+    input: state.interactions.getIn([currentSlidePos, 'input'], undefined)
   }
 }
 
