@@ -10,10 +10,12 @@ export const SET_ACTIVE_COURSE = 'SET_ACTIVE_COURSE'
 export const SET_ACTIVE_LESSON = 'SET_ACTIVE_LESSON'
 export const RENDER_SLIDE = 'RENDER_SLIDE'
 export const SET_CURRENT_SLIDE_POS = 'SET_CURRENT_SLIDE_POS'
-export const VALIDATE_QUIZ = 'VALIDATE_QUIZ'
 export const SAVE_CURRENT_SLIDE_POS = 'SAVE_CURRENT_SLIDE_POS'
-export const ADD_INTERACTION = 'ADD_INTERACTION'
 
-// Action regarding alternatating between english/arabic text style.
+// Actions regarding alternatating between english/arabic text style.
 export const TOGGLE_TEXT_ALIGNMENT = 'TOGGLE_TEXT_ALIGNMENT'
 export const TOGGLE_LANGUAGE = 'TOGGLE_LANGUAGE'
+
+// Actions related to interactions
+export const VALIDATE_INTERACTION = 'VALIDATE_INTERACTION'
+export const ADD_INTERACTION = 'ADD_INTERACTION'

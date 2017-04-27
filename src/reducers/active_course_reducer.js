@@ -22,27 +22,6 @@ export const activeCourse = createReducer(Map(), {
     return newState
   },
 
-  [types.VALIDATE_QUIZ](state, action) {
-    //This call to storage maybe should be in the actions
-    let interactionsLeft = state.get('interactionsLeft')
-    let newState = state.set('interactionsLeft', interactionsLeft - 1)
-    if (action.isCorrect) {
-      let correctAnswers = newState.get('correctAnswers', 0)
-      newState = newState.set('correctAnswers', correctAnswers + 1)
-    } else {
-      let wrongAnswers = newState.get('wrongAnswers', 0)
-      newState = newState.set('wrongAnswers', wrongAnswers + 1)
-    }
-    newState = newState.set('latestInteractionResult', action.isCorrect)
-    return newState
-  },
-
-  // Notify the state that there is an interaction that hasn't yet received input from the user
-  [types.ADD_INTERACTION](state, action) {
-    let interactionsLeft = state.get('interactionsLeft', 0)
-    return state.set('interactionsLeft', interactionsLeft + 1)
-  },
-
   // Persistently store the user's position in the lesson and add the new progress to lesson state
   [types.SAVE_CURRENT_SLIDE_POS](state, action) {
     Storage.saveSlidePos(action.courseId, action.lessonName, action.currentSlidePos)

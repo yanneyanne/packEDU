@@ -6,13 +6,6 @@ import { View, Text, Button} from 'native-base'
 
 class MultipleChoice extends Component {
 
-  constructor(props) {
-    super(props) 
-    this.state = {
-      input: undefined
-    }
-  }
-
   componentDidMount() {
     this.props.addInteraction() 
   }
@@ -20,11 +13,11 @@ class MultipleChoice extends Component {
   answer(input) {
     let evaluator = this.props.evaluator
     let ansKey = this.props.answer
-    this.setState({
-      answered: true,
-      input: input
-    })
-    this.props.evaluateAnswer(input, evaluator, ansKey)
+    this.props.validateInteraction(input, evaluator, ansKey)
+  }
+
+  isAnswered() {
+    return !(typeof this.props.input === 'undefined')
   }
 
   getBaseChoiceStyle() {
@@ -60,6 +53,7 @@ class MultipleChoice extends Component {
 
   getChoiceTextStyle() {
     return {
+      backgroundColor: 'rgba(0,0,0,0)',
       color: 'white' 
     }
   }
@@ -71,9 +65,9 @@ class MultipleChoice extends Component {
       <View style={{alignSelf: 'center'}}>
         {this.props.choices.map((choice) => {
           let style = this.props.latestInteractionResult ? this.getCorrectChoiceStyle() : this.getIncorrectChoiceStyle()
-          let choiceStyle = this.state.input === choice ?  style : this.getStandardChoiceStyle()
+          let choiceStyle = this.props.input === choice ?  style : this.getStandardChoiceStyle()
           return (
-            <Button bordered key={choice} style={choiceStyle} onPress={() => this.answer(choice)}>
+            <Button bordered disabled={this.isAnswered()} key={choice} style={choiceStyle} onPress={() => this.answer(choice)}>
               <Text style={this.getChoiceTextStyle()}>
                 {choice}
               </Text>
@@ -87,7 +81,8 @@ class MultipleChoice extends Component {
 
 function mapStateToProps(state) {
   return {
-    latestInteractionResult: state.activeCourse.get('latestInteractionResult')
+    latestInteractionResult: state.interactions.get('latestInteractionResult'),
+    input: state.interactions.get('input')
   }
 }
 

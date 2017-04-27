@@ -74,27 +74,6 @@ export function previousSlide(pos, material) {
   }
 }
 
-export function evaluateAnswer(input, validatorId, answer) {
-  return (dispatch, getState) => {
-    return Storage.evaluate(validatorId, input, answer).then((isCorrect) => {
-      dispatch(dispatchEvaluateAnswer(isCorrect))
-    })
-  }
-}
-
-function dispatchEvaluateAnswer(isCorrect) {
-  return {
-    type: types.VALIDATE_QUIZ,
-    isCorrect
-  }
-}
-
-export function addInteraction() {
-  return {
-    type: types.ADD_INTERACTION 
-  }
-}
-
 export function saveSlidePos(courseId, lessonName, currentSlidePos, lessonLength) {
   return {
     type: types.SAVE_CURRENT_SLIDE_POS,
