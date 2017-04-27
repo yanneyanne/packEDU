@@ -33,6 +33,7 @@ export const activeCourse = createReducer(Map(), {
       let wrongAnswers = newState.get('wrongAnswers', 0)
       newState = newState.set('wrongAnswers', wrongAnswers + 1)
     }
+    newState = newState.set('latestInteractionResult', action.isCorrect)
     return newState
   },
 

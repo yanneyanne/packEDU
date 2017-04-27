@@ -9,7 +9,6 @@ class MultipleChoice extends Component {
   constructor(props) {
     super(props) 
     this.state = {
-      answered: false,
       input: undefined
     }
   }
@@ -21,12 +20,11 @@ class MultipleChoice extends Component {
   answer(input) {
     let evaluator = this.props.evaluator
     let ansKey = this.props.answer
-    console.log("Sending evaluation from mutiple choice")
-    this.state.answered = true
-    this.state.input = input
+    this.setState({
+      answered: true,
+      input: input
+    })
     this.props.evaluateAnswer(input, evaluator, ansKey)
-    console.log(this.state.answered)
-    console.log(this.state.input)
   }
 
   getBaseChoiceStyle() {
@@ -34,7 +32,6 @@ class MultipleChoice extends Component {
       alignSelf: 'center',
       margin: 5,
       borderRadius: 0,
-      borderColor: 'white'
     } 
   }
 
@@ -72,13 +69,17 @@ class MultipleChoice extends Component {
     // Is it a better idea to put them in the redux state?
     return (
       <View style={{alignSelf: 'center'}}>
-        {this.props.choices.map((choice) =>
-            <Button bordered key={choice} style={this.getStandardChoiceStyle()} onPress={() => this.answer(choice)}>
+        {this.props.choices.map((choice) => {
+          let style = this.props.latestInteractionResult ? this.getCorrectChoiceStyle() : this.getIncorrectChoiceStyle()
+          let choiceStyle = this.state.input === choice ?  style : this.getStandardChoiceStyle()
+          return (
+            <Button bordered key={choice} style={choiceStyle} onPress={() => this.answer(choice)}>
               <Text style={this.getChoiceTextStyle()}>
                 {choice}
               </Text>
             </Button>
-        )}
+          )
+        })}
       </View>
     )
   }
@@ -86,6 +87,7 @@ class MultipleChoice extends Component {
 
 function mapStateToProps(state) {
   return {
+    latestInteractionResult: state.activeCourse.get('latestInteractionResult')
   }
 }
 
