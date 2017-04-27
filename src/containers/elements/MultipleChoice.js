@@ -7,7 +7,13 @@ import { View, Text, Button} from 'native-base'
 class MultipleChoice extends Component {
 
   componentDidMount() {
+    console.log("Mounting multiple choice")
     this.props.addInteraction(this.props.currentSlidePos) 
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if(prevProps.currentSlidePos !== this.props.currentSlidePos)
+      this.props.addInteraction(this.props.currentSlidePos)
   }
 
   answer(input) {
