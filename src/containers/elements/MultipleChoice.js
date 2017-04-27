@@ -3,29 +3,9 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { ActionCreators } from '../../actions'
 import { View, Text, Button} from 'native-base'
+import Interaction from './Interaction.js'
 
-class MultipleChoice extends Component {
-
-  componentDidMount() {
-    console.log("Mounting multiple choice")
-    this.props.addInteraction(this.props.currentSlidePos) 
-  }
-
-  componentDidUpdate(prevProps, prevState) {
-    if(prevProps.currentSlidePos !== this.props.currentSlidePos)
-      this.props.addInteraction(this.props.currentSlidePos)
-  }
-
-  answer(input) {
-    let evaluator = this.props.evaluator
-    let ansKey = this.props.answer
-    let currentSlidePos = this.props.currentSlidePos
-    this.props.validateInteraction(currentSlidePos, input, evaluator, ansKey)
-  }
-
-  isAnswered() {
-    return typeof this.props.input !== 'undefined'
-  }
+class MultipleChoice extends Interaction {
 
   getBaseChoiceStyle() {
     return {
