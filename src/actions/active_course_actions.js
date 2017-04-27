@@ -74,9 +74,9 @@ export function previousSlide(pos, material) {
   }
 }
 
-export function evaluateAnswer(choice, validatorId, answer) {
+export function evaluateAnswer(input, validatorId, answer) {
   return (dispatch, getState) => {
-    return Storage.evaluate(validatorId, choice, answer).then((isCorrect) => {
+    return Storage.evaluate(validatorId, input, answer).then((isCorrect) => {
       dispatch(dispatchEvaluateAnswer(isCorrect))
     })
   }

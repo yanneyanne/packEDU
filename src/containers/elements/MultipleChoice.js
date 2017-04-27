@@ -6,14 +6,27 @@ import { View, Text, Button} from 'native-base'
 
 class MultipleChoice extends Component {
 
+  constructor(props) {
+    super(props) 
+    this.state = {
+      answered: false,
+      input: undefined
+    }
+  }
+
   componentDidMount() {
     this.props.addInteraction() 
   }
 
-  answer(choice) {
+  answer(input) {
     let evaluator = this.props.evaluator
     let ansKey = this.props.answer
-    this.props.evaluateAnswer(choice, evaluator, ansKey)
+    console.log("Sending evaluation from mutiple choice")
+    this.state.answered = true
+    this.state.input = input
+    this.props.evaluateAnswer(input, evaluator, ansKey)
+    console.log(this.state.answered)
+    console.log(this.state.input)
   }
 
   getBaseChoiceStyle() {
