@@ -9,6 +9,7 @@ import Storage from '../lib/storage.js'
 import Alignment from './AlignmentContainer'
 import ReactNative from 'react-native'
 import styles from '../assets/styles/lessons_styles'
+import * as buttonStyle from '../assets/styles/slide_styles'
 import { StyleSheet } from 'react-native'
 
 const {
@@ -32,6 +33,7 @@ class Lessons extends Component {
 
   removeCourse(courseId) {
     this.props.removeLocalCourse(courseId)
+    Actions.home()
   }
 
 
@@ -52,11 +54,13 @@ class Lessons extends Component {
             </View>
           )
         })}
-        <Button onPress = {() => this.removeCourse(this.getCourseId()) }>
-          <Text>
-            Delete course
-          </Text>
-        </Button>
+        <View style = {StyleSheet.flatten([styles.nextPrevButtonsContainer, ])}>
+          <Button large style = {StyleSheet.flatten(buttonStyle.nextPrevButton)} onPress = {() => this.removeCourse(this.getCourseId())}>
+            <Text>
+              Delete this course
+            </Text>
+          </Button>
+        </View>
       </View>
     )
   }

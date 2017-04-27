@@ -44,13 +44,13 @@ class Storage{
 
   static async removeCourse(courseId) {
     try {
-      const removedCourse = await AsyncStorage.removeItem(courseId)
-      return removedCourse 
+      let courseList = JSON.parse(await AsyncStorage.getItem('courses'))
+      delete courseList[courseId]
+      await AsyncStorage.setItem('courses', JSON.stringify(courseList))
     } catch (e) {
       console.log(e)
     }
   }
- 
 
   static async evaluatorsToDownload(idList) {
     try {
