@@ -21,6 +21,28 @@ function dispatchAddLocalCourses({ courses }) {
   }
 }
 
+export function removeLocalCourse(courseId) {
+  return(dispatch, getState) => {
+    console.log("Removing a course!")
+    return Storage.removeCourse(courseId).then(() => {
+      console.log("Removed course")
+      return Storage.getCourses().then ( localCourses => {
+        dispatch(dispatchRemovedLocalCourses({
+          courses: localCourses
+        }))
+      })
+    })
+  }
+}
+
+function dispatchRemovedLocalCourses({ courses }) {
+  return {
+    type: types.LOAD_LOCAL_COURSES,
+    courses
+  }
+}
+
+
 export function downloadRemoteCourse(courseId) {
   return (dispatch, getState) => {
     const route = '/course/material/' + courseId

@@ -42,6 +42,16 @@ class Storage{
     }
   }
 
+  static async removeCourse(courseId) {
+    try {
+      const removedCourse = await AsyncStorage.removeItem(courseId)
+      return removedCourse 
+    } catch (e) {
+      console.log(e)
+    }
+  }
+ 
+
   static async evaluatorsToDownload(idList) {
     try {
       const loaded = await AsyncStorage.getItem('evaluators')
