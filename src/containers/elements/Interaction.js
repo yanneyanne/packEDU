@@ -4,7 +4,6 @@ import { connect } from 'react-redux'
 export default class Interaction extends Component {
 
   componentDidMount() {
-    console.log("Mounting interaction")
     this.props.addInteraction(this.props.currentSlidePos) 
   }
 
