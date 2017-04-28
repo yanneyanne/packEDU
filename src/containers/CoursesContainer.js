@@ -20,7 +20,7 @@ class Courses extends Component {
   componentDidMount() {
     console.log("Courses are mounting")
     this.props.loadLocalCourses()
-    this.props.getLastSession()
+    this.props.loadLastSession()
   }
 
   getLocalCourses() {
@@ -28,19 +28,12 @@ class Courses extends Component {
   }
 
   startCourse(courseId) {
-    this.props.setLastSession(courseId)
     this.props.setActiveCourse(courseId)
-    Actions.lessons()
-  }
-
-  resumeSession(){
-    this.props.setActiveCourse(this.props.lastSession)
     Actions.lessons()
   }
 
   render() {
     return (
-
       <View style={StyleSheet.flatten(styles.content)}>
         <ListItem itemHeader first>
           <Text style={{fontWeight: 'bold'}}>
@@ -59,11 +52,7 @@ class Courses extends Component {
             </View>
           )
         })}
-        {this.props.lastSession !== null &&
-          <ResumeSessionButtonContainer onPress={() => {this.resumeSession()}}/>
-        }
       </View>
-      
     )
   }
 }
@@ -71,7 +60,6 @@ class Courses extends Component {
 function mapStateToProps(state) {
   return {
     localCourses: state.courses,
-    lastSession: state.activeCourse.get('lastSession'),
     settingsAlignRight: state.settings ? state.settings.get('alignment') : false,
     getLanguage: state.settings.get('english') ? language.arabic : language.eng
   }

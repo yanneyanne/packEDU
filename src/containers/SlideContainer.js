@@ -16,10 +16,14 @@ import { StyleSheet, Dimensions } from 'react-native'
 class Slide extends Component {
 
   componentWillUnmount() {
+    console.log("Unmounting the slide")
     this.props.saveSlidePos(this.props.courseId, 
-        this.props.activeLesson, 
-        this.props.currentSlidePos,
-        this.props.lessonMaterial.length)
+      this.props.activeLesson, 
+      this.props.currentSlidePos,
+      this.props.lessonMaterial.length)
+    this.props.saveLastSession(this.props.courseId,
+      this.props.activeLesson,
+      this.props.currentSlidePos)
   }
 
   getSlideMaterial() {

@@ -120,18 +120,23 @@ class Storage{
     }
   }
 
-  static async getLastSession(){
+  static async loadLastSession(){
     try {
-      const session = await AsyncStorage.getItem('lastSession')
+      const session = await AsyncStorage.getItem('lastSession') || {}
       return session
     } catch(e) {
       console.log(e)
     }
   }
 
-  static async setLastSession(courseId){
+  static async saveLastSession(courseId, lessonName, currentSlidePos){
     try {
-      await AsyncStorage.setItem('lastSession', courseId)
+      let session = {
+        courseId,
+        lessonName,
+        currentSlidePos
+      }
+      await AsyncStorage.setItem('lastSession', JSON.stringify(session))
     } catch(e) {
       console.log(e)
     }
