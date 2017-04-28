@@ -22,12 +22,6 @@ export const activeCourse = createReducer(Map(), {
     return newState
   },
 
-  [types.VALIDATE_QUIZ](state, action) {
-    //This call to storage maybe should be in the actions
-    Storage.evaluate(action.evaluatorId, action.choice, action.answer)
-    return state 
-  },
-
   // Persistently store the user's position in the lesson and add the new progress to lesson state
   [types.SAVE_CURRENT_SLIDE_POS](state, action) {
     Storage.saveSlidePos(action.courseId, action.lessonName, action.currentSlidePos)

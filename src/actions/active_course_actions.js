@@ -74,15 +74,6 @@ export function previousSlide(pos, material) {
   }
 }
 
-export function evaluateAnswer(choice, validatorId, answer) {
-  return {
-    type: types.VALIDATE_QUIZ,
-    choice: choice,
-    answer: answer,
-    evaluatorId: validatorId
-  }
-}
-
 export function saveSlidePos(courseId, lessonName, currentSlidePos, lessonLength) {
   return {
     type: types.SAVE_CURRENT_SLIDE_POS,

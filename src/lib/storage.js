@@ -48,8 +48,9 @@ class Storage{
       var evaluators = JSON.parse(loaded) || []
       // Filter out evaluators we already have downloaded
       let neededEvaluators = idList.filter((evalId) => {
-        return evaluators.indexOf(evalId) < 0
+        return !evaluators.hasOwnProperty(evalId)
       })
+      console.log("The evaluators needed are " + neededEvaluators)
       return neededEvaluators
     } catch (e) {
       console.log(e) 
@@ -73,8 +74,7 @@ class Storage{
     let evalScript = await this.loadEvaluator(evaluatorId)
     let param = choice
     let isCorrect = eval(evalScript)
-    console.log("Is the answer correct: " + isCorrect)
-    
+    return isCorrect
   }
 
   // "Private"-ish function only to be used by class itself
@@ -96,7 +96,6 @@ class Storage{
         if (lesson.name === lessonName)
           lesson["savedPos"] = pos
       })
-      console.log("Trying to save the object " + JSON.stringify(allCourses))
       await AsyncStorage.mergeItem('courses', JSON.stringify(allCourses)) 
     } catch(e) {
       console.log(e) 

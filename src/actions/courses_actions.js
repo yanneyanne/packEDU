@@ -48,6 +48,7 @@ async function retrieveEvaluators(lessons) {
 }
 
 async function downloadNeededEvaluators(needed) {
+  if (!needed) return
   const route = '/course/getEvaluator/'
   needed.forEach((id) => {
     Api.get(route + id).then((resp) => {
