@@ -28,7 +28,6 @@ var styles = StyleSheet.create({
     },
 
     removeCourseButton: {
-        color: 'green',
         width: 230,
         borderRadius: 50,
         justifyContent: 'center',
