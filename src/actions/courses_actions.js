@@ -7,14 +7,26 @@ export function loadLocalCourses() {
   return (dispatch, getState) => {
     console.log("Loading local courses in actions")
     return Storage.getCourses().then( localCourses => {
-      dispatch(dispatchAddLocalCourses({
+      dispatch(dispatchLocalCourses({
         courses: localCourses
       }))
     })
   }
 }
 
-function dispatchAddLocalCourses({ courses }) {
+export function removeLocalCourse(courseId) {
+  return(dispatch, getState) => {
+    return Storage.removeCourse(courseId).then( () => {
+      return Storage.getCourses().then( localCourses => {
+        dispatch(dispatchLocalCourses({
+          courses: localCourses
+        }))
+      })
+    })
+  }
+}
+
+function dispatchLocalCourses({ courses }) {
   return {
     type: types.LOAD_LOCAL_COURSES,
     courses

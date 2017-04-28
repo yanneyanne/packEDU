@@ -30,6 +30,12 @@ class Lessons extends Component {
     Actions.slide()
   }
 
+  removeCourse(courseId) {
+    this.props.removeLocalCourse(courseId)
+    Actions.home()
+  }
+
+
   render() {
     return (
       <View style={StyleSheet.flatten(styles.content)}>
@@ -47,6 +53,13 @@ class Lessons extends Component {
             </View>
           )
         })}
+        <View style = {styles.removeCourseContainer}>
+          <Button large block danger style = {(styles.removeCourseButton)} onPress = {() => this.removeCourse(this.getCourseId())}>
+            <Text>
+              Delete this course
+            </Text>
+          </Button>
+        </View>
       </View>
     )
   }
