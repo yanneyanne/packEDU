@@ -44,17 +44,14 @@ export const activeCourse = createReducer(Map(), {
 
   [types.SET_LAST_SESSION](state, action) {
     let session
-    if (!action.courseId || !action.lessonName || !action.currentSlidePos) {
+    if (!action.courseId || !action.lessonName) {
       session = Map()
     } else {
       session = Map({
         courseId: action.courseId,
-        lessonName: action.lessonName,
-        currentSlidePos: action.currentSlidePos
+        lessonName: action.lessonName
       })
     }
-    console.log("This is the set session")
-    console.log(session)
     let newState = state.set('lastSession', session)
     return newState
   }

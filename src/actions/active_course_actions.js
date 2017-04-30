@@ -83,10 +83,10 @@ export function evaluateAnswer(choice, validatorId, answer) {
   }
 }
 
-export function saveLastSession(courseId, lessonName, currentSlidePos) {
+export function saveLastSession(courseId, lessonName) {
   return (dispatch, getState) => {
-    return Storage.saveLastSession(courseId, lessonName, currentSlidePos).then(() => {
-      dispatch(dispatchSetLastSession(courseId, lessonName, currentSlidePos))
+    return Storage.saveLastSession(courseId, lessonName).then(() => {
+      dispatch(setLastSession(courseId, lessonName))
     })
   }
 }
@@ -96,18 +96,16 @@ export function loadLastSession() {
     return Storage.loadLastSession().then((session) => {
       let courseId = session.courseId
       let lessonName = session.lessonName
-      let currentSlidePos = session.currentSlidePos
-      dispatch(dispatchSetLastSession(courseId, lessonName, currentSlidePos))
+      dispatch(setLastSession(courseId, lessonName))
     })
   }
 }
 
-function dispatchSetLastSession(courseId, lessonName, currentSlidePos) {
+function setLastSession(courseId, lessonName) {
   return {
     type: types.SET_LAST_SESSION,
     courseId,
-    lessonName,
-    currentSlidePos
+    lessonName
   }
 }
 

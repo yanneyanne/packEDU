@@ -142,8 +142,7 @@ class Storage{
     try {
       let session = {
         courseId,
-        lessonName,
-        currentSlidePos
+        lessonName
       }
       await AsyncStorage.setItem('lastSession', JSON.stringify(session))
     } catch(e) {
