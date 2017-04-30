@@ -11,6 +11,7 @@ import Alignment from './AlignmentContainer'
 import * as language from '../assets/styles/language_strings'
 import NextPrevButtons from './NextPrevButtonsContainer'
 import styles from '../assets/styles/slide_styles'
+import LinearGradient from 'react-native-linear-gradient'
 import { StyleSheet, Dimensions } from 'react-native'
 
 class Slide extends Component {
@@ -43,8 +44,8 @@ class Slide extends Component {
   render() {
     let {height, width} = Dimensions.get('window')
     return(
-      <View style={styles.content}>
-        <Bar progress={this.getProgress()}
+      <LinearGradient colors={['#f4a791', '#f3818a']} style={styles.content}>
+        <Bar progress={this.getProgress()} borderWidth={0} color={'rgba(255,255,255,1)'}
           width={width} borderRadius={0} style={styles.progress}/>
         <View style={StyleSheet.flatten(styles.slideElements)}>
           { this.getSlideMaterial().map(elt => {
@@ -54,7 +55,7 @@ class Slide extends Component {
         <View style={styles.footer}>
           <NextPrevButtons />
         </View>
-      </View>
+      </LinearGradient>
     )
   }
 }

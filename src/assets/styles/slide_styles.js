@@ -10,7 +10,8 @@ var styles = StyleSheet.create({
     slideElements: {
         flex: 1,
         alignItems:'center',
-        justifyContent:'center'
+        justifyContent:'center',
+        padding: 15
     },
 
     progress: {
@@ -24,8 +25,17 @@ var styles = StyleSheet.create({
         right: 5
     },
 
-    nextPrevButtons: {
+    nextPrevButtonsContainer: {
         justifyContent: 'space-between'
+    },
+
+    nextPrevButton: {
+        borderRadius: 0,
+        borderColor: 'white'
+    },
+
+    nextPrevButtonText: {
+        color: 'white'
     }
 })
 

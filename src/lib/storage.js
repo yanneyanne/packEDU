@@ -42,14 +42,25 @@ class Storage{
     }
   }
 
+  static async removeCourse(courseId) {
+    try {
+      let courseList = JSON.parse(await AsyncStorage.getItem('courses'))
+      delete courseList[courseId]
+      await AsyncStorage.setItem('courses', JSON.stringify(courseList))
+    } catch (e) {
+      console.log(e)
+    }
+  }
+
   static async evaluatorsToDownload(idList) {
     try {
       const loaded = await AsyncStorage.getItem('evaluators')
       var evaluators = JSON.parse(loaded) || []
       // Filter out evaluators we already have downloaded
       let neededEvaluators = idList.filter((evalId) => {
-        return evaluators.indexOf(evalId) < 0
+        return !evaluators.hasOwnProperty(evalId)
       })
+      console.log("The evaluators needed are " + neededEvaluators)
       return neededEvaluators
     } catch (e) {
       console.log(e)
@@ -73,8 +84,7 @@ class Storage{
     let evalScript = await this.loadEvaluator(evaluatorId)
     let param = choice
     let isCorrect = eval(evalScript)
-    console.log("Is the answer correct: " + isCorrect)
-
+    return isCorrect
   }
 
   // "Private"-ish function only to be used by class itself
@@ -96,8 +106,7 @@ class Storage{
         if (lesson.name === lessonName)
           lesson["savedPos"] = pos
       })
-      console.log("Trying to save the object " + JSON.stringify(allCourses))
-      await AsyncStorage.mergeItem('courses', JSON.stringify(allCourses))
+      await AsyncStorage.mergeItem('courses', JSON.stringify(allCourses)) 
     } catch(e) {
       console.log(e)
     }
