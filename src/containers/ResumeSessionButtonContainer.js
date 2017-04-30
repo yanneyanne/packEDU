@@ -13,7 +13,11 @@ class ResumeSessionButtonContainer extends Component {
   resumeSession(){
     console.log("Resuming session")
     this.props.setActiveCourse(this.props.lastSession.get('courseId'))
-    this.props.setActiveLesson(this.props.lastSession.get('lessonName'))
+    console.log("The lesson is ")
+    console.log(this.props.lastSession.get('lessonName'))
+    this.props.setActiveLesson(this.props.lastSession.get('courseId'),
+      this.props.lastSession.get('lessonName')
+    )
     Actions.slide()
   }
 

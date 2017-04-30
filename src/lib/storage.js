@@ -131,8 +131,10 @@ class Storage{
 
   static async loadLastSession(){
     try {
-      const session = await AsyncStorage.getItem('lastSession') || {}
-      return session
+      const session = await AsyncStorage.getItem('lastSession')
+      console.log("Loading the last session")
+      console.log(session)
+      return JSON.parse(session)
     } catch(e) {
       console.log(e)
     }

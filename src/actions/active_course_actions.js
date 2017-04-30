@@ -96,6 +96,9 @@ export function loadLastSession() {
     return Storage.loadLastSession().then((session) => {
       let courseId = session.courseId
       let lessonName = session.lessonName
+      console.log("This course info in the actions: ")
+      console.log(courseId)
+      console.log(lessonName)
       dispatch(setLastSession(courseId, lessonName))
     })
   }
