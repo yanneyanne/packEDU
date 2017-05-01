@@ -63,7 +63,7 @@ class Storage{
       console.log("The evaluators needed are " + neededEvaluators)
       return neededEvaluators
     } catch (e) {
-      console.log(e) 
+      console.log(e)
     }
   }
 
@@ -72,15 +72,15 @@ class Storage{
       console.log("Storing evaluator")
       let evalObj = {}
       evalObj[evaluatorId] = {
-        "script": evaluatorScript 
+        "script": evaluatorScript
       }
-      await AsyncStorage.mergeItem('evaluators', JSON.stringify(evalObj))  
+      await AsyncStorage.mergeItem('evaluators', JSON.stringify(evalObj))
     } catch (e) {
-      console.log(e) 
+      console.log(e)
     }
   }
 
-  static async evaluate(evaluatorId, choice, key) { 
+  static async evaluate(evaluatorId, choice, key) {
     let evalScript = await this.loadEvaluator(evaluatorId)
     let param = choice
     let isCorrect = eval(evalScript)
@@ -94,7 +94,7 @@ class Storage{
       let evaluators = JSON.parse(loadedEvals)
       return evaluators[evaluatorId].script
     } catch (e) {
-      console.log(e) 
+      console.log(e)
     }
   }
 
@@ -108,26 +108,50 @@ class Storage{
       })
       await AsyncStorage.mergeItem('courses', JSON.stringify(allCourses)) 
     } catch(e) {
-      console.log(e) 
+      console.log(e)
     }
   }
 
   static async getSavedLessonProgress(courseId, lessonName) {
     try {
-      const value = await AsyncStorage.getItem('courses') 
-      const allCourses = JSON.parse(value) 
+      const value = await AsyncStorage.getItem('courses')
+      const allCourses = JSON.parse(value)
       let pos
       let length
       allCourses[courseId][lessons].forEach((lesson) => {
-        if (lesson.name === lessonName) 
+        if (lesson.name === lessonName)
           pos = lesson.savedPos
           length = lesson.material.length
       })
       return pos/length
     } catch(e) {
-      console.log(e) 
+      console.log(e)
     }
   }
+
+  static async loadLastSession(){
+    try {
+      const session = await AsyncStorage.getItem('lastSession')
+      console.log("Loading the last session")
+      console.log(session)
+      return JSON.parse(session)
+    } catch(e) {
+      console.log(e)
+    }
+  }
+
+  static async saveLastSession(courseId, lessonName, currentSlidePos){
+    try {
+      let session = {
+        courseId,
+        lessonName
+      }
+      await AsyncStorage.setItem('lastSession', JSON.stringify(session))
+    } catch(e) {
+      console.log(e)
+    }
+  }
+
 }
 
 export default Storage

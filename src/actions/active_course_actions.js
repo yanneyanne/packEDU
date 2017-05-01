@@ -74,6 +74,44 @@ export function previousSlide(pos, material) {
   }
 }
 
+export function evaluateAnswer(choice, validatorId, answer) {
+  return {
+    type: types.VALIDATE_QUIZ,
+    choice: choice,
+    answer: answer,
+    evaluatorId: validatorId
+  }
+}
+
+export function saveLastSession(courseId, lessonName) {
+  return (dispatch, getState) => {
+    return Storage.saveLastSession(courseId, lessonName).then(() => {
+      dispatch(setLastSession(courseId, lessonName))
+    })
+  }
+}
+
+export function loadLastSession() {
+  return (dispatch, getState) => {
+    return Storage.loadLastSession().then((session) => {
+      let courseId = session.courseId
+      let lessonName = session.lessonName
+      console.log("This course info in the actions: ")
+      console.log(courseId)
+      console.log(lessonName)
+      dispatch(setLastSession(courseId, lessonName))
+    })
+  }
+}
+
+function setLastSession(courseId, lessonName) {
+  return {
+    type: types.SET_LAST_SESSION,
+    courseId,
+    lessonName
+  }
+}
+
 export function saveSlidePos(courseId, lessonName, currentSlidePos, lessonLength) {
   return {
     type: types.SAVE_CURRENT_SLIDE_POS,
