@@ -22,16 +22,18 @@ var styles = StyleSheet.create({
 
     removeCourseContainer: {
         position: 'absolute',
-        bottom: 5,
-        left: 5,
-        right: 5,
+        justifyContent: 'center',
+        left: 0,
+        right: 0,
+        bottom: 5
     },
 
     removeCourseButton: {
-        width: 230,
-        borderRadius: 50,
-        justifyContent: 'center',
-        marginBottom: 10
+        position: 'relative',
+    },
+
+    removeCourseButtonText: {
+        color: '#D9534F'
     }
 });
 
