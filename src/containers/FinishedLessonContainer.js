@@ -15,12 +15,23 @@ import LinearGradient from 'react-native-linear-gradient'
 import { StyleSheet, Dimensions } from 'react-native'
 
 class FinishedLesson extends Component {
-
   quizResult() {
-    for (var i in this.props.getResult) {
-      console.log(i)
+    let correctAnswers = 0
+    let totalAnswers = 0
+    for (let i = 0; i <= this.props.currentSlidePos; i++) {
+      let temp = this.props.getResult.get(i)
+      if (temp != undefined) {
+        if (temp.get("isCorrect") === true) {
+          correctAnswers++
+          totalAnswers++
+        } else {
+          totalAnswers++
+        }
+      }
     }
+    return [totalAnswers, correctAnswers]
   }
+
 
   render() {
     let {height, width} = Dimensions.get('window')
@@ -36,8 +47,7 @@ class FinishedLesson extends Component {
             Congratulations! You just completed {this.props.activeLesson}
           </Text>
           <Text>
-          This is prel
-          {this.quizResult()}
+          {this.quizResult()[1]}
           </Text>
         </View>
         
@@ -71,7 +81,7 @@ function mapStateToProps(state) {
     currentSlidePos: state.activeCourse.get('currentSlidePos'),
     lessonMaterial: state.activeCourse.get('lessonMaterial'),
     alignRight: state.settings ? state.settings.get('alignment') : false,
-    getResult: state.interactions ? state.interactions : 0
+    getResult: state.activeCourse.get('interactions') ? state.activeCourse.get('interactions') : 0
   }
 }
 
