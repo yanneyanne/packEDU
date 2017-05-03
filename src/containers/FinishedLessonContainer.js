@@ -18,30 +18,32 @@ class FinishedLesson extends Component {
  
   results() {
     let correctAnswers = 0
-    let totalAnswers = 0
-    for (let i = 0; i <= this.props.currentSlidePos; i++) {
-      let temp = this.props.getResult.get(i)
-      if (temp != undefined) {
-        totalAnswers++
-        if (temp.get("isCorrect") === true) {
-          correctAnswers++
+    let allAnswers = 0
+    if (this.props.getResult != false) {
+      for (let i = 0; i <= this.props.currentSlidePos; i++) {
+        let tempMap = this.props.getResult.get(i)
+        if (tempMap != undefined) {
+          allAnswers++
+          if (tempMap.get("isCorrect") === true) {
+            correctAnswers++
+          }
         }
       }
     }
-    return [totalAnswers, correctAnswers]
+    return [allAnswers, correctAnswers]
   }
 
   render() {
     let {height, width} = Dimensions.get('window')
     let flexDir = this.props.alignRight ? 'row' : 'row-reverse'
-    let result = this.results()
-    let percentageResult = 1
-    if (result[0] > 0 && result[1] > 0) {
-      percentageResult = result[1] / result[0]
+    let answers = this.results()
+    let percentageAnswers = 1
+    if (answers[0] > 0 ) {
+      percentageAnswers = answers[1] / answers[0]
     } else {
-      percentageResult = 1
-      result[0] = 1
-      result[1] = 1
+      percentageAnswers = 1
+      answers[0] = 1
+      answers[1] = 1
     }
 
     return (
@@ -52,9 +54,9 @@ class FinishedLesson extends Component {
           <Text>
             Congratulations! You just completed {this.props.activeLesson}
           </Text>
-          <Circle borderWidth = {0.5} size = {width/2} progress = {percentageResult} color={'rgba(255,255,255,1)'} style = {styles.progress}/>
+          <Circle borderWidth = {0.5} size = {width/2} progress = {percentageAnswers} color={'rgba(255,255,255,1)'} style = {styles.progress}/>
           <Text>
-            {result[1]} / {result[0]}
+            {answers[1]} / {answers[0]}
           </Text>
           <Text>
             Correct answers!
