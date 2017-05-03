@@ -19,26 +19,16 @@ class FinishedLesson extends Component {
   results() {
     let correctAnswers = 0
     let totalAnswers = 0
-    try {
-      if (this.props.getResult != false) {
     for (let i = 0; i <= this.props.currentSlidePos; i++) {
-        let temp = this.props.getResult.get(i)
-        if (temp != undefined) {
-          if (temp.get("isCorrect") === true) {
-            correctAnswers++
-            totalAnswers++
-          } else {
-            totalAnswers++
-          }
+      let temp = this.props.getResult.get(i)
+      if (temp != undefined) {
+        totalAnswers++
+        if (temp.get("isCorrect") === true) {
+          correctAnswers++
         }
       }
     }
-    } catch(e) {
-        totalAnswers = 1
-        correctAnswers = 1
-    } finally {
-      return [totalAnswers, correctAnswers]
-    }
+    return [totalAnswers, correctAnswers]
   }
 
   render() {
@@ -56,21 +46,19 @@ class FinishedLesson extends Component {
 
     return (
       <LinearGradient colors={['#f4a791', '#f3818a']} style={styles.content}>
-
         <Bar progress={1} borderWidth={0} color={'rgba(255,255,255,1)'}
           width={width} borderRadius={0} style={styles.progress}/>
-
         <View style={StyleSheet.flatten(styles.slideElements)}>
           <Text>
             Congratulations! You just completed {this.props.activeLesson}
           </Text>
           <Circle borderWidth = {0.5} size = {width/2} progress = {percentageResult} color={'rgba(255,255,255,1)'} style = {styles.progress}/>
-            <Text>
+          <Text>
             {result[1]} / {result[0]}
-            </Text>
-            <Text>
-              Correct answers!
-            </Text>
+          </Text>
+          <Text>
+            Correct answers!
+          </Text>
         </View>
         <View style={styles.footer}>
           <View style = {StyleSheet.flatten([styles.nextPrevButtonsContainer], {flexDirection: flexDir})}>
