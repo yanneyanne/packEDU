@@ -16,6 +16,12 @@ import { StyleSheet, Dimensions } from 'react-native'
 
 class FinishedLesson extends Component {
 
+  quizResult() {
+    for (var i in this.props.getResult) {
+      console.log(i)
+    }
+  }
+
   render() {
     let {height, width} = Dimensions.get('window')
     let flexDir = this.props.alignRight ? 'row' : 'row-reverse'
@@ -29,8 +35,12 @@ class FinishedLesson extends Component {
           <Text>
             Congratulations! You just completed {this.props.activeLesson}
           </Text>
+          <Text>
+          This is prel
+          {this.quizResult()}
+          </Text>
         </View>
-
+        
         <View style={styles.footer}>
 
           <View style = {StyleSheet.flatten([styles.nextPrevButtonsContainer], {flexDirection: flexDir})}>
@@ -60,7 +70,8 @@ function mapStateToProps(state) {
     activeLesson: state.activeCourse.get('activeLesson'),
     currentSlidePos: state.activeCourse.get('currentSlidePos'),
     lessonMaterial: state.activeCourse.get('lessonMaterial'),
-    alignRight: state.settings ? state.settings.get('alignment') : false
+    alignRight: state.settings ? state.settings.get('alignment') : false,
+    getResult: state.interactions ? state.interactions : 0
   }
 }
 

@@ -42,17 +42,28 @@ class Storage{
     }
   }
 
+  static async removeCourse(courseId) {
+    try {
+      let courseList = JSON.parse(await AsyncStorage.getItem('courses'))
+      delete courseList[courseId]
+      await AsyncStorage.setItem('courses', JSON.stringify(courseList))
+    } catch (e) {
+      console.log(e)
+    }
+  }
+
   static async evaluatorsToDownload(idList) {
     try {
       const loaded = await AsyncStorage.getItem('evaluators')
       var evaluators = JSON.parse(loaded) || []
       // Filter out evaluators we already have downloaded
       let neededEvaluators = idList.filter((evalId) => {
-        return evaluators.indexOf(evalId) < 0
+        return !evaluators.hasOwnProperty(evalId)
       })
+      console.log("The evaluators needed are " + neededEvaluators)
       return neededEvaluators
     } catch (e) {
-      console.log(e) 
+      console.log(e)
     }
   }
 
@@ -61,20 +72,19 @@ class Storage{
       console.log("Storing evaluator")
       let evalObj = {}
       evalObj[evaluatorId] = {
-        "script": evaluatorScript 
+        "script": evaluatorScript
       }
-      await AsyncStorage.mergeItem('evaluators', JSON.stringify(evalObj))  
+      await AsyncStorage.mergeItem('evaluators', JSON.stringify(evalObj))
     } catch (e) {
-      console.log(e) 
+      console.log(e)
     }
   }
 
-  static async evaluate(evaluatorId, choice, key) { 
+  static async evaluate(evaluatorId, choice, key) {
     let evalScript = await this.loadEvaluator(evaluatorId)
     let param = choice
     let isCorrect = eval(evalScript)
-    console.log("Is the answer correct: " + isCorrect)
-    
+    return isCorrect
   }
 
   // "Private"-ish function only to be used by class itself
@@ -84,7 +94,7 @@ class Storage{
       let evaluators = JSON.parse(loadedEvals)
       return evaluators[evaluatorId].script
     } catch (e) {
-      console.log(e) 
+      console.log(e)
     }
   }
 
@@ -96,29 +106,52 @@ class Storage{
         if (lesson.name === lessonName)
           lesson["savedPos"] = pos
       })
-      console.log("Trying to save the object " + JSON.stringify(allCourses))
       await AsyncStorage.mergeItem('courses', JSON.stringify(allCourses)) 
     } catch(e) {
-      console.log(e) 
+      console.log(e)
     }
   }
 
   static async getSavedLessonProgress(courseId, lessonName) {
     try {
-      const value = await AsyncStorage.getItem('courses') 
-      const allCourses = JSON.parse(value) 
+      const value = await AsyncStorage.getItem('courses')
+      const allCourses = JSON.parse(value)
       let pos
       let length
       allCourses[courseId][lessons].forEach((lesson) => {
-        if (lesson.name === lessonName) 
+        if (lesson.name === lessonName)
           pos = lesson.savedPos
           length = lesson.material.length
       })
       return pos/length
     } catch(e) {
-      console.log(e) 
+      console.log(e)
     }
   }
+
+  static async loadLastSession(){
+    try {
+      const session = await AsyncStorage.getItem('lastSession')
+      console.log("Loading the last session")
+      console.log(session)
+      return JSON.parse(session)
+    } catch(e) {
+      console.log(e)
+    }
+  }
+
+  static async saveLastSession(courseId, lessonName, currentSlidePos){
+    try {
+      let session = {
+        courseId,
+        lessonName
+      }
+      await AsyncStorage.setItem('lastSession', JSON.stringify(session))
+    } catch(e) {
+      console.log(e)
+    }
+  }
+
 }
 
 export default Storage

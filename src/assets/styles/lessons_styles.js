@@ -18,6 +18,22 @@ var styles = StyleSheet.create({
 
     progress: {
         marginTop: 2
+    },
+
+    removeCourseContainer: {
+        position: 'absolute',
+        justifyContent: 'center',
+        left: 0,
+        right: 0,
+        bottom: 5
+    },
+
+    removeCourseButton: {
+        position: 'relative',
+    },
+
+    removeCourseButtonText: {
+        color: '#D9534F'
     }
 });
 

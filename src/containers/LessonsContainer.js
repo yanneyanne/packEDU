@@ -30,6 +30,12 @@ class Lessons extends Component {
     Actions.slide()
   }
 
+  removeCourse(courseId) {
+    this.props.removeLocalCourse(courseId)
+    Actions.home()
+  }
+
+
   render() {
     return (
       <View style={StyleSheet.flatten(styles.content)}>
@@ -42,11 +48,19 @@ class Lessons extends Component {
                   {lesson.get('name')}
                 </Text>
               </Button>
-              <Bar style={styles.progress} height={3} borderRadius={0} borderWidth={0} 
+              <Bar style={styles.progress} height={3} width={230} borderRadius={0} borderWidth={0}
                 progress={lesson.get('progress')}/>
             </View>
           )
         })}
+        <View style = {styles.removeCourseContainer}>
+          <Button transparent block style = {StyleSheet.flatten(styles.removeCourseButton)}
+            onPress = {() => this.removeCourse(this.getCourseId())}>
+            <Text style={StyleSheet.flatten(styles.removeCourseButtonText)}>
+              Delete this course
+            </Text>
+          </Button>
+        </View>
       </View>
     )
   }
