@@ -69,10 +69,9 @@ class FinishedLesson extends Component {
         <View style={styles.footer}>
           <View style = {StyleSheet.flatten([styles.nextPrevButtonsContainer], {flexDirection: flexDir})}>
             <Button full bordered key={'done'} style={StyleSheet.flatten(styles.nextPrevButton)}
-              onPress={() => Actions.home()}>
-
+              onPress={() => Actions.lessons()}>
               <Text style={StyleSheet.flatten(styles.nextPrevButtonText)}>
-                Pick another lesson
+                Choose another lesson
               </Text>
             </Button>
           </View>
