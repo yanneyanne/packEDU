@@ -16,29 +16,44 @@ import { StyleSheet, Dimensions } from 'react-native'
 
 class FinishedLesson extends Component {
  
-  quizResult() {
+  results() {
     let correctAnswers = 0
     let totalAnswers = 0
+    try {
+      if (this.props.getResult != false) {
     for (let i = 0; i <= this.props.currentSlidePos; i++) {
-      let temp = this.props.getResult.get(i)
-      if (temp != undefined) {
-        if (temp.get("isCorrect") === true) {
-          correctAnswers++
-          totalAnswers++
-        } else {
-          totalAnswers++
+        let temp = this.props.getResult.get(i)
+        if (temp != undefined) {
+          if (temp.get("isCorrect") === true) {
+            correctAnswers++
+            totalAnswers++
+          } else {
+            totalAnswers++
+          }
         }
       }
     }
-    return [totalAnswers, correctAnswers]
+    } catch(e) {
+        totalAnswers = 1
+        correctAnswers = 1
+    } finally {
+      return [totalAnswers, correctAnswers]
+    }
   }
-
 
   render() {
     let {height, width} = Dimensions.get('window')
     let flexDir = this.props.alignRight ? 'row' : 'row-reverse'
-    let result = this.quizResult()
-    let percentageResult = result[1] / result[0]
+    let result = this.results()
+    let percentageResult = 1
+    if (result[0] > 0 && result[1] > 0) {
+      percentageResult = result[1] / result[0]
+    } else {
+      percentageResult = 1
+      result[0] = 1
+      result[1] = 1
+    }
+
     return (
       <LinearGradient colors={['#f4a791', '#f3818a']} style={styles.content}>
 
@@ -49,32 +64,25 @@ class FinishedLesson extends Component {
           <Text>
             Congratulations! You just completed {this.props.activeLesson}
           </Text>
-          <Circle progress = {percentageResult} color={'rgba(255,255,255,1)'} style = {styles.progress}/>
-          <Text>
-          {result[1]} / {result[0]}
-          </Text>
-          <Text>
-          Correct answers!
-          </Text>
+          <Circle borderWidth = {0.5} size = {width/2} progress = {percentageResult} color={'rgba(255,255,255,1)'} style = {styles.progress}/>
+            <Text>
+            {result[1]} / {result[0]}
+            </Text>
+            <Text>
+              Correct answers!
+            </Text>
         </View>
-        
         <View style={styles.footer}>
-
           <View style = {StyleSheet.flatten([styles.nextPrevButtonsContainer], {flexDirection: flexDir})}>
-
             <Button full bordered key={'done'} style={StyleSheet.flatten(styles.nextPrevButton)}
               onPress={() => console.log("FINNISHED NOW RETURN")}>
 
               <Text style={StyleSheet.flatten(styles.nextPrevButtonText)}>
                 Pick another lesson
               </Text>
-
             </Button>
-
           </View>
-
         </View>
-
       </LinearGradient>
     )
   }
@@ -88,7 +96,7 @@ function mapStateToProps(state) {
     currentSlidePos: state.activeCourse.get('currentSlidePos'),
     lessonMaterial: state.activeCourse.get('lessonMaterial'),
     alignRight: state.settings ? state.settings.get('alignment') : false,
-    getResult: state.activeCourse.get('interactions') ? state.activeCourse.get('interactions') : 0
+    getResult: state.activeCourse.get('interactions') ? state.activeCourse.get('interactions') : false
   }
 }
 
