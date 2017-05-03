@@ -70,8 +70,8 @@ function mapStateToProps(state) {
   let currentSlidePos = state.activeCourse.get('currentSlidePos')
   return {
     currentSlidePos: currentSlidePos,
-    isCorrect: state.activeCourse.getIn([currentSlidePos, 'isCorrect'], undefined),
-    input: state.activeCourse.getIn([currentSlidePos, 'input'], undefined)
+    isCorrect: state.activeCourse.getIn([currentSlidePos, 'isCorrect']) ? state.activeCourse.getIn([currentSlidePos, 'isCorrect']) :  undefined,
+    input: state.activeCourse.getIn([currentSlidePos, 'input']) ? state.activeCourse.getIn([currentSlidePos, 'input' ]) : undefined
   }
 }
 
