@@ -4,8 +4,9 @@ import { bindActionCreators } from 'redux'
 import { ActionCreators } from '../actions'
 import { Actions } from 'react-native-router-flux'
 import { View } from 'react-native'
-import { Container, Content, Button } from 'native-base'
-import Text from './elements/Text'
+import { Container, Content, Button, Text } from 'native-base'
+import SlideText from './elements/Text'
+import BigSlideText from './elements/BigText'
 import { Bar , Circle} from 'react-native-progress'
 import SCompile from '../lib/slideCompile/SCompile'
 import Alignment from './AlignmentContainer'
@@ -51,21 +52,24 @@ class FinishedLesson extends Component {
         <Bar progress={1} borderWidth={0} color={'rgba(255,255,255,1)'}
           width={width} borderRadius={0} style={styles.progress}/>
         <View style={StyleSheet.flatten(styles.slideElements)}>
-          <Text>
-            Congratulations! You just completed {this.props.activeLesson}
-          </Text>
-          <Circle borderWidth = {0.5} size = {width/2} progress = {percentageAnswers} color={'rgba(255,255,255,1)'} style = {styles.progress}/>
-          <Text>
+          <SlideText>
+            Congratulations! You just completed 
+          </SlideText>
+          <BigSlideText>
+            {this.props.activeLesson}
+          </BigSlideText>
+          <Circle borderWidth = {0.5} size = {width/2} progress = {percentageAnswers} color={'rgba(255,255,255,1)'} style = {styles.progress} marginBottom={20}/>
+          <BigSlideText>
             {answers[1]} / {answers[0]}
-          </Text>
-          <Text>
+          </BigSlideText>
+          <SlideText>
             Correct answers!
-          </Text>
+          </SlideText>
         </View>
         <View style={styles.footer}>
           <View style = {StyleSheet.flatten([styles.nextPrevButtonsContainer], {flexDirection: flexDir})}>
             <Button full bordered key={'done'} style={StyleSheet.flatten(styles.nextPrevButton)}
-              onPress={() => console.log("FINNISHED NOW RETURN")}>
+              onPress={() => Actions.home()}>
 
               <Text style={StyleSheet.flatten(styles.nextPrevButtonText)}>
                 Pick another lesson
