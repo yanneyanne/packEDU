@@ -6,7 +6,7 @@ import { Actions } from 'react-native-router-flux'
 import { View } from 'react-native'
 import { Container, Content, Button } from 'native-base'
 import Text from './elements/Text'
-import { Bar } from 'react-native-progress'
+import { Bar , Circle} from 'react-native-progress'
 import SCompile from '../lib/slideCompile/SCompile'
 import Alignment from './AlignmentContainer'
 import * as language from '../assets/styles/language_strings'
@@ -38,6 +38,7 @@ class FinishedLesson extends Component {
     let {height, width} = Dimensions.get('window')
     let flexDir = this.props.alignRight ? 'row' : 'row-reverse'
     let result = this.quizResult()
+    let percentageResult = result[1] / result[0]
     return (
       <LinearGradient colors={['#f4a791', '#f3818a']} style={styles.content}>
 
@@ -48,6 +49,7 @@ class FinishedLesson extends Component {
           <Text>
             Congratulations! You just completed {this.props.activeLesson}
           </Text>
+          <Circle progress = {percentageResult} color={'rgba(255,255,255,1)'} style = {styles.progress}/>
           <Text>
           {result[1]} / {result[0]}
           </Text>
