@@ -17,10 +17,6 @@ import { StyleSheet, Dimensions } from 'react-native'
 
 class FinishedLesson extends Component {
   
-  componentWillUnmoutn() {
-    console.log("UNMOUNTING FINISHED SLIDE")
-  }
-
   results() {
     let correctAnswers = 0
     let allAnswers = 0
