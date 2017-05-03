@@ -3,6 +3,7 @@ import React from 'react'
 import ReactNative from 'react-native'
 import { View, Button } from 'native-base'
 import MultipleChoice from '../../containers/elements/MultipleChoice'
+import FlashCard from '../../containers/elements/FlashCard'
 import Text from '../../containers/elements/Text'
 
 class Generator {
@@ -11,7 +12,7 @@ class Generator {
   static convertDOMtoJSX(dom) {
     let jsx = []
     for (let i = 0; i < dom.size(); i++) {
-      let element = dom.get(i) 
+      let element = dom.get(i)
       let jsxElement = this.mapElementToJSX(element)
       jsx.push(jsxElement)
     }
@@ -22,6 +23,8 @@ class Generator {
     switch(element.name) {
       case types.TEXT:
         return <Text> { element.content } </Text>
+      case types.FLASHCARD:
+        return <FlashCard answer={element.answer} word={element.content}/>
       case types.INTERACTION:
           if(element.type==types.INTERACTION_MULTIPLECHOICEQUIZ){
             // Hacky code to parse choices into separate list elements
@@ -33,7 +36,7 @@ class Generator {
             )
           }
       default:
-        return 
+        return
     }
   }
 }
