@@ -16,7 +16,11 @@ import LinearGradient from 'react-native-linear-gradient'
 import { StyleSheet, Dimensions } from 'react-native'
 
 class FinishedLesson extends Component {
- 
+  
+  componentWillUnmoutn() {
+    console.log("UNMOUNTING FINISHED SLIDE")
+  }
+
   results() {
     let correctAnswers = 0
     let allAnswers = 0
@@ -42,7 +46,6 @@ class FinishedLesson extends Component {
     if (answers[0] > 0 ) {
       percentageAnswers = answers[1] / answers[0]
     } else {
-      percentageAnswers = 1
       answers[0] = 1
       answers[1] = 1
     }
