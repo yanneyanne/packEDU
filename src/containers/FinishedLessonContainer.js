@@ -15,6 +15,7 @@ import LinearGradient from 'react-native-linear-gradient'
 import { StyleSheet, Dimensions } from 'react-native'
 
 class FinishedLesson extends Component {
+ 
   quizResult() {
     let correctAnswers = 0
     let totalAnswers = 0
@@ -36,6 +37,7 @@ class FinishedLesson extends Component {
   render() {
     let {height, width} = Dimensions.get('window')
     let flexDir = this.props.alignRight ? 'row' : 'row-reverse'
+    let result = this.quizResult()
     return (
       <LinearGradient colors={['#f4a791', '#f3818a']} style={styles.content}>
 
@@ -47,7 +49,10 @@ class FinishedLesson extends Component {
             Congratulations! You just completed {this.props.activeLesson}
           </Text>
           <Text>
-          {this.quizResult()[1]}
+          {result[1]} / {result[0]}
+          </Text>
+          <Text>
+          Correct answers!
           </Text>
         </View>
         
