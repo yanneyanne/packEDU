@@ -3,6 +3,8 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { ActionCreators } from '../../actions'
 import { Container, View, Button, Text } from 'native-base'
+import { StyleSheet } from 'react-native'
+import styles from '../../assets/styles/flashcard_styles'
 var TouchableWithoutFeedback = require('TouchableWithoutFeedback')
 
 class FlashCard extends Component {
@@ -25,22 +27,22 @@ class FlashCard extends Component {
     return(
 
       <TouchableWithoutFeedback onPress={this.showAnswer}>
-        <View style={{ justifyContent: 'center', marginBottom: 70, alignSelf: 'stretch', flex: 1, flexDirection: 'column' }}>
-          <View style={{alignItems: 'center', justifyContent: 'center'}}>
-            <Text style={{backgroundColor: 'rgba(0,0,0,0)', color: 'white'}}>{this.props.word}</Text>
-            <Text style={{backgroundColor: 'rgba(0,0,0,0)', color: 'white', fontWeight: 'bold', marginTop: 15}}> {this.state.pressed ? this.props.answer : ''} </Text>
+        <View style={StyleSheet.flatten(styles.flashCardContainer)}>
+          <View style={StyleSheet.flatten(styles.flashCardWords)}>
+            <Text style={StyleSheet.flatten(styles.flashCardText)}>{this.props.word}</Text>
+            <Text style={StyleSheet.flatten(styles.flashCardAnswerText)}> {this.state.pressed ? this.props.answer : ''} </Text>
           </View>
 
-          <View style={{position: 'absolute', bottom: 5, left: 5, right: 5, alignItems: 'center'}}>
-            <Text style={{alignSelf: 'center', backgroundColor: 'rgba(0,0,0,0)', color: 'white'}}>DID YOU GET IT?</Text>
-            <View style={{alignSelf: 'center', flexDirection: flexDir, padding: 10}}>
-              <Button bordered small style={{borderColor: 'white', borderRadius: 0, marginLeft: 5, marginRight: 5}}>
-                <Text style={{color: 'white'}}>
+          <View style={StyleSheet.flatten(styles.flashCardControl)}>
+            <Text style={StyleSheet.flatten(styles.flashCardText)}>DID YOU GET IT?</Text>
+            <View style={{flexDirection: flexDir}}>
+              <Button bordered small style={StyleSheet.flatten(styles.flashCardButtons)}>
+                <Text style={StyleSheet.flatten(styles.flashCardText)}>
                   YES
                 </Text>
               </Button>
-              <Button bordered small style={{borderColor: 'white', borderRadius: 0, marginLeft: 5, marginRight: 5}}>
-                <Text style={{color:'white'}}>
+              <Button bordered small style={StyleSheet.flatten(styles.flashCardButtons)}>
+                <Text style={StyleSheet.flatten(styles.flashCardText)}>
                   NO
                 </Text>
               </Button>
