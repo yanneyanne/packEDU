@@ -17,8 +17,8 @@ import back_cross from './assets/imgs/back_cross.png'
 import { Actions, ActionConst, Router, Scene } from 'react-native-router-flux'
 import { dimensions } from './assets/styles/constants'
 import { Container } from 'native-base'
-import ReactNative from 'react-native'
-const { View } = ReactNative
+import { DeviceEventEmitter, NativeAppEventEmitter, Platform, ReactNative } from 'react-native'
+import BackgroundTimer from 'react-native-background-timer';
 
 const loggerMiddleware = createLogger({ predicate: (getState, action) => __DEV__ })
 
@@ -36,6 +36,11 @@ function configureStore(initialState) {
 
 const store = configureStore({})
 
+const EventEmitter = Platform.select({
+  ios: () => NativeAppEventEmitter,
+  android: () => DeviceEventEmitter,
+  })();
+
 const Scenes = Actions.create(
   <Scene key='root'>
     <Scene key='home' title='Home' component={Home}></Scene>
@@ -50,6 +55,14 @@ const Scenes = Actions.create(
 )
 
 export default class AppContainer extends Component {
+
+  stard() {
+  EventEmitter.addListener('backgroundTimer', () => {
+	console.log('toe');
+  })
+  }
+
+
   render() {
     return(
       <Provider store={store}>

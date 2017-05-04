@@ -2,12 +2,35 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { ActionCreators } from '../actions'
-import ReactNative from 'react-native'
+import { DeviceEventEmitter, NativeAppEventEmitter, Platform, ReactNative } from 'react-native'
+import BackgroundTimer from 'react-native-background-timer'
 import { Map } from 'immutable'
 import { Content, View, Text, Button } from 'native-base'
 import Alignment from './AlignmentContainer'
 
+const EventEmitter = Platform.select({
+    ios: () => NativeAppEventEmitter,
+    android: () => DeviceEventEmitter,
+  })()
+
 class RemoteCourses extends Component {
+
+  startBackgroundTimer() {
+    BackgroundTimer.start(1000)
+  }
+ 
+  startBackgroundListener() {
+  let count = 0
+  EventEmitter.addListener('backgroundTimer', () => {
+    console.log(count)
+      count++
+  })
+  }
+
+  stopBackgroundTimer() {
+    BackgroundTimer.stop()
+  }
+
   componentDidMount() {
     this.props.fetchRemoteCourses()
   }
@@ -23,14 +46,27 @@ class RemoteCourses extends Component {
     })
   }
 
+
   downloadCourse(courseId) {
     this.props.downloadRemoteCourse(courseId)
   }
   
   render() {
+    this.startBackgroundListener()
     return (
       <Content>
         <Alignment>
+        <Button style ={{marginTop: 65}} full onPress = {() => {this.startBackgroundTimer()}}>
+          <Text> 
+          START TIMER
+          </Text>
+        </Button>
+        <Button style ={{marginTop: 65}} full onPress = {() => {this.stopBackgroundTimer()}}>
+          <Text> 
+          STOP TIMER
+          </Text>
+        </Button>
+
           <Text style={{marginTop: 65}}>
             Download more Courses:
           </Text>
