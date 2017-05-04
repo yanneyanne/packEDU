@@ -56,8 +56,12 @@ class Storage{
     try {
       const loaded = await AsyncStorage.getItem('evaluators')
       var evaluators = JSON.parse(loaded) || []
+      // Filter out duplicate evaluators in the course
+      let nonDuplicateIdList = idList.filter((evalId, pos) => {
+        return idList.indexOf(evalId)===pos
+      })
       // Filter out evaluators we already have downloaded
-      let neededEvaluators = idList.filter((evalId) => {
+      let neededEvaluators = nonDuplicateIdList.filter((evalId) => {
         return !evaluators.hasOwnProperty(evalId)
       })
       console.log("The evaluators needed are " + neededEvaluators)
