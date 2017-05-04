@@ -11,8 +11,14 @@ import FooterBar from './containers/FooterBarContainer'
 import Lessons from './containers/LessonsContainer'
 import Settings from './containers/SettingsContainer'
 import Profile from './containers/ProfileContainer'
+import Achievements from './containers/AchievementsContainer'
+import FinishedLesson from './containers/FinishedLessonContainer'
+import back_cross from './assets/imgs/back_cross.png'
 import { Actions, ActionConst, Router, Scene } from 'react-native-router-flux'
+import { dimensions } from './assets/styles/constants'
 import { Container } from 'native-base'
+import ReactNative from 'react-native'
+const { View } = ReactNative
 
 const loggerMiddleware = createLogger({ predicate: (getState, action) => __DEV__ })
 
@@ -35,9 +41,11 @@ const Scenes = Actions.create(
     <Scene key='home' title='Home' component={Home}></Scene>
     <Scene key='remotes' title='Download' component={RemoteCourses}></Scene>
     <Scene key='lessons' title='Lessons' component={Lessons}></Scene>
-    <Scene key='slide' title='Course' component={Slide}></Scene>
+    <Scene key='slide' leftButtonIconStyle={{width: 35 , height: 35}} backButtonImage={back_cross} navigationBarStyle={{backgroundColor :'#f4a791'}} title='Course' component={Slide}></Scene>
     <Scene key='settings' title='Settings' component={Settings}></Scene>
     <Scene key='profile' title='Profile' component={Profile}></Scene>
+    <Scene key='achievements' title='Achievements' component={Achievements}></Scene>
+    <Scene key='finishedLesson' title='Finished Lesson' component={FinishedLesson}></Scene>
   </Scene>
 )
 
@@ -46,7 +54,9 @@ export default class AppContainer extends Component {
     return(
       <Provider store={store}>
         <Container>
-          <RouterWithRedux scenes={Scenes}/>
+          <RouterWithRedux
+            navigationBarStyle={{height: dimensions.headerHeight}}
+            scenes={Scenes}/>
           <FooterBar/>
         </Container>
       </Provider>

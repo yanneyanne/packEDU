@@ -1,13 +1,24 @@
 import createReducer from '../lib/createReducer'
 import * as types from '../actions/types'
 import { Map, List, fromJS } from 'immutable'
+import * as language from '../assets/styles/language_strings'
 
 export const settings = createReducer(Map(), {
   [types.TOGGLE_TEXT_ALIGNMENT](state, action) {
-    let newState = Map()
-    let current = state.get('alignment')
-    newState = state.set('alignment', !current)
-    return newState 
+    newState = state.set('alignment', !state.get('alignment')) 
+    return newState
+  },
+
+  [types.SET_CONNECTION_ERROR](state, action) {
+    return state.set('online', false)
+  },
+
+  [types.NO_CONNECTION_ERROR](state, action) {
+    return state.set('online', true)
+  },
+
+  [types.TOGGLE_LANGUAGE](state, action) {
+    return state.set('english', !state.get('english'))
   }
 })
 

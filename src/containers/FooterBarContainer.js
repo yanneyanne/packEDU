@@ -3,57 +3,59 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { ActionCreators } from '../actions'
 import { Actions } from 'react-native-router-flux'
-
-import { Container, Content, Footer, FooterTab, Button, Text } from 'native-base'
+import { Footer, FooterTab, Button, Text, View } from 'native-base'
+import Alignment from './AlignmentContainer'
+import * as language from '../assets/styles/language_strings'
 
 class FooterBar extends Component {
+
   isActiveTab(tab) {
-    return tab==this.props.activeTab
-  }
-  
-  constructor(props) {
-    super(props)
-      
-    this.homePage =
-      <Button active={this.isActiveTab("home")} onPress = {() => Actions.home()} key={"home"}>
-        <Text>
-          Home
-        </Text>
-      </Button>
-   
-    this.downloadPage =
-      <Button active={this.isActiveTab("remotes")} onPress = {() => Actions.remotes()} key={"download"}>
-        <Text>
-          DL
-        </Text>
-      </Button>
-   
-    this.achievementsPage =
-      <Button key={"achievements"}>
-        <Text>
-          Achievements
-        </Text>
-      </Button>
-   
-    this.profilePage = 
-      <Button active={this.isActiveTab("profile")} onPress = {() => Actions.profile()} key={"profile"}>
-        <Text>
-          Profile
-        </Text>
-      </Button>
+    return tab===this.props.activeTab
   }
 
- 
-  render() {
-    let pageList = []
-    pageList.push(this.homePage, this.downloadPage, this.achievementsPage, this.profilePage)
+ render() {
+    let homePage =
+      <Button active={this.isActiveTab("home")} onPress = {() => Actions.home()} key={"home"}>
+        <Text>
+          {this.props.getLanguage.home}
+        </Text>
+      </Button>
+
+    let downloadPage =
+      <Button active={this.isActiveTab("remotes")} onPress = {() => Actions.remotes()} key={"download"}>
+        <Text>
+          {this.props.getLanguage.download}
+        </Text>
+      </Button>
+
+    let achievementsPage =
+      <Button active={this.isActiveTab("achievements")} onPress = {() => Actions.achievements()} key={"achievements"}>
+        <Text>
+          {this.props.getLanguage.achievements}
+        </Text>
+      </Button>
+
+    let profilePage =
+      <Button active={this.isActiveTab("profile")} onPress = {() => Actions.profile()} key={"profile"}>
+        <Text>
+          {this.props.getLanguage.profile}
+        </Text>
+      </Button>
+
+    let pageList =[homePage, downloadPage, achievementsPage, profilePage]
     {this.props.settingsAlignRight ? pageList.reverse() : pageList}
     return (
-      <Footer>
-        <FooterTab>
-          {pageList}
-        </FooterTab>
-      </Footer>
+      <View>
+        {this.props.activeTab != "slide" && this.props.activeTab != "finishedLesson" ?
+          <Footer>
+            <FooterTab>
+              {pageList}
+            </FooterTab>
+          </Footer>
+          :
+          null
+        }
+      </View>
     )
   }
 }
@@ -61,7 +63,8 @@ class FooterBar extends Component {
 function mapStateToProps(state) {
   return {
     activeTab: state.default.scene ? state.default.scene.name : null,
-    settingsAlignRight: state.settings ? state.settings.get('alignment') : false 
+    settingsAlignRight: state.settings ? state.settings.get('alignment') : false,
+    getLanguage : state.settings.get('english') ? language.arabic : language.eng
   }
 }
 

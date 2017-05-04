@@ -4,30 +4,36 @@ import { bindActionCreators } from 'redux'
 import { ActionCreators } from '../actions'
 import ReactNative from 'react-native'
 import { Actions } from 'react-native-router-flux'
-const {
-  View,
-  TouchableHighlight
-} = ReactNative
-
-import { Container, Content, Footer, FooterTab, Button, Icon, Badge, Text } from 'native-base'
-import styles from '../assets/styles/home_styles'
+import { Content, Text } from 'native-base'
 import Courses from './CoursesContainer.js'
-import RemoteCourses from './RemoteCoursesContainer.js'
+import styles from '../assets/styles/home_styles'
+import ResumeSessionButton from './ResumeSessionButtonContainer'
+import { View } from 'native-base'
+import { Map } from 'immutable'
+import { StyleSheet } from 'react-native'
 
 class Home extends Component {
+  componentDidMount() {
+    console.log("Mounting home") 
+    this.props.loadLastSession()
+  }
   render() {
     return (
-      <Container style={{marginTop: 63}}>
-        <View style={styles.displayContainer}>
-          <Courses/>
-        </View>
-      </Container>
+      <View style={StyleSheet.flatten(styles.content)}>
+        <Courses />
+        {this.props.lastSession.isEmpty() ?
+            <View></View> 
+            :
+          <ResumeSessionButton style={styles.resumeButton}/>
+        }
+      </View>
     )
   }
 }
 
 function mapStateToProps(state) {
   return {
+    lastSession: state.activeCourse.get('lastSession') || Map()
   }
 }
 
