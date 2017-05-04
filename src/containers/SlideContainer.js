@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { ActionCreators } from '../actions'
-import { Actions } from 'react-native-router-flux'
 import { View } from 'react-native'
 import { Container, Content, Text, Button } from 'native-base'
 import { Bar } from 'react-native-progress'
@@ -39,10 +38,6 @@ class Slide extends Component {
     }else{
       return 0
     }
-  }
-
-  finishLesson(){
-    Actions.finishedLesson()
   }
 
   render() {

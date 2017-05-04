@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { ActionCreators } from '../actions'
+import { Actions } from 'react-native-router-flux'
 import { Content, Text, Button } from 'native-base'
 import styles from '../assets/styles/slide_styles'
 import { View } from 'react-native'
@@ -24,7 +25,7 @@ class NextPrevButtons extends Component {
       <View style = {StyleSheet.flatten([styles.nextPrevButtonsContainer, {flexDirection: flexDir}])}>
         {this.isLastSlide() ?
           <Button large bordered key={'finish'} style={StyleSheet.flatten(styles.nextPrevButton)}
-            onPress={() => this.props.onFinnish()}>
+            onPress={() => Actions.finishedLesson()}>
             <Text style={StyleSheet.flatten(styles.nextPrevButtonText)}>
               Finish
             </Text>

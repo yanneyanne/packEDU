@@ -78,7 +78,6 @@ class FinishedLesson extends Component {
       </LinearGradient>
     )
   }
-
 }
 
 function mapStateToProps(state) {
