@@ -56,16 +56,17 @@ class RemoteCourses extends Component {
     return (
       <Content>
         <Alignment>
-        <Button style ={{marginTop: 65}} full onPress = {() => {this.startBackgroundTimer()}}>
-          <Text> 
-          START TIMER
-          </Text>
-        </Button>
-        <Button style ={{marginTop: 65}} full onPress = {() => {this.stopBackgroundTimer()}}>
-          <Text> 
-          STOP TIMER
-          </Text>
-        </Button>
+
+          <Button style ={{marginTop: 65}} full onPress = {() => {this.startBackgroundTimer()}}>
+            <Text> 
+              START TIMER
+            </Text>
+          </Button>
+          <Button style ={{marginTop: 65}} full onPress = {() => {this.stopBackgroundTimer()}}>
+            <Text> 
+              STOP TIMER
+            </Text>
+          </Button>
 
           <Text style={{marginTop: 65}}>
             Download more Courses:
