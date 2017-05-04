@@ -26,12 +26,12 @@ class Slide extends Component {
   }
 
   getSlideMaterial() {
-    return this.props.lessonMaterial ?  
+    return this.props.lessonMaterial ?
       SCompile.getSlide(this.props.currentSlidePos, this.props.lessonMaterial) : []
   }
 
   getProgress() {
-    return this.props.lessonMaterial ? 
+    return this.props.lessonMaterial ?
       this.props.currentSlidePos / this.props.lessonMaterial.length : 0
   }
 
