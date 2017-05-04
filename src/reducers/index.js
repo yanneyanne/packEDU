@@ -11,6 +11,5 @@ export default combineReducers(Object.assign(
   coursesReducer,
   remoteCoursesReducer,
   activeCourseReducer,
-  settingsReducer,
-  interactionsReducer
+  settingsReducer
 ))

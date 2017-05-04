@@ -54,5 +54,18 @@ export const activeCourse = createReducer(Map(), {
     }
     let newState = state.set('lastSession', session)
     return newState
+  },
+
+  [types.ADD_INTERACTION](state, action) {
+    if (state.get('interactions', Map()).has(action.currentSlidePos)) {
+      return state
+    }
+    return state.setIn(['interactions', action.currentSlidePos], Map())
+  },
+
+  [types.VALIDATE_INTERACTION](state, action) {
+    let newState = state.setIn(['interactions', action.currentSlidePos, 'input'], action.input)
+    newState = newState.setIn(['interactions', action.currentSlidePos,'isCorrect'], action.isCorrect)
+    return newState
   }
 })
