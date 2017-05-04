@@ -13,22 +13,22 @@ const EventEmitter = Platform.select({
     android: () => DeviceEventEmitter,
   })()
 
+
 class RemoteCourses extends Component {
 
-  startBackgroundTimer() {
-    BackgroundTimer.start(1000)
-  }
- 
   startBackgroundListener() {
   let count = 0
-  EventEmitter.addListener('backgroundTimer', () => {
-    console.log(count)
-      count++
-  })
+  timer = BackgroundTimer.setInterval(() => {
+    if (this.props.testTimer != true) {
+      console.log("tic")
+    } else {
+      this.stopBackgroundTimer()
+    }
+  }, 1100)
   }
 
   stopBackgroundTimer() {
-    BackgroundTimer.stop()
+    BackgroundTimer.clearInterval(timer)
   }
 
   componentDidMount() {
@@ -52,12 +52,11 @@ class RemoteCourses extends Component {
   }
   
   render() {
-    this.startBackgroundListener()
     return (
       <Content>
         <Alignment>
 
-          <Button style ={{marginTop: 65}} full onPress = {() => {this.startBackgroundTimer()}}>
+          <Button style ={{marginTop: 65}} full onPress = {() => {this.startBackgroundListener()}}>
             <Text> 
               START TIMER
             </Text>
@@ -96,7 +95,8 @@ function mapStateToProps(state) {
   return {
     localCourses: state.courses,
     remoteCourses: state.remoteCourses,
-    online: state.settings.get('online')
+    online: state.settings.get('online'),
+    testTimer: state.settings ? state.settings.get('alignment') : false
   }
 }
 
