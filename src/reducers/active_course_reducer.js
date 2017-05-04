@@ -57,17 +57,15 @@ export const activeCourse = createReducer(Map(), {
   },
 
   [types.ADD_INTERACTION](state, action) {
-     if (state.hasIn['interactions',action.currentSlidePos])
-       return state
-     return state.setIn(['interactions', action.currentSlidePos], Map())
-   },
+    if (state.get('interactions', Map()).has(action.currentSlidePos)) {
+      return state
+    }
+    return state.setIn(['interactions', action.currentSlidePos], Map())
+  },
 
   [types.VALIDATE_INTERACTION](state, action) {
-    //This call to storage maybe should be in the actions
-    let interactionState = state.get('interactions')
-    let newInteractionState = interactionState.setIn([action.currentSlidePos, 'input'], action.input)
-    newInteractionState = newInteractionState.setIn([action.currentSlidePos,'isCorrect'], action.isCorrect)
-    let newState = state.set('interactions', (action.currentSlidePos, newInteractionState))
+    let newState = state.setIn(['interactions', action.currentSlidePos, 'input'], action.input)
+    newState = newState.setIn(['interactions', action.currentSlidePos,'isCorrect'], action.isCorrect)
     return newState
   }
 })

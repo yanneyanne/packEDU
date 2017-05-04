@@ -26,18 +26,13 @@ class Slide extends Component {
   }
 
   getSlideMaterial() {
-    if(this.props.lessonMaterial)
-      return SCompile.getSlide(this.props.currentSlidePos, this.props.lessonMaterial)
-    else
-      return []
+    return this.props.lessonMaterial ?  
+      SCompile.getSlide(this.props.currentSlidePos, this.props.lessonMaterial) : []
   }
 
   getProgress() {
-    if (this.props.lessonMaterial){
-      return this.props.currentSlidePos / this.props.lessonMaterial.length
-    }else{
-      return 0
-    }
+    return this.props.lessonMaterial ? 
+      this.props.currentSlidePos / this.props.lessonMaterial.length : 0
   }
 
   render() {

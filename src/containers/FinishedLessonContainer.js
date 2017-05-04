@@ -4,9 +4,9 @@ import { bindActionCreators } from 'redux'
 import { ActionCreators } from '../actions'
 import { Actions } from 'react-native-router-flux'
 import { View } from 'react-native'
-import { Container, Content, Button, Text } from 'native-base'
+import { Container, Content, Button, Text} from 'native-base'
 import SlideText from './elements/Text'
-import BigSlideText from './elements/BigText'
+import Heading from './elements/Heading'
 import { Bar , Circle} from 'react-native-progress'
 import SCompile from '../lib/slideCompile/SCompile'
 import Alignment from './AlignmentContainer'
@@ -14,23 +14,18 @@ import * as language from '../assets/styles/language_strings'
 import styles from '../assets/styles/slide_styles'
 import LinearGradient from 'react-native-linear-gradient'
 import { StyleSheet, Dimensions } from 'react-native'
+import { Map } from 'immutable'
 
 class FinishedLesson extends Component {
   
   results() {
     let correctAnswers = 0
     let allAnswers = 0
-    if (this.props.getResult != false) {
-      for (let i = 0; i <= this.props.currentSlidePos; i++) {
-        let tempMap = this.props.getResult.get(i)
-        if (tempMap != undefined) {
-          allAnswers++
-          if (tempMap.get("isCorrect") === true) {
-            correctAnswers++
-          }
-        }
-      }
-    }
+    this.props.interactions.keySeq().forEach((key) => {
+      allAnswers++
+      if (this.props.interactions.get(key) === true)
+        correctAnswers++
+    })
     return [allAnswers, correctAnswers]
   }
 
@@ -54,13 +49,13 @@ class FinishedLesson extends Component {
           <SlideText>
             Congratulations! You just completed 
           </SlideText>
-          <BigSlideText>
+          <Heading>
             {this.props.activeLesson}
-          </BigSlideText>
+          </Heading>
           <Circle borderWidth = {0.5} size = {width/2} progress = {percentageAnswers} color={'rgba(255,255,255,1)'} style = {styles.progress} marginBottom={20}/>
-          <BigSlideText>
+          <Heading>
             {answers[1]} / {answers[0]}
-          </BigSlideText>
+          </Heading>
           <SlideText>
             Correct answers!
           </SlideText>
@@ -82,12 +77,9 @@ class FinishedLesson extends Component {
 
 function mapStateToProps(state) {
   return {
-    courseId: state.activeCourse.get('id'),
     activeLesson: state.activeCourse.get('activeLesson'),
-    currentSlidePos: state.activeCourse.get('currentSlidePos'),
-    lessonMaterial: state.activeCourse.get('lessonMaterial'),
     alignRight: state.settings ? state.settings.get('alignment') : false,
-    getResult: state.activeCourse.get('interactions') ? state.activeCourse.get('interactions') : false
+    interactions: state.activeCourse.get('interactions') ? state.activeCourse.get('interactions') : Map()
   }
 }
 
