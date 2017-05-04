@@ -8,7 +8,8 @@ export default class Bullet extends Component {
   getTextContainerStyle() {
     return {
       marginBottom: 20,
-      backgroundColor: 'rgba(0,0,0,0)'
+      backgroundColor: 'rgba(0,0,0,0)',
+      flexDirection: 'row'
     }
   }
 
@@ -20,21 +21,11 @@ export default class Bullet extends Component {
     } 
   }
 
-  getCircleStyle() {
-    return {
-      width: 10,
-      height: 10,
-      borderRadius: 10/2,
-      backgroundColor: 'white'
-    } 
-  }
-
   render() {
     return (
       <View style={this.getTextContainerStyle()}>
-        <View style={this.getCircleStyle()}></View>
         <Text style={this.getTextStyle()}>
-          {this.props.children}
+          {`\u2022`} {this.props.children}
         </Text>
       </View>
     ) 
