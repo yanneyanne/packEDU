@@ -9,6 +9,7 @@ import * as language from '../assets/styles/language_strings'
 import styles from '../assets/styles/courses_styles'
 import { StyleSheet } from 'react-native'
 import ReactNative from 'react-native'
+import ResumeSessionButtonContainer from './ResumeSessionButtonContainer'
 
 const {
   View
@@ -19,6 +20,7 @@ class Courses extends Component {
   componentDidMount() {
     console.log("Courses are mounting")
     this.props.loadLocalCourses()
+    this.props.loadLastSession()
   }
 
   getLocalCourses() {
@@ -35,7 +37,7 @@ class Courses extends Component {
       <View style={StyleSheet.flatten(styles.content)}>
         <ListItem itemHeader first>
           <Text style={{fontWeight: 'bold'}}>
-            {this.props.getLanguage.mycourses} 
+            {this.props.getLanguage.mycourses}
           </Text>
         </ListItem>
         {this.getLocalCourses().map(course => {
@@ -51,7 +53,7 @@ class Courses extends Component {
           )
         })}
       </View>
-    ) 
+    )
   }
 }
 

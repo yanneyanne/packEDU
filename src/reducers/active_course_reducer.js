@@ -18,8 +18,14 @@ export const activeCourse = createReducer(Map(), {
   },
 
   [types.SET_CURRENT_SLIDE_POS](state, action) {
-    let newState = state.set('currentSlidePos', action.slidePos) 
+    let newState = state.set('currentSlidePos', action.slidePos)
     return newState
+  },
+
+  [types.VALIDATE_QUIZ](state, action) {
+    //This call to storage maybe should be in the actions
+    Storage.evaluate(action.evaluatorId, action.choice, action.answer)
+    return state
   },
 
   // Persistently store the user's position in the lesson and add the new progress to lesson state
@@ -34,6 +40,32 @@ export const activeCourse = createReducer(Map(), {
     })
     let newState = state.set('lessons', updatedLessons)
     return newState
+  },
+
+  [types.SET_LAST_SESSION](state, action) {
+    let session
+    if (!action.courseId || !action.lessonName) {
+      session = Map()
+    } else {
+      session = Map({
+        courseId: action.courseId,
+        lessonName: action.lessonName
+      })
+    }
+    let newState = state.set('lastSession', session)
+    return newState
+  },
+
+  [types.ADD_INTERACTION](state, action) {
+    if (state.get('interactions', Map()).has(action.currentSlidePos)) {
+      return state
+    }
+    return state.setIn(['interactions', action.currentSlidePos], Map())
+  },
+
+  [types.VALIDATE_INTERACTION](state, action) {
+    let newState = state.setIn(['interactions', action.currentSlidePos, 'input'], action.input)
+    newState = newState.setIn(['interactions', action.currentSlidePos,'isCorrect'], action.isCorrect)
+    return newState
   }
 })
-

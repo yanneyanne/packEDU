@@ -48,7 +48,6 @@ class FlashCard extends Component {
               </Button>
             </View>
           </View>
-
         </View>
       </TouchableWithoutFeedback>
 
@@ -58,10 +57,8 @@ class FlashCard extends Component {
 }
 
 function mapStateToProps(state) {
-  let currentSlidePos = state.activeCourse.get('currentSlidePos')
-  //console.log(state.settings)
   return {
-    currentSlidePos: currentSlidePos,
+    currentSlidePos: state.activeCourse.get('currentSlidePos'),
     alignRight: state.settings ? state.settings.get('alignment') : false
   }
 }

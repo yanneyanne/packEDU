@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { ActionCreators } from '../actions'
-import { Actions } from 'react-native-router-flux'
 import { View } from 'react-native'
 import { Container, Content, Text, Button } from 'native-base'
 import { Bar } from 'react-native-progress'
@@ -17,24 +16,23 @@ import { StyleSheet, Dimensions } from 'react-native'
 class Slide extends Component {
 
   componentWillUnmount() {
+   console.log("Unmounting the slide")
     this.props.saveSlidePos(this.props.courseId, 
-        this.props.activeLesson, 
-        this.props.currentSlidePos,
-        this.props.lessonMaterial.length)
+      this.props.activeLesson, 
+      this.props.currentSlidePos,
+      this.props.lessonMaterial.length
+    )
+    this.props.saveLastSession(this.props.courseId, this.props.activeLesson)
   }
 
   getSlideMaterial() {
-    if(this.props.lessonMaterial)
-      return SCompile.getSlide(this.props.currentSlidePos, this.props.lessonMaterial)
-    else 
-      return []
+    return this.props.lessonMaterial ?
+      SCompile.getSlide(this.props.currentSlidePos, this.props.lessonMaterial) : []
   }
 
   getProgress() {
-    if (this.props.lessonMaterial)
-      return this.props.currentSlidePos / this.props.lessonMaterial.length 
-    else
-      return 0
+    return this.props.lessonMaterial ?
+      this.props.currentSlidePos / this.props.lessonMaterial.length : 0
   }
 
   render() {
@@ -49,7 +47,7 @@ class Slide extends Component {
           })}
         </View>
         <View style={styles.footer}>
-          <NextPrevButtons />
+          <NextPrevButtons onFinnish={this.finishLesson}/>
         </View>
       </LinearGradient>
     )

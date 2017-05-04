@@ -5,6 +5,8 @@ import { View, Button } from 'native-base'
 import MultipleChoice from '../../containers/elements/MultipleChoice'
 import FlashCard from '../../containers/elements/FlashCard'
 import Text from '../../containers/elements/Text'
+import Heading from '../../containers/elements/Heading'
+import Bullet from '../../containers/elements/Bullet'
 
 class Generator {
   /* TODO: This function takes a DOM tree and converts
@@ -21,19 +23,23 @@ class Generator {
 
   static mapElementToJSX(element) {
     switch(element.name) {
+      case types.HEADING:
+        return <Heading> { element.content } </Heading>
       case types.TEXT:
         return <Text> { element.content } </Text>
-      case types.FLASHCARD:
-        return <FlashCard answer={element.answer} word={element.content}/>
+      case types.BULLET:
+        return <Bullet> { element.content } </Bullet>
       case types.INTERACTION:
-          if(element.type==types.INTERACTION_MULTIPLECHOICEQUIZ){
+          if(element.type==types.INTERACTION_MULTIPLECHOICEQUIZ) {
             // Hacky code to parse choices into separate list elements
             element.content = element.content.split("<choice>")
             element.content = element.content.map((choice) => choice.replace("</choice>",""))
             element.content.shift()
             return (
-              <MultipleChoice choices = {element.content} evaluator = {element.evaluator} answer = {element.answer}/>
+              <MultipleChoice choices = {element.content} evaluator = {element.evaluator} answer = {element.answer} />
             )
+          } else if (element.type===types.INTERACTION_FLASHCARD) {
+            return <FlashCard answer={element.answer} word={element.content} />
           }
       default:
         return

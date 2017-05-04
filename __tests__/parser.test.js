@@ -22,6 +22,18 @@ test('gets correct next slide position', () => {
 
 test('gets correct previous slide position', () => {
   let slide2Pos = dummyMaterial.lastIndexOf("<slide>") 
-  console.log(slide2Pos)
   expect(Parser.getPreviousSlidePosition(slide2Pos, dummyMaterial)).toBe(0)
+})
+
+const simpleTag = "<text>"
+
+test('can correctly parse a simple tag', () => {
+  let result = Parser.parseOpeningTag(simpleTag)
+})
+
+const complexTag = "<interaction type=\"multiple_choice_quiz\" answer=\"To prevent dehydration\" evaluator=\"1a2b3c\"></interaction>"
+
+test('can correctly parse a complex tag', () => {
+  let result = Parser.parseOpeningTag(complexTag)
+  console.log(result)
 })

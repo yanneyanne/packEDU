@@ -70,8 +70,8 @@ function mapStateToProps(state) {
   let currentSlidePos = state.activeCourse.get('currentSlidePos')
   return {
     currentSlidePos: currentSlidePos,
-    isCorrect: state.interactions.getIn([currentSlidePos, 'isCorrect'], undefined),
-    input: state.interactions.getIn([currentSlidePos, 'input'], undefined)
+    isCorrect: state.activeCourse.getIn(['interactions', currentSlidePos, 'isCorrect'], undefined),
+    input: state.activeCourse.getIn(['interactions', currentSlidePos, 'input'], undefined)
   }
 }
 

@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { ActionCreators } from '../actions'
+import { Actions } from 'react-native-router-flux'
 import { Content, Text, Button } from 'native-base'
 import styles from '../assets/styles/slide_styles'
 import { View } from 'react-native'
@@ -23,17 +24,23 @@ class NextPrevButtons extends Component {
     return (
       <View style = {StyleSheet.flatten([styles.nextPrevButtonsContainer, {flexDirection: flexDir}])}>
         {this.isLastSlide() ?
-          <View/>:
-          <Button large bordered key={'next'} style={StyleSheet.flatten(styles.nextPrevButton)} 
+          <Button large bordered key={'finish'} style={StyleSheet.flatten(styles.nextPrevButton)}
+            onPress={() => Actions.finishedLesson()}>
+            <Text style={StyleSheet.flatten(styles.nextPrevButtonText)}>
+              Finish
+            </Text>
+          </Button>
+          :
+          <Button large bordered key={'next'} style={StyleSheet.flatten(styles.nextPrevButton)}
             onPress = {() => this.props.nextSlide(this.props.currentSlidePos, this.props.lessonMaterial)}>
             <Text style={StyleSheet.flatten(styles.nextPrevButtonText)}>
               Next
             </Text>
           </Button>
         }
-        {this.isFirstSlide() ? 
+        {this.isFirstSlide() ?
           <View/> :
-            <Button large bordered key={'prev'} style={StyleSheet.flatten(styles.nextPrevButton)} 
+            <Button large bordered key={'prev'} style={StyleSheet.flatten(styles.nextPrevButton)}
               onPress = {() => this.props.previousSlide(this.props.currentSlidePos, this.props.lessonMaterial)} >
             <Text style={StyleSheet.flatten(styles.nextPrevButtonText)}>
               Previous
