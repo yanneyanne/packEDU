@@ -23,7 +23,7 @@ class FinishedLesson extends Component {
     let allAnswers = 0
     this.props.interactions.keySeq().forEach((key) => {
       allAnswers++
-      if (this.props.interactions.get(key) === true)
+      if ((this.props.interactions.get(key)).get("isCorrect") === true)
         correctAnswers++
     })
     return [allAnswers, correctAnswers]
