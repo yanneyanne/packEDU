@@ -11,6 +11,7 @@ import ResumeSessionButton from './ResumeSessionButtonContainer'
 import { View } from 'native-base'
 import { Map } from 'immutable'
 import { StyleSheet } from 'react-native'
+import { fetchBackground } from '../lib/backgroundFetch'
 
 class Home extends Component {
   componentDidMount() {
@@ -18,6 +19,7 @@ class Home extends Component {
     this.props.loadLastSession()
   }
   render() {
+    fetchBackground()
     return (
       <View style={StyleSheet.flatten(styles.content)}>
         <Courses />
