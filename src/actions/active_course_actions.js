@@ -96,10 +96,10 @@ export function loadLastSession() {
     return Storage.loadLastSession().then((session) => {
       let courseId
       let lessonName
-      try{
+      try {
         courseId = session.courseId
         lessonName = session.lessonName
-      }catch(e){
+      } catch(e) {
         console.log(e)
       }
       console.log("This course info in the actions: ")
