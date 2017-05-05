@@ -20,7 +20,9 @@ class RemoteCourses extends Component {
 //The following 5 functions should probably be moved
 
   startBackgroundListener() {
+    let count = 0
     timer = BackgroundTimer.setInterval(async () => {
+      console.log(count++)
       if (this.props.downloadQueue.length === 0 ) {
         console.log("STOPPING TIMER")
         this.stopBackgroundTimer()
@@ -29,9 +31,12 @@ class RemoteCourses extends Component {
         console.log(network_status)
         if (network_status === 'WIFI') {
         this.downloadCourse(this.props.downloadQueue[0])
+        if (this.props.downloadQueue.includes(coruseId)){
+          this.props.removeDownloadQueue(courseId)
+        }
         }
       }
-    }, 1100)
+    }, 1000*10)
   }
 
   stopBackgroundTimer() {
@@ -45,14 +50,12 @@ class RemoteCourses extends Component {
   //Download a course from the queue
   downloadCourse(courseId) {
     this.props.downloadRemoteCourse(courseId)
-    if (this.props.downloadQueue.includes(courseId)) {
-      this.props.removeDownloadQueue(courseId)
-    }
   }
 
   // Add a course to the queue to be downloaded
   addDownloadQueue(courseId) {
     this.props.addDownloadQueue(courseId)
+    this.startBackgroundListener()
   }
 
 //***********************************************//
