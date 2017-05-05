@@ -7,6 +7,7 @@ import BackgroundTimer from 'react-native-background-timer'
 import { Map } from 'immutable'
 import { Content, View, Text, Button } from 'native-base'
 import Alignment from './AlignmentContainer'
+import { networkStatus } from '../lib/networkStatus'
 
 const EventEmitter = Platform.select({
     ios: () => NativeAppEventEmitter,
@@ -15,41 +16,31 @@ const EventEmitter = Platform.select({
 
 class RemoteCourses extends Component {
 
+//***********************************************//
+//The following 5 functions should probably be moved
 
   startBackgroundListener() {
-  timer = BackgroundTimer.setInterval(() => {
-    if (this.props.downloadQueue.length === 0 ) {
-      console.log("STOPPING TIMER")
-      this.stopBackgroundTimer()
-    } else {
-      this.downloadCourse(this.props.downloadQueue[0])
-    }
-  }, 1100)
+    timer = BackgroundTimer.setInterval(() => {
+      if (this.props.downloadQueue.length === 0 ) {
+        console.log("STOPPING TIMER")
+        this.stopBackgroundTimer()
+      } else {
+        let network_status = networkStatus()
+        if (network_status === true) {
+        this.downloadCourse(this.props.downloadQueue[0])
+        }
+      }
+    }, 1100)
   }
 
   stopBackgroundTimer() {
     BackgroundTimer.clearInterval(timer)
   }
 
-  componentDidMount() {
-    this.props.fetchRemoteCourses()
-  }
-
-  getLocalCourses() {
-    return this.props.localCourses || []
-  }
-
   getStoredCourses() {
     return this.props.storedCourses || []
   }
-
-  getRemoteCourses() {
-    // Only return the courses which have not yet been downloaded
-    return this.props.remoteCourses.filterNot(course => {
-      return this.getLocalCourses().has(course.get('id')) 
-    })
-  }
-
+ 
   //Download a course from the queue
   downloadCourse(courseId) {
     this.props.downloadRemoteCourse(courseId)
@@ -62,6 +53,23 @@ class RemoteCourses extends Component {
   addDownloadQueue(courseId) {
     this.props.addDownloadQueue(courseId)
   } 
+
+//***********************************************//
+
+  componentDidMount() {
+    this.props.fetchRemoteCourses()
+  }
+
+  getLocalCourses() {
+    return this.props.localCourses || []
+  }
+
+  getRemoteCourses() {
+    // Only return the courses which have not yet been downloaded
+    return this.props.remoteCourses.filterNot(course => {
+      return this.getLocalCourses().has(course.get('id')) 
+    })
+  }
   
   render() {
     return (
@@ -122,7 +130,7 @@ function mapStateToProps(state) {
     remoteCourses: state.remoteCourses,
     storedCourses: state.storedCourses,
     online: state.settings.get('online'),
-    downloadQueue: state.download.get('downloadQueue') ? state.download.get('downloadQueue') : []
+    downloadQueue: state.download.get('downloadQueue') ? state.download.get('downloadQueue') : false
   }
 }
 

@@ -44,7 +44,6 @@ const Scenes = Actions.create(
     <Scene key='profile' title='Profile' component={Profile}></Scene>
     <Scene key='achievements' title='Achievements' component={Achievements}></Scene>
     <Scene key='finishedLesson' leftButtonIconStyle={{width: 35 , height: 35}} backButtonImage={back_cross} navigationBarStyle={{backgroundColor :'#f4a791'}} component={FinishedLesson}></Scene>
-
   </Scene>
 )
 
