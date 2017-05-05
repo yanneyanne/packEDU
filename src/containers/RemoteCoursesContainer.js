@@ -17,12 +17,11 @@ const EventEmitter = Platform.select({
 class RemoteCourses extends Component {
 
   startBackgroundListener() {
-  let count = 0
   timer = BackgroundTimer.setInterval(() => {
-    if (this.props.testTimer != true) {
-      console.log("tic")
-    } else {
+    if (this.props.downloadQueue.length === 0 ) {
       this.stopBackgroundTimer()
+    } else {
+      console.log("Ticc")
     }
   }, 1100)
   }
@@ -49,6 +48,10 @@ class RemoteCourses extends Component {
 
   downloadCourse(courseId) {
     this.props.downloadRemoteCourse(courseId)
+    if (this.props.downloadQueue.includes(courseId)) {
+      console.log("In here?")
+      this.props.removeDownloadQueue(courseId)
+    }
   }
   
   render() {
@@ -96,7 +99,7 @@ function mapStateToProps(state) {
     localCourses: state.courses,
     remoteCourses: state.remoteCourses,
     online: state.settings.get('online'),
-    testTimer: state.settings ? state.settings.get('alignment') : false
+    downloadQueue: state.download.get('downloadQueue') ? state.download.get('downloadQueue') : false
   }
 }
 

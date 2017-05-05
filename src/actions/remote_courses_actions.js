@@ -16,6 +16,20 @@ export function fetchRemoteCourses() {
   }
 }
 
+export function addDownloadQueue ( courseId ) {
+  return {
+    type: types.QUEUE_BACKGROUND_DOWNLOAD,
+    courseId
+  }
+}
+
+export function removeDownloadQueue ( courseId ) {
+  return {
+    type: types.REMOVE_BACKGROUND_QUEUE,
+    courseId
+  }
+}
+
 function setRemoteCourses({ courses }) {
   return {
     type: types.GET_REMOTE_COURSES,
