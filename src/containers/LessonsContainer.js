@@ -22,7 +22,7 @@ class Lessons extends Component {
   }
 
   getCourseId() {
-    return this.props.courseId 
+    return this.props.courseId
   }
 
   startLesson(courseId, lesson) {
@@ -31,8 +31,12 @@ class Lessons extends Component {
   }
 
   removeCourse(courseId) {
-    this.props.removeLocalCourse(courseId)
-    Actions.home()
+    this.props.removeLocalCourse(courseId).then(() => {
+      if(this.props.lastSessionCourseId == courseId){
+        this.props.removeLastSession()
+      }
+      Actions.home()
+    })
   }
 
 
@@ -69,7 +73,8 @@ class Lessons extends Component {
 function mapStateToProps(state) {
   return {
     courseId: state.activeCourse.get('id'),
-    lessons: state.activeCourse.get('lessons')
+    lessons: state.activeCourse.get('lessons'),
+    lastSessionCourseId: state.activeCourse.get('lastSession').get('courseId')
   }
 }
 

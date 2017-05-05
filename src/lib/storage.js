@@ -110,7 +110,7 @@ class Storage{
         if (lesson.name === lessonName)
           lesson["savedPos"] = pos
       })
-      await AsyncStorage.mergeItem('courses', JSON.stringify(allCourses)) 
+      await AsyncStorage.mergeItem('courses', JSON.stringify(allCourses))
     } catch(e) {
       console.log(e)
     }
@@ -150,6 +150,15 @@ class Storage{
         courseId,
         lessonName
       }
+      await AsyncStorage.setItem('lastSession', JSON.stringify(session))
+    } catch(e) {
+      console.log(e)
+    }
+  }
+
+  static async removeLastSession(){
+    try {
+      let session = {}
       await AsyncStorage.setItem('lastSession', JSON.stringify(session))
     } catch(e) {
       console.log(e)

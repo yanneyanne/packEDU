@@ -112,6 +112,20 @@ function setLastSession(courseId, lessonName) {
   }
 }
 
+export function removeLastSession() {
+  return (dispatch, getState) => {
+    return Storage.removeLastSession().then(() => {
+      dispatch(setLastSession(null, null))
+    })
+  }
+}
+
+/*function dispatchRemoveLastSession() {
+  return {
+    type: types.REMOVE_LAST_SESSION
+  }
+}*/
+
 export function saveSlidePos(courseId, lessonName, currentSlidePos, lessonLength) {
   return {
     type: types.SAVE_CURRENT_SLIDE_POS,
