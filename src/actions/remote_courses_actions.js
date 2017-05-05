@@ -1,5 +1,6 @@
 import * as types from './types'
 import Api from '../lib/api/api'
+import Storage from '../lib/storage'
 
 export function fetchRemoteCourses() {
   console.log("Fetching remote courses...")
@@ -7,6 +8,7 @@ export function fetchRemoteCourses() {
     const route = '/course/names'
     return Api.get(route).then((resp) => {
       dispatch(setRemoteCourses({ courses: resp }))
+      dispatch(setStoredCourses({ courses: resp}))
       dispatch((removeConnectionError()))
     }).catch( (err) => { 
       console.log(err)
@@ -33,6 +35,13 @@ export function removeDownloadQueue ( courseId ) {
 function setRemoteCourses({ courses }) {
   return {
     type: types.GET_REMOTE_COURSES,
+    courses
+  }
+}
+
+function setStoredCourses( { courses }) {
+  return {
+    type: types.GET_STORED_COURSES,
     courses
   }
 }

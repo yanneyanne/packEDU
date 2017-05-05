@@ -13,15 +13,16 @@ const EventEmitter = Platform.select({
     android: () => DeviceEventEmitter,
   })()
 
-
 class RemoteCourses extends Component {
+
 
   startBackgroundListener() {
   timer = BackgroundTimer.setInterval(() => {
     if (this.props.downloadQueue.length === 0 ) {
+      console.log("STOPPING TIMER")
       this.stopBackgroundTimer()
     } else {
-      console.log("Ticc")
+      this.downloadCourse(this.props.downloadQueue[0])
     }
   }, 1100)
   }
@@ -38,6 +39,10 @@ class RemoteCourses extends Component {
     return this.props.localCourses || []
   }
 
+  getStoredCourses() {
+    return this.props.storedCourses || []
+  }
+
   getRemoteCourses() {
     // Only return the courses which have not yet been downloaded
     return this.props.remoteCourses.filterNot(course => {
@@ -45,14 +50,18 @@ class RemoteCourses extends Component {
     })
   }
 
-
+  //Download a course from the queue
   downloadCourse(courseId) {
     this.props.downloadRemoteCourse(courseId)
     if (this.props.downloadQueue.includes(courseId)) {
-      console.log("In here?")
       this.props.removeDownloadQueue(courseId)
     }
   }
+  
+  // Add a course to the queue to be downloaded
+  addDownloadQueue(courseId) {
+    this.props.addDownloadQueue(courseId)
+  } 
   
   render() {
     return (
@@ -86,7 +95,20 @@ class RemoteCourses extends Component {
               )
             })
             :
-            <Text>No connection</Text>
+            this.getStoredCourses().map(course => {
+              return (
+                <View style = {{marginTop: 10}} key={course.get('id')}>
+                  <Button onPress = {() => {this.addDownloadQueue(course.get('id'))}}>
+                    <Text>
+                      {course.get('name')}
+                    </Text>
+                  </Button>
+                  <Text>
+                    OFFLINE
+                  </Text>
+                </View>
+              )
+            })
           }
         </Alignment>
       </Content>
@@ -98,8 +120,9 @@ function mapStateToProps(state) {
   return {
     localCourses: state.courses,
     remoteCourses: state.remoteCourses,
+    storedCourses: state.storedCourses,
     online: state.settings.get('online'),
-    downloadQueue: state.download.get('downloadQueue') ? state.download.get('downloadQueue') : false
+    downloadQueue: state.download.get('downloadQueue') ? state.download.get('downloadQueue') : []
   }
 }
 

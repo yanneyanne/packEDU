@@ -2,23 +2,13 @@ import createReducer from '../lib/createReducer'
 import * as types from '../actions/types'
 import { List, Map } from 'immutable'
 
-export const remoteCourses = createReducer(List(), {
-  [types.GET_REMOTE_COURSES](state, action) {
-    let newRemoteCourses = List()
-    action.courses.forEach((course) => {
-      newRemoteCourses = newRemoteCourses.push(Map({
-        "id": course.id, 
-        "name": course.name
-      }))
-    })
-    return newRemoteCourses
-  },
+export const storedCourses = createReducer(List(), {
 
   [types.GET_STORED_COURSES](state, action) {
     let newStoredCourses = List()
     action.courses.forEach((course) => {
       newStoredCourses = newStoredCourses.push(Map({
-        "id": course.id, 
+        "id": course.id,
         "name": course.name
       }))
     })
