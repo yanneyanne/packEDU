@@ -6,6 +6,10 @@ var styles = StyleSheet.create({
     content:
         general.content,
 
+    courseButtonContainer: {
+        marginBottom: 10
+    },
+
     courseButton: {
         borderRadius: 0,
         width: 230,

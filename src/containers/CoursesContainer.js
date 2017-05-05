@@ -42,7 +42,7 @@ class Courses extends Component {
         </ListItem>
         {this.getLocalCourses().map(course => {
           return (
-            <View Style = {{marginTop: 10}} key ={course.get('id')}>
+            <View style={styles.courseButtonContainer} key ={course.get('id')}>
               <Button bordered style={StyleSheet.flatten(styles.courseButton)}
                 onPress={() => {this.startCourse(course.get('id'))}}>
                 <Text>
