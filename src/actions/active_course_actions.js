@@ -120,12 +120,6 @@ export function removeLastSession() {
   }
 }
 
-/*function dispatchRemoveLastSession() {
-  return {
-    type: types.REMOVE_LAST_SESSION
-  }
-}*/
-
 export function saveSlidePos(courseId, lessonName, currentSlidePos, lessonLength) {
   return {
     type: types.SAVE_CURRENT_SLIDE_POS,
