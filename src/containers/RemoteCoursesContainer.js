@@ -20,13 +20,14 @@ class RemoteCourses extends Component {
 //The following 5 functions should probably be moved
 
   startBackgroundListener() {
-    timer = BackgroundTimer.setInterval(() => {
+    timer = BackgroundTimer.setInterval(async () => {
       if (this.props.downloadQueue.length === 0 ) {
         console.log("STOPPING TIMER")
         this.stopBackgroundTimer()
       } else {
-        let network_status = networkStatus()
-        if (network_status === true) {
+        let network_status = await networkStatus()
+        console.log(network_status)
+        if (network_status === 'WIFI') {
         this.downloadCourse(this.props.downloadQueue[0])
         }
       }
@@ -40,7 +41,7 @@ class RemoteCourses extends Component {
   getStoredCourses() {
     return this.props.storedCourses || []
   }
- 
+
   //Download a course from the queue
   downloadCourse(courseId) {
     this.props.downloadRemoteCourse(courseId)
@@ -48,11 +49,11 @@ class RemoteCourses extends Component {
       this.props.removeDownloadQueue(courseId)
     }
   }
-  
+
   // Add a course to the queue to be downloaded
   addDownloadQueue(courseId) {
     this.props.addDownloadQueue(courseId)
-  } 
+  }
 
 //***********************************************//
 
@@ -67,22 +68,22 @@ class RemoteCourses extends Component {
   getRemoteCourses() {
     // Only return the courses which have not yet been downloaded
     return this.props.remoteCourses.filterNot(course => {
-      return this.getLocalCourses().has(course.get('id')) 
+      return this.getLocalCourses().has(course.get('id'))
     })
   }
-  
+
   render() {
     return (
       <Content>
         <Alignment>
 
           <Button style ={{marginTop: 65}} full onPress = {() => {this.startBackgroundListener()}}>
-            <Text> 
+            <Text>
               START TIMER
             </Text>
           </Button>
           <Button style ={{marginTop: 65}} full onPress = {() => {this.stopBackgroundTimer()}}>
-            <Text> 
+            <Text>
               STOP TIMER
             </Text>
           </Button>
@@ -90,7 +91,7 @@ class RemoteCourses extends Component {
           <Text style={{marginTop: 65}}>
             Download more Courses:
           </Text>
-          {this.props.online ? 
+          {this.props.online ?
             this.getRemoteCourses().map(course => {
               return (
                 <View style={{marginTop: 10}} key={course.get('id')}>
@@ -120,7 +121,7 @@ class RemoteCourses extends Component {
           }
         </Alignment>
       </Content>
-    )	
+    )
   }
 }
 

@@ -6,9 +6,6 @@ const { NetInfo,
 
 
 export function networkStatus() {
-    NetInfo.fetch().done((reach) => {
-      console.log('Initial: ' + reach);
-    })
-  }
+    return NetInfo.fetch()
 
-
+      }
