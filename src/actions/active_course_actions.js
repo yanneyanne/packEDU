@@ -112,6 +112,14 @@ function setLastSession(courseId, lessonName) {
   }
 }
 
+export function removeLastSession() {
+  return (dispatch, getState) => {
+    return Storage.removeLastSession().then(() => {
+      dispatch(setLastSession(null, null))
+    })
+  }
+}
+
 export function saveSlidePos(courseId, lessonName, currentSlidePos, lessonLength) {
   return {
     type: types.SAVE_CURRENT_SLIDE_POS,
