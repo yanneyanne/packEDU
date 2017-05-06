@@ -13,30 +13,29 @@ const EventEmitter = Platform.select({
     ios: () => NativeAppEventEmitter,
     android: () => DeviceEventEmitter,
   })()
-
+const listening = false
 class RemoteCourses extends Component {
 
 //***********************************************//
 //The following 5 functions should probably be moved
-
   startBackgroundListener() {
-    let count = 0
+    listening = true 
     timer = BackgroundTimer.setInterval(async () => {
-      console.log(count++)
       if (this.props.downloadQueue.length === 0 ) {
         console.log("STOPPING TIMER")
         this.stopBackgroundTimer()
+        listening = false
       } else {
         let network_status = await networkStatus()
         console.log(network_status)
         if (network_status === 'WIFI') {
         this.downloadCourse(this.props.downloadQueue[0])
-        if (this.props.downloadQueue.includes(coruseId)){
+        if (this.props.downloadQueue.includes(courseId)){
           this.props.removeDownloadQueue(courseId)
         }
         }
       }
-    }, 1000*10)
+    }, 1000*1)
   }
 
   stopBackgroundTimer() {
@@ -55,7 +54,9 @@ class RemoteCourses extends Component {
   // Add a course to the queue to be downloaded
   addDownloadQueue(courseId) {
     this.props.addDownloadQueue(courseId)
+      if (listening === false) {
     this.startBackgroundListener()
+      }
   }
 
 //***********************************************//
