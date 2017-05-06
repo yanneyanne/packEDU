@@ -7,7 +7,7 @@ export function fetchBackground() {
     BackgroundFetch.configure({
       stopOnTerminate: false
     }, function() {
-      console.log("FACK MA MOMMA");
+      console.log("Background fetch working!");
 
       // To signal completion of your task to iOS, you must call #finish!
       // If you fail to do this, iOS can kill your app.
