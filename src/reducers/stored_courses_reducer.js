@@ -4,7 +4,7 @@ import { List, Map } from 'immutable'
 
 export const storedCourses = createReducer(List(), {
 
-  [types.GET_STORED_COURSES](state, action) {
+  [types.SET_STORED_REMOTE_COURSES](state, action) {
     let newStoredCourses = List()
     action.courses.forEach((course) => {
       newStoredCourses = newStoredCourses.push(Map({

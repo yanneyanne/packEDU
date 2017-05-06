@@ -6,5 +6,5 @@ const { NetInfo,
 
 
 export function networkStatus() {
-    return NetInfo.isConnected.fetch()
-      }
+    return NetInfo.fetch()
+  }

@@ -22,20 +22,16 @@ class RemoteCourses extends Component {
     listening = true 
     timer = BackgroundTimer.setInterval(async () => {
       if (this.props.downloadQueue.length === 0 ) {
-        console.log("STOPPING TIMER")
         this.stopBackgroundTimer()
         listening = false
       } else {
         let network_status = await networkStatus()
-        console.log(network_status)
-        if (network_status === 'WIFI') {
-        this.downloadCourse(this.props.downloadQueue[0])
-        if (this.props.downloadQueue.includes(courseId)){
-          this.props.removeDownloadQueue(courseId)
-        }
+        if (network_status === 'WIFI'){ 
+          this.downloadCourse(this.props.downloadQueue[0])
+          this.props.removeDownloadQueue(this.props.downloadQueue[0])
         }
       }
-    }, 1000*1)
+    }, 1000 * 60 * 30) //Check once every half-hour
   }
 
   stopBackgroundTimer() {
@@ -43,7 +39,10 @@ class RemoteCourses extends Component {
   }
 
   getStoredCourses() {
-    return this.props.storedCourses || []
+    return this.props.storedCourses.filterNot(course => {
+      return this.getLocalCourses().has(course.get('id'))
+    })
+
   }
 
   //Download a course from the queue
@@ -54,9 +53,9 @@ class RemoteCourses extends Component {
   // Add a course to the queue to be downloaded
   addDownloadQueue(courseId) {
     this.props.addDownloadQueue(courseId)
-      if (listening === false) {
-    this.startBackgroundListener()
-      }
+    if (listening === false) {
+      this.startBackgroundListener()
+    }
   }
 
 //***********************************************//
@@ -80,21 +79,15 @@ class RemoteCourses extends Component {
     return (
       <Content>
         <Alignment>
-
-          <Button style ={{marginTop: 65}} full onPress = {() => {this.startBackgroundListener()}}>
-            <Text>
-              START TIMER
+          {this.props.online ?
+            <Text style={{marginTop:65}}>
+              Download more courses:
             </Text>
-          </Button>
-          <Button style ={{marginTop: 65}} full onPress = {() => {this.stopBackgroundTimer()}}>
-            <Text>
-              STOP TIMER
+            :
+            <Text style={{marginTop:65}}>
+              Queue courses for downloading
             </Text>
-          </Button>
-
-          <Text style={{marginTop: 65}}>
-            Download more Courses:
-          </Text>
+          }
           {this.props.online ?
             this.getRemoteCourses().map(course => {
               return (
@@ -116,9 +109,6 @@ class RemoteCourses extends Component {
                       {course.get('name')}
                     </Text>
                   </Button>
-                  <Text>
-                    OFFLINE
-                  </Text>
                 </View>
               )
             })

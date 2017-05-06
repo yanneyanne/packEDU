@@ -1,6 +1,6 @@
 // Actions pertaining to remote course download and local course loading
 export const GET_REMOTE_COURSES = 'GET_REMOTE_COURSES'
-export const GET_STORED_COURSES = 'GET_STORED_COURSES'
+export const SET_STORED_REMOTE_COURSES = 'SET_STORED_REMOTE_COURSES'
 export const DOWNLOAD_REMOTE_COURSE = 'DOWNLOAD_REMOTE_COURSE'
 export const LOAD_LOCAL_COURSES = 'LOAD_LOCAL_COURSES'
 export const SET_CONNECTION_ERROR = 'SET_CONNECTION_ERROR'

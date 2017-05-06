@@ -8,7 +8,7 @@ export function fetchRemoteCourses() {
     const route = '/course/names'
     return Api.get(route).then((resp) => {
       dispatch(setRemoteCourses({ courses: resp }))
-      dispatch(setStoredCourses({ courses: resp}))
+      dispatch(setStoredRemoteCourses({ courses: resp}))
       dispatch((removeConnectionError()))
     }).catch( (err) => { 
       console.log(err)
@@ -39,9 +39,9 @@ function setRemoteCourses({ courses }) {
   }
 }
 
-function setStoredCourses( { courses }) {
+function setStoredRemoteCourses( { courses }) {
   return {
-    type: types.GET_STORED_COURSES,
+    type: types.SET_STORED_REMOTE_COURSES,
     courses
   }
 }

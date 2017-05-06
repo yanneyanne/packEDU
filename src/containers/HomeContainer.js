@@ -13,39 +13,28 @@ import { Map } from 'immutable'
 import { StyleSheet } from 'react-native'
 import  iOSFetch  from '../lib/backgroundFetch'
 import BackgroundFetch from 'react-native-background-fetch'
-
-
+import { networkStatus } from '../lib/networkStatus'
   
 class Home extends Component {
 
-
-//  constructor(props) {
-//    super(props)
-//    this.downloadRemote = this.downloadRemote.bind(this)
-//  }
-//
-//  downloadRemote(id) {
-//    this.props.downloadRemoteCourse(id)
-//  }
-//
   componentDidMount() {
-    console.log("Mounting home") 
     this.props.loadLastSession()
-  BackgroundFetch.configure( {
-    stopOnTerminate: false
-  }, (() => {
-    if (this.props.downloadQueue != []) {
-    this.props.downloadRemoteCourse(this.props.downloadQueue[0])
-    this.props.removeDownloadQueue(this.props.downloadQueue[0])
-    }
-    BackgroundFetch.finish();
-   
-  }), function(error) {
-    console.log("[js] RNBackgroundFetch failed to start");
-  })
-}
+    BackgroundFetch.configure( {
+      stopOnTerminate: false
+    }, (() => {
+      if (networkStatus() === "WIFI") {
+        if (this.props.downloadQueue != []) {
+          this.props.downloadRemoteCourse(this.props.downloadQueue[0])
+          this.props.removeDownloadQueue(this.props.downloadQueue[0])
+        }
+      }
+      BackgroundFetch.finish();
+    }), function(error) {
+      console.log(error)
+    })
+  }
+    
   render() {
-    {iOSFetch}
     return (
       <View style={StyleSheet.flatten(styles.content)}>
         <Courses />
