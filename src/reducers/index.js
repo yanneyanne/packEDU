@@ -5,11 +5,15 @@ import * as routeReducer from './routes'
 import * as activeCourseReducer from './active_course_reducer'
 import * as settingsReducer from './settings_reducer'
 import * as interactionsReducer from './interactions_reducer'
+import * as downloadReducer from './download_reducer'
+import * as storedCourses from './stored_courses_reducer'
 
 export default combineReducers(Object.assign(
   routeReducer,
   coursesReducer,
   remoteCoursesReducer,
   activeCourseReducer,
-  settingsReducer
+  settingsReducer,
+  downloadReducer,
+  storedCourses
 ))

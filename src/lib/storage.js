@@ -29,6 +29,28 @@ class Storage{
     }
   }
 
+  static async getOfflineCourses() {
+    try {
+      const value = await AsyncStorage.getItem('offlineCourses')
+      let courses = JSON.parse(value)
+      return courses
+    } catch (e) {
+      console.log(e)
+    }
+  }
+
+  static async saveOfflineCourses(courseId, courseName) {
+    try {
+      let courseObj = {}
+      courseObj[courseId] = {
+        'name': courseName
+      }
+      await AsyncStorage.mergeItem('offlineCourses', JSON.stringify(coursObj))
+    } catch (e) {
+      console.log(e)
+    }
+  }
+
   static async saveCourse(courseId, courseName, lessons){
     try {
       let courseObj = {}
@@ -110,7 +132,7 @@ class Storage{
         if (lesson.name === lessonName)
           lesson["savedPos"] = pos
       })
-      await AsyncStorage.mergeItem('courses', JSON.stringify(allCourses)) 
+      await AsyncStorage.mergeItem('courses', JSON.stringify(allCourses))
     } catch(e) {
       console.log(e)
     }
@@ -150,6 +172,15 @@ class Storage{
         courseId,
         lessonName
       }
+      await AsyncStorage.setItem('lastSession', JSON.stringify(session))
+    } catch(e) {
+      console.log(e)
+    }
+  }
+
+  static async removeLastSession(){
+    try {
+      let session = {}
       await AsyncStorage.setItem('lastSession', JSON.stringify(session))
     } catch(e) {
       console.log(e)
