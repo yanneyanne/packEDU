@@ -2,12 +2,19 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { ActionCreators } from '../actions'
-import { DeviceEventEmitter, NativeAppEventEmitter, Platform, ReactNative } from 'react-native'
+import { DeviceEventEmitter, NativeAppEventEmitter, Platform } from 'react-native'
 import BackgroundTimer from 'react-native-background-timer'
+import ReactNative from 'react-native'
 import { Map } from 'immutable'
-import { Content, View, Text, Button } from 'native-base'
+import { Content, Text, Button } from 'native-base'
 import Alignment from './AlignmentContainer'
 import { networkStatus } from '../lib/networkStatus'
+import { StyleSheet } from 'react-native'
+import styles from '../assets/styles/courses_styles'
+
+const {
+  View
+} = ReactNative
 
 const EventEmitter = Platform.select({
     ios: () => NativeAppEventEmitter,
@@ -77,14 +84,13 @@ class RemoteCourses extends Component {
 
   render() {
     return (
-      <Content>
-        <Alignment>
+        <View style={StyleSheet.flatten(styles.content)}>
           {this.props.online ?
-            <Text style={{marginTop:65}}>
+            <Text >
               Download more courses:
             </Text>
             :
-            <Text style={{marginTop:65}}>
+            <Text >
               Queue courses for downloading
             </Text>
           }
@@ -92,7 +98,7 @@ class RemoteCourses extends Component {
             this.getRemoteCourses().map(course => {
               return (
                 <View style={{marginTop: 10}} key={course.get('id')}>
-                  <Button onPress = {() => {this.downloadCourse(course.get('id'))}}>
+                  <Button bordered style={StyleSheet.flatten(styles.courseButton)} onPress = {() => {this.downloadCourse(course.get('id'))}}>
                     <Text>
                       {course.get('name')}
                     </Text>
@@ -104,7 +110,7 @@ class RemoteCourses extends Component {
             this.getStoredCourses().map(course => {
               return (
                 <View style = {{marginTop: 10}} key={course.get('id')}>
-                  <Button onPress = {() => {this.addDownloadQueue(course.get('id'))}}>
+                  <Button bordered style={StyleSheet.flatten(styles.courseButton)} onPress = {() => {this.addDownloadQueue(course.get('id'))}}>
                     <Text>
                       {course.get('name')}
                     </Text>
@@ -113,8 +119,7 @@ class RemoteCourses extends Component {
               )
             })
           }
-        </Alignment>
-      </Content>
+          </View>
     )
   }
 }
