@@ -11,7 +11,6 @@ import ResumeSessionButton from './ResumeSessionButtonContainer'
 import { View } from 'native-base'
 import { Map } from 'immutable'
 import { StyleSheet } from 'react-native'
-import  iOSFetch  from '../lib/backgroundFetch'
 import BackgroundFetch from 'react-native-background-fetch'
 import { networkStatus } from '../lib/networkStatus'
   
