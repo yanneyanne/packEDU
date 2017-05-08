@@ -8,7 +8,6 @@ export function fetchRemoteCourses() {
     const route = '/course/names'
     return Api.get(route).then((resp) => {
       dispatch(setRemoteCourses({ courses: resp }))
-      dispatch(setStoredRemoteCourses({ courses: resp}))
       dispatch((removeConnectionError()))
     }).catch( (err) => { 
       console.log(err)
@@ -33,6 +32,7 @@ export function removeDownloadQueue ( courseId ) {
 }
 
 function setRemoteCourses({ courses }) {
+  setStoredRemoteCourses(courses)
   return {
     type: types.GET_REMOTE_COURSES,
     courses
@@ -40,10 +40,7 @@ function setRemoteCourses({ courses }) {
 }
 
 function setStoredRemoteCourses( { courses }) {
-  return {
-    type: types.SET_STORED_REMOTE_COURSES,
-    courses
-  }
+  return Storage.saveOfflineCourses(courses) 
 }
 
 function setConnectionError() {

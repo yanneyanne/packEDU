@@ -14,7 +14,7 @@ import { StyleSheet } from 'react-native'
 import  iOSFetch  from '../lib/backgroundFetch'
 import BackgroundFetch from 'react-native-background-fetch'
 import { networkStatus } from '../lib/networkStatus'
-  
+
 class Home extends Component {
 
   componentDidMount() {

@@ -8,12 +8,15 @@ import { Map } from 'immutable'
 import { Content, View, Text, Button } from 'native-base'
 import Alignment from './AlignmentContainer'
 import { networkStatus } from '../lib/networkStatus'
+import Storage from '../lib/storage'
 
 const EventEmitter = Platform.select({
     ios: () => NativeAppEventEmitter,
     android: () => DeviceEventEmitter,
   })()
+
 const listening = false
+
 class RemoteCourses extends Component {
 
 //***********************************************//
@@ -38,11 +41,11 @@ class RemoteCourses extends Component {
     BackgroundTimer.clearInterval(timer)
   }
 
-  getStoredCourses() {
+  getStoredOfflineCourses() {
+    this.props.loadOfflineCourses()
     return this.props.storedCourses.filterNot(course => {
       return this.getLocalCourses().has(course.get('id'))
     })
-
   }
 
   //Download a course from the queue
@@ -101,7 +104,7 @@ class RemoteCourses extends Component {
               )
             })
             :
-            this.getStoredCourses().map(course => {
+            this.getStoredOfflineCourses().map(course => {
               return (
                 <View style = {{marginTop: 10}} key={course.get('id')}>
                   <Button onPress = {() => {this.addDownloadQueue(course.get('id'))}}>
