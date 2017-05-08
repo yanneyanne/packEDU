@@ -17,8 +17,7 @@ import back_cross from './assets/imgs/back_cross.png'
 import { Actions, ActionConst, Router, Scene } from 'react-native-router-flux'
 import { dimensions } from './assets/styles/constants'
 import { Container } from 'native-base'
-import ReactNative from 'react-native'
-const { View } = ReactNative
+import { ReactNative } from 'react-native'
 
 const loggerMiddleware = createLogger({ predicate: (getState, action) => __DEV__ })
 
@@ -35,7 +34,6 @@ function configureStore(initialState) {
 }
 
 const store = configureStore({})
-
 const Scenes = Actions.create(
   <Scene key='root'>
     <Scene key='home' title='Home' component={Home}></Scene>
@@ -45,11 +43,12 @@ const Scenes = Actions.create(
     <Scene key='settings' title='Settings' component={Settings}></Scene>
     <Scene key='profile' title='Profile' component={Profile}></Scene>
     <Scene key='achievements' title='Achievements' component={Achievements}></Scene>
-    <Scene key='finishedLesson' title='Finished Lesson' component={FinishedLesson}></Scene>
+    <Scene key='finishedLesson' leftButtonIconStyle={{width: 35 , height: 35}} backButtonImage={back_cross} navigationBarStyle={{backgroundColor :'#f4a791'}} component={FinishedLesson}></Scene>
   </Scene>
 )
 
 export default class AppContainer extends Component {
+
   render() {
     return(
       <Provider store={store}>

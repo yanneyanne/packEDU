@@ -1,9 +1,12 @@
 // Actions pertaining to remote course download and local course loading
 export const GET_REMOTE_COURSES = 'GET_REMOTE_COURSES'
+export const SET_STORED_REMOTE_COURSES = 'SET_STORED_REMOTE_COURSES'
 export const DOWNLOAD_REMOTE_COURSE = 'DOWNLOAD_REMOTE_COURSE'
 export const LOAD_LOCAL_COURSES = 'LOAD_LOCAL_COURSES'
 export const SET_CONNECTION_ERROR = 'SET_CONNECTION_ERROR'
 export const NO_CONNECTION_ERROR = 'REMOVE_CONNECTION_ERROR'
+export const QUEUE_BACKGROUND_DOWNLOAD = 'QUEUE_BACKGROUND_DOWNLOAD'
+export const REMOVE_BACKGROUND_QUEUE = 'REMOVE_BACKGROUND_QUEUE'
 
 // Actions pertaining to currently active course
 export const SET_ACTIVE_COURSE = 'SET_ACTIVE_COURSE'

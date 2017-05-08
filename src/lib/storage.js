@@ -29,6 +29,28 @@ class Storage{
     }
   }
 
+  static async getOfflineCourses() {
+    try {
+      const value = await AsyncStorage.getItem('offlineCourses')
+      let courses = JSON.parse(value)
+      return courses
+    } catch (e) {
+      console.log(e)
+    }
+  }
+
+  static async saveOfflineCourses(courseId, courseName) {
+    try {
+      let courseObj = {}
+      courseObj[courseId] = {
+        'name': courseName
+      }
+      await AsyncStorage.mergeItem('offlineCourses', JSON.stringify(coursObj))
+    } catch (e) {
+      console.log(e)
+    }
+  }
+
   static async saveCourse(courseId, courseName, lessons){
     try {
       let courseObj = {}
