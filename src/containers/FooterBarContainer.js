@@ -22,22 +22,22 @@ class FooterBar extends Component {
  render() {
     let homePage =
       <Button  active={this.isActiveTab("home")} onPress = {() => Actions.home()} key={"home"}>
-      <Image style={{width: 30, height: 30}}source = {homeImg} />
+      <Image style={{width: 30, height: 30}} source = {homeImg} />
       </Button>
 
     let downloadPage =
       <Button active={this.isActiveTab("remotes")} onPress = {() => Actions.remotes()} key={"download"}>
-      <Image style={{width: 30, height: 30}}source = {downloadImg} />
+      <Image style={{width: 30, height: 30}} source = {downloadImg} />
       </Button>
 
     let achievementsPage =
       <Button active={this.isActiveTab("achievements")} onPress = {() => Actions.achievements()} key={"achievements"}>
-      <Image style={{width: 30, height: 30}}source = {achievementsImg} />
+      <Image style={{width: 30, height: 30}} source = {achievementsImg} />
       </Button>
 
     let profilePage =
       <Button active={this.isActiveTab("profile")} onPress = {() => Actions.profile()} key={"profile"}>
-      <Image style={{width: 30, height: 30}}source = {profileImg} />
+      <Image style={{width: 30, height: 30}} source = {profileImg} />
       </Button>
 
     let pageList =[homePage, downloadPage, achievementsPage, profilePage]
