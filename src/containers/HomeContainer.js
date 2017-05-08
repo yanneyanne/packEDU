@@ -49,7 +49,6 @@ class Home extends Component {
 
 function mapStateToProps(state) {
   return {
-    localC : state.courses,
     lastSession: state.activeCourse.get('lastSession') || Map(),
     downloadQueue: state.download.get('downloadQueue') || [] 
   }

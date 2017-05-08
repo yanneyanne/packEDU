@@ -20,7 +20,9 @@ const EventEmitter = Platform.select({
     ios: () => NativeAppEventEmitter,
     android: () => DeviceEventEmitter,
   })()
+
 const listening = false
+
 class RemoteCourses extends Component {
 
 //***********************************************//
@@ -84,42 +86,42 @@ class RemoteCourses extends Component {
 
   render() {
     return (
-        <View style={StyleSheet.flatten(styles.content)}>
-          {this.props.online ?
-            <Text >
-              Download more courses:
-            </Text>
-            :
-            <Text >
-              Queue courses for downloading
-            </Text>
-          }
-          {this.props.online ?
-            this.getRemoteCourses().map(course => {
-              return (
-                <View style={{marginTop: 10}} key={course.get('id')}>
-                  <Button bordered style={StyleSheet.flatten(styles.courseButton)} onPress = {() => {this.downloadCourse(course.get('id'))}}>
-                    <Text>
-                      {course.get('name')}
-                    </Text>
-                  </Button>
-                </View>
-              )
-            })
-            :
-            this.getStoredCourses().map(course => {
-              return (
-                <View style = {{marginTop: 10}} key={course.get('id')}>
-                  <Button bordered style={StyleSheet.flatten(styles.courseButton)} onPress = {() => {this.addDownloadQueue(course.get('id'))}}>
-                    <Text>
-                      {course.get('name')}
-                    </Text>
-                  </Button>
-                </View>
-              )
-            })
-          }
-          </View>
+      <View style={StyleSheet.flatten(styles.content)}>
+        {this.props.online ?
+          <Text >
+            Download more courses:
+          </Text>
+          :
+          <Text >
+            Queue courses for downloading
+          </Text>
+        }
+        {this.props.online ?
+          this.getRemoteCourses().map(course => {
+            return (
+              <View style={{marginTop: 10}} key={course.get('id')}>
+                <Button bordered style={StyleSheet.flatten(styles.courseButton)} onPress = {() => {this.downloadCourse(course.get('id'))}}>
+                  <Text>
+                    {course.get('name')}
+                  </Text>
+                </Button>
+              </View>
+            )
+          })
+          :
+          this.getStoredCourses().map(course => {
+            return (
+              <View style = {{marginTop: 10}} key={course.get('id')}>
+                <Button bordered style={StyleSheet.flatten(styles.courseButton)} onPress = {() => {this.addDownloadQueue(course.get('id'))}}>
+                  <Text>
+                    {course.get('name')}
+                  </Text>
+                </Button>
+              </View>
+            )
+          })
+        }
+      </View>
     )
   }
 }
@@ -130,7 +132,7 @@ function mapStateToProps(state) {
     remoteCourses: state.remoteCourses,
     storedCourses: state.storedCourses,
     online: state.settings.get('online'),
-    downloadQueue: state.download.get('downloadQueue') ? state.download.get('downloadQueue') : false
+    downloadQueue: state.download.get('downloadQueue') || []  
   }
 }
 
