@@ -14,6 +14,16 @@ export function loadLocalCourses() {
   }
 }
 
+export function loadOfflineCourses() {
+  return (dispatch, getState) => {
+    return Storage.getOfflineCourses().then (offlineCourses => {
+      dispatch(dispatchOfflineCourses({
+        courses: offlineCourses
+      }))
+    })
+  }
+}
+
 export function removeLocalCourse(courseId) {
   return(dispatch, getState) => {
     return Storage.removeCourse(courseId).then( () => {
@@ -29,6 +39,13 @@ export function removeLocalCourse(courseId) {
 function dispatchLocalCourses({ courses }) {
   return {
     type: types.LOAD_LOCAL_COURSES,
+    courses
+  }
+}
+
+function dispatchOfflineCourses({ courses }) {
+  return {
+    type: types.SET_STORED_REMOTE_COURSES,
     courses
   }
 }

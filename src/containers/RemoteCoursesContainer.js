@@ -47,13 +47,12 @@ class RemoteCourses extends Component {
     BackgroundTimer.clearInterval(timer)
   }
 
-  getStoredCourses() {
+  getStoredOfflineCourses() {
     return this.props.storedCourses.filterNot(course => {
       return this.getLocalCourses().has(course.get('id'))
     })
-
   }
-
+ 
   //Download a course from the queue
   downloadCourse(courseId) {
     this.props.downloadRemoteCourse(courseId)
@@ -71,6 +70,7 @@ class RemoteCourses extends Component {
 
   componentDidMount() {
     this.props.fetchRemoteCourses()
+    this.props.loadOfflineCourses()
   }
 
   getLocalCourses() {
@@ -86,7 +86,7 @@ class RemoteCourses extends Component {
 
   render() {
     return (
-      <View style={StyleSheet.flatten(styles.content)}>
+     <View style={StyleSheet.flatten(styles.content)}>
         {this.props.online ?
           <Text >
             Download more courses:
@@ -109,7 +109,7 @@ class RemoteCourses extends Component {
             )
           })
           :
-          this.getStoredCourses().map(course => {
+          this.getStoredOfflineCourses().map(course => {
             return (
               <View style = {{marginTop: 10}} key={course.get('id')}>
                 <Button bordered style={StyleSheet.flatten(styles.courseButton)} onPress = {() => {this.addDownloadQueue(course.get('id'))}}>
