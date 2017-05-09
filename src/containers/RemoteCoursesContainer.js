@@ -41,12 +41,21 @@ class RemoteCourses extends Component {
     BackgroundTimer.clearInterval(timer)
   }
 
-  getStoredOfflineCourses() {
-    this.props.loadOfflineCourses()
-    return this.props.storedCourses.filterNot(course => {
-      return this.getLocalCourses().has(course.get('id'))
+  async getStoredOfflineCourses() {
+    let storedCourses = {} 
+    await Storage.getOfflineCourses().then((courses) => {
+    for (var id in courses) {
+      storedCourses[id] = courses[id]
+      
+    }
     })
+    return storedCourses
+ //   this.props.loadOfflineCourses()
+ //   return this.props.storedCourses.filterNot(course => {
+ //     return this.getLocalCourses().has(course.get('id'))
+ //   })
   }
+ 
 
   //Download a course from the queue
   downloadCourse(courseId) {
@@ -79,6 +88,11 @@ class RemoteCourses extends Component {
   }
 
   render() {
+    (this.getStoredOfflineCourses()).then((course) => {
+      for (var id in course) {
+        console.log(id)
+      }
+    })
     return (
       <Content>
         <Alignment>
@@ -104,17 +118,7 @@ class RemoteCourses extends Component {
               )
             })
             :
-            this.getStoredOfflineCourses().map(course => {
-              return (
-                <View style = {{marginTop: 10}} key={course.get('id')}>
-                  <Button onPress = {() => {this.addDownloadQueue(course.get('id'))}}>
-                    <Text>
-                      {course.get('name')}
-                    </Text>
-                  </Button>
-                </View>
-              )
-            })
+              null
           }
         </Alignment>
       </Content>
