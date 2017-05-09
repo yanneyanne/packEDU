@@ -94,8 +94,14 @@ export function saveLastSession(courseId, lessonName) {
 export function loadLastSession() {
   return (dispatch, getState) => {
     return Storage.loadLastSession().then((session) => {
-      let courseId = session.courseId
-      let lessonName = session.lessonName
+      let courseId
+      let lessonName
+      try {
+        courseId = session.courseId
+        lessonName = session.lessonName
+      } catch(e) {
+        console.log(e)
+      }
       console.log("This course info in the actions: ")
       console.log(courseId)
       console.log(lessonName)
@@ -109,6 +115,14 @@ function setLastSession(courseId, lessonName) {
     type: types.SET_LAST_SESSION,
     courseId,
     lessonName
+  }
+}
+
+export function removeLastSession() {
+  return (dispatch, getState) => {
+    return Storage.removeLastSession().then(() => {
+      dispatch(setLastSession(null, null))
+    })
   }
 }
 

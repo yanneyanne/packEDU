@@ -5,9 +5,6 @@ import { List, Map } from 'immutable'
 export const storedCourses = createReducer(List(), {
 
   [types.SET_STORED_REMOTE_COURSES](state, action) {
-   if (!action.courses) {
-     return state
-   }
     let newStoredCourses = List()
     for (var id in action.courses) {
       console.log(id)
@@ -17,7 +14,7 @@ export const storedCourses = createReducer(List(), {
        "name": action.courses[id]['name']
       }))
     }
-    return newStoredCourses
+   return newStoredCourses
     }
 })
 
