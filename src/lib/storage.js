@@ -33,6 +33,8 @@ class Storage{
     try {
       const value = await AsyncStorage.getItem('offlineCourses')
       let courses = JSON.parse(value)
+      console.log("In storage, getting offline courses")
+      console.log(courses)
       return courses
     } catch (e) {
       console.log(e)

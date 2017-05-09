@@ -10,9 +10,11 @@ export const storedCourses = createReducer(List(), {
    }
     let newStoredCourses = List()
     for (var id in action.courses) {
+      console.log(id)
+        console.log(action.courses[id])
       newStoredCourses = newStoredCourses.push(Map({
         "id": id,
-       "asasd": action.courses[id]
+       "name": action.courses[id]['name']
       }))
     }
     return newStoredCourses

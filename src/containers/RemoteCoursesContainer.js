@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux'
 import { ActionCreators } from '../actions'
 import { DeviceEventEmitter, NativeAppEventEmitter, Platform, ReactNative } from 'react-native'
 import BackgroundTimer from 'react-native-background-timer'
-import { Map } from 'immutable'
+import { Map, List } from 'immutable'
 import { Content, View, Text, Button } from 'native-base'
 import Alignment from './AlignmentContainer'
 import { networkStatus } from '../lib/networkStatus'
@@ -41,19 +41,10 @@ class RemoteCourses extends Component {
     BackgroundTimer.clearInterval(timer)
   }
 
-  async getStoredOfflineCourses() {
-    let storedCourses = {} 
-    await Storage.getOfflineCourses().then((courses) => {
-    for (var id in courses) {
-      storedCourses[id] = courses[id]
-      
-    }
+  getStoredOfflineCourses() {
+    return this.props.storedCourses.filterNot(course => {
+      return this.getLocalCourses().has(course.get('id'))
     })
-    return storedCourses
- //   this.props.loadOfflineCourses()
- //   return this.props.storedCourses.filterNot(course => {
- //     return this.getLocalCourses().has(course.get('id'))
- //   })
   }
  
 
@@ -74,6 +65,7 @@ class RemoteCourses extends Component {
 
   componentDidMount() {
     this.props.fetchRemoteCourses()
+    this.props.loadOfflineCourses()
   }
 
   getLocalCourses() {
@@ -88,39 +80,42 @@ class RemoteCourses extends Component {
   }
 
   render() {
-    (this.getStoredOfflineCourses()).then((course) => {
-      for (var id in course) {
-        console.log(id)
-      }
-    })
     return (
       <Content>
-        <Alignment>
-          {this.props.online ?
-            <Text style={{marginTop:65}}>
-              Download more courses:
-            </Text>
-            :
-            <Text style={{marginTop:65}}>
-              Queue courses for downloading
-            </Text>
-          }
-          {this.props.online ?
-            this.getRemoteCourses().map(course => {
-              return (
-                <View style={{marginTop: 10}} key={course.get('id')}>
-                  <Button onPress = {() => {this.downloadCourse(course.get('id'))}}>
-                    <Text>
-                      {course.get('name')}
-                    </Text>
-                  </Button>
-                </View>
-              )
-            })
-            :
-              null
-          }
-        </Alignment>
+        {this.props.online ?
+          <Text style={{marginTop:65}}>
+            Download more courses:
+          </Text>
+          :
+          <Text style={{marginTop:65}}>
+            Queue courses for downloading
+          </Text>
+        }
+        {this.props.online ?
+          this.getRemoteCourses().map(course => {
+            return (
+              <View style={{marginTop: 10}} key={course.get('id')}>
+                <Button onPress = {() => {this.downloadCourse(course.get('id'))}}>
+                  <Text>
+                    {course.get('name')}
+                  </Text>
+                </Button>
+              </View>
+            )
+          })
+          :
+          this.getStoredOfflineCourses().map(course => {
+            return (
+              <View style={{marginTop: 10}} key={course.get('id')}>
+                <Button onPress = {() => {this.addDownloadQueue(course.get('id'))}}>
+                  <Text>
+                    {course.get('name')}
+                  </Text>
+                </Button>
+              </View>
+            )
+          })
+        }
       </Content>
     )
   }
