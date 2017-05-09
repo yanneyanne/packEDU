@@ -10,7 +10,7 @@ export function fetchRemoteCourses() {
       dispatch(setRemoteCourses({ courses: resp }))
       dispatch(setStoredRemoteCourses({ courses: resp}))
       dispatch((removeConnectionError()))
-    }).catch( (err) => { 
+    }).catch( (err) => {
       console.log(err)
       if (err instanceof TypeError)
         dispatch(setConnectionError())
@@ -54,6 +54,6 @@ function setConnectionError() {
 
 function removeConnectionError() {
   return {
-    type: types.NO_CONNECTION_ERROR 
+    type: types.NO_CONNECTION_ERROR
   }
 }

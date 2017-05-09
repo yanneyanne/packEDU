@@ -28,19 +28,23 @@ class RemoteCourses extends Component {
 //***********************************************//
 //The following 5 functions should probably be moved
   startBackgroundListener() {
-    listening = true 
+    listening = true
     timer = BackgroundTimer.setInterval(async () => {
       if (this.props.downloadQueue.length === 0 ) {
         this.stopBackgroundTimer()
         listening = false
+        console.log("Stopped")
       } else {
-        let network_status = await networkStatus()
-        if (network_status === 'WIFI'){ 
+        try {
           this.downloadCourse(this.props.downloadQueue[0])
-          this.props.removeDownloadQueue(this.props.downloadQueue[0])
+          if(this.getLocalCourses().has(this.props.downloadQueue[0])){
+            this.props.removeDownloadQueue(this.props.downloadQueue[0])
+          }
+        } catch (e) {
+          console.log(e)
         }
       }
-    }, 1000 * 60 * 30) //Check once every half-hour
+    }, 1000 * 10 * 1) //Check once every half-hour
   }
 
   stopBackgroundTimer() {
@@ -132,7 +136,7 @@ function mapStateToProps(state) {
     remoteCourses: state.remoteCourses,
     storedCourses: state.storedCourses,
     online: state.settings.get('online'),
-    downloadQueue: state.download.get('downloadQueue') || []  
+    downloadQueue: state.download.get('downloadQueue') || []
   }
 }
 
