@@ -27,11 +27,23 @@ class Courses extends Component {
   }
 
   getDownloadQueue(){
+    let courses = []
+    this.getStoredOfflineCourses().map(course => {
+      if(this.props.downloadQueue.includes(course.get('id'))){
+        courses.push(course.get('name'))
+      }
+    })
     if(this.props.downloadQueue.length === 0){
       return []
     }else{
-      return this.props.downloadQueue
+      return courses
     }
+  }
+
+  getStoredOfflineCourses() {
+    return this.props.storedCourses.filterNot(course => {
+      return this.getLocalCourses().has(course.get('id'))
+    })
   }
 
   startCourse(courseId) {
@@ -91,7 +103,8 @@ function mapStateToProps(state) {
     localCourses: state.courses,
     settingsAlignRight: state.settings ? state.settings.get('alignment') : false,
     getLanguage: state.settings.get('english') ? language.arabic : language.eng,
-    downloadQueue: state.download.get('downloadQueue') || []
+    downloadQueue: state.download.get('downloadQueue') || [],
+    storedCourses: state.storedCourses,
   }
 }
 
