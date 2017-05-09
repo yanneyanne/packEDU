@@ -36,14 +36,14 @@ function configureStore(initialState) {
 const store = configureStore({})
 const Scenes = Actions.create(
   <Scene key='root'>
-    <Scene key='home' duration={0} title='Home' component={Home}></Scene>
-    <Scene key='remotes' duration={0} title='Download' component={RemoteCourses}></Scene>
-    <Scene key='lessons' title='Lessons' component={Lessons}></Scene>
+    <Scene key='home' type={ActionConst.REPLACE} duration={0} title='Home' component={Home}></Scene>
+    <Scene key='remotes' type={ActionConst.REPLACE} duration={0} title='Download' component={RemoteCourses}></Scene>
+    <Scene key='lessons' type={ActionConst.REPLACE} title='Lessons' component={Lessons}></Scene>
     <Scene key='slide' leftButtonIconStyle={{width: 40 , height: 40}} backButtonImage={back_cross} navigationBarStyle={{backgroundColor :'#f4a791'}} title='Course' component={Slide}></Scene>
-    <Scene key='settings' title='Settings' component={Settings}></Scene>
-    <Scene key='profile' title='Profile' component={Profile}></Scene>
-    <Scene key='achievements' title='Achievements' component={Achievements}></Scene>
-    <Scene key='finishedLesson' leftButtonIconStyle={{width: 40 , height: 40}} backButtonImage={back_cross} navigationBarStyle={{backgroundColor :'#f4a791'}} component={FinishedLesson}></Scene>
+    <Scene key='settings' type={ActionConst.REPLACE} title='Settings' component={Settings}></Scene>
+    <Scene key='profile' type={ActionConst.REPLACE} title='Profile' component={Profile}></Scene>
+    <Scene key='achievements' type={ActionConst.REPLACE} title='Achievements' component={Achievements}></Scene>
+    <Scene key='finishedLesson' type={ActionConst.REPLACE} leftButtonIconStyle={{width: 40 , height: 40}} backButtonImage={back_cross} navigationBarStyle={{backgroundColor :'#f4a791'}} component={FinishedLesson}></Scene>
   </Scene>
 )
 

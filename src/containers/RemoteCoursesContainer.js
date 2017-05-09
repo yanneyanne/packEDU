@@ -36,10 +36,12 @@ class RemoteCourses extends Component {
         console.log("Stopped")
       } else {
         try {
-          this.downloadCourse(this.props.downloadQueue[0])
-          if(this.getLocalCourses().has(this.props.downloadQueue[0])){
-            this.props.removeDownloadQueue(this.props.downloadQueue[0])
+          for (let i = 0; i < this.props.downloadQueue.length; i++) {
+            this.downloadCourse(this.props.downloadQueue[0])
+            if(this.getLocalCourses().has(this.props.downloadQueue[0])){
+              this.props.removeDownloadQueue(this.props.downloadQueue[0])
           }
+        }
         } catch (e) {
           console.log(e)
         }
@@ -56,7 +58,7 @@ class RemoteCourses extends Component {
       return this.getLocalCourses().has(course.get('id'))
     })
   }
- 
+
   //Download a course from the queue
   downloadCourse(courseId) {
     this.props.downloadRemoteCourse(courseId)
@@ -64,9 +66,11 @@ class RemoteCourses extends Component {
 
   // Add a course to the queue to be downloaded
   addDownloadQueue(courseId) {
-    this.props.addDownloadQueue(courseId)
-    if (listening === false) {
-      this.startBackgroundListener()
+    if (!(this.props.downloadQueue.includes(courseId))) {
+      this.props.addDownloadQueue(courseId)
+      if (listening === false) {
+        this.startBackgroundListener()
+      }
     }
   }
 
