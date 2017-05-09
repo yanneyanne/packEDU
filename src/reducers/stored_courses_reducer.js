@@ -6,13 +6,15 @@ export const storedCourses = createReducer(List(), {
 
   [types.SET_STORED_REMOTE_COURSES](state, action) {
     let newStoredCourses = List()
-    action.courses.forEach((course) => {
+    for (var id in action.courses) {
+      console.log(id)
+        console.log(action.courses[id])
       newStoredCourses = newStoredCourses.push(Map({
-        "id": course.id,
-        "name": course.name
+        "id": id,
+       "name": action.courses[id]['name']
       }))
-    })
-    return newStoredCourses
+    }
+   return newStoredCourses
     }
 })
 

@@ -39,14 +39,16 @@ class Storage{
     }
   }
 
-  static async saveOfflineCourses(courseId, courseName) {
+  static async saveOfflineCourses(courses) {
+    let courseObj = {}
     try {
-      let courseObj = {}
-      courseObj[courseId] = {
-        'name': courseName
+    courses.forEach((course) => {
+      courseObj[course.id] = {
+        'name': course.name
       }
-      await AsyncStorage.mergeItem('offlineCourses', JSON.stringify(coursObj))
-    } catch (e) {
+    })
+      await AsyncStorage.mergeItem('offlineCourses', JSON.stringify(courseObj))
+   } catch (e) {
       console.log(e)
     }
   }
