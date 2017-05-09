@@ -39,11 +39,11 @@ const Scenes = Actions.create(
     <Scene key='home' title='Home' component={Home}></Scene>
     <Scene key='remotes' title='Download' component={RemoteCourses}></Scene>
     <Scene key='lessons' title='Lessons' component={Lessons}></Scene>
-    <Scene key='slide' leftButtonIconStyle={{width: 35 , height: 35}} backButtonImage={back_cross} navigationBarStyle={{backgroundColor :'#f4a791'}} title='Course' component={Slide}></Scene>
+    <Scene key='slide' leftButtonIconStyle={{width: 40 , height: 40}} backButtonImage={back_cross} navigationBarStyle={{backgroundColor :'#f4a791'}} title='Course' component={Slide}></Scene>
     <Scene key='settings' title='Settings' component={Settings}></Scene>
     <Scene key='profile' title='Profile' component={Profile}></Scene>
     <Scene key='achievements' title='Achievements' component={Achievements}></Scene>
-    <Scene key='finishedLesson' leftButtonIconStyle={{width: 35 , height: 35}} backButtonImage={back_cross} navigationBarStyle={{backgroundColor :'#f4a791'}} component={FinishedLesson}></Scene>
+    <Scene key='finishedLesson' leftButtonIconStyle={{width: 40 , height: 40}} backButtonImage={back_cross} navigationBarStyle={{backgroundColor :'#f4a791'}} component={FinishedLesson}></Scene>
   </Scene>
 )
 
