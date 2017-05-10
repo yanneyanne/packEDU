@@ -42,7 +42,7 @@ class NextPrevButtons extends Component {
           <View/> :
             <Button large bordered key={'prev'} style={StyleSheet.flatten(styles.nextPrevButton)}
               onPress = {() => this.props.previousSlide(this.props.currentSlidePos, this.props.lessonMaterial)} >
-            <Text style={StyleSheet.flatten(styles.nextPrevButtonText)}>
+            <Text numberOfLines={1} style={StyleSheet.flatten(styles.nextPrevButtonText)}>
               Previous
             </Text>
           </Button>

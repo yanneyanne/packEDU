@@ -31,7 +31,9 @@ var styles = StyleSheet.create({
 
     nextPrevButton: {
         borderRadius: 0,
-        borderColor: 'white'
+        borderColor: 'white',
+        paddingRight: 10,
+        paddingLeft: 10
     },
 
     nextPrevButtonText: {
