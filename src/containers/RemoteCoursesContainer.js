@@ -46,7 +46,7 @@ class RemoteCourses extends Component {
           console.log(e)
         }
       }
-    }, 1000 * 10 * 1) //Check once every half-hour
+    }, 1000 * 60 * 30) //Check once every half-hour
   }
 
   stopBackgroundTimer() {

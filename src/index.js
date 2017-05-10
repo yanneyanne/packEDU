@@ -36,8 +36,8 @@ function configureStore(initialState) {
 const store = configureStore({})
 const Scenes = Actions.create(
   <Scene key='root'>
-    <Scene key='home' type={ActionConst.REPLACE} duration={0} title='Home' component={Home}></Scene>
-    <Scene key='remotes' type={ActionConst.REPLACE} duration={0} title='Download' component={RemoteCourses}></Scene>
+    <Scene key='home' type={ActionConst.REPLACE} title='Home' component={Home}></Scene>
+    <Scene key='remotes' type={ActionConst.REPLACE} title='Download' component={RemoteCourses}></Scene>
     <Scene key='lessons' type={ActionConst.REPLACE} title='Lessons' component={Lessons}></Scene>
     <Scene key='slide' leftButtonIconStyle={{width: 40 , height: 40}} backButtonImage={back_cross} navigationBarStyle={{backgroundColor :'#f4a791'}} title='Course' component={Slide}></Scene>
     <Scene key='settings' type={ActionConst.REPLACE} title='Settings' component={Settings}></Scene>
