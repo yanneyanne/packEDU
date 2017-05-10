@@ -23,7 +23,7 @@ class Home extends Component {
     }, (() => {
         if (this.props.downloadQueue != []) {
           this.props.downloadRemoteCourse(this.props.downloadQueue[0])
-          if(this.getLocalCourses().has(this.props.downloadQueue[0])){
+          if(this.props.localCourses.has(this.props.downloadQueue[0])){
             this.props.removeDownloadQueue(this.props.downloadQueue[0])
           }
       }
@@ -50,7 +50,8 @@ class Home extends Component {
 function mapStateToProps(state) {
   return {
     lastSession: state.activeCourse.get('lastSession') || Map(),
-    downloadQueue: state.download.get('downloadQueue') || []
+    downloadQueue: state.download.get('downloadQueue') || [],
+    localCourses : state.courses
   }
 }
 
