@@ -7,11 +7,10 @@ export const remoteCourses = createReducer(List(), {
     let newRemoteCourses = List()
     action.courses.forEach((course) => {
       newRemoteCourses = newRemoteCourses.push(Map({
-        "id": course.id, 
+        "id": course.id,
         "name": course.name
       }))
     })
     return newRemoteCourses
   }
 })
-

@@ -26,6 +26,26 @@ class Courses extends Component {
     return this.props.localCourses
   }
 
+  getDownloadQueue(){
+    let courses = []
+    this.getStoredOfflineCourses().map(course => {
+      if(this.props.downloadQueue.includes(course.get('id'))){
+        courses.push(course.get('name'))
+      }
+    })
+    if(this.props.downloadQueue.length === 0){
+      return []
+    }else{
+      return courses
+    }
+  }
+
+  getStoredOfflineCourses() {
+    return this.props.storedCourses.filterNot(course => {
+      return this.getLocalCourses().has(course.get('id'))
+    })
+  }
+
   startCourse(courseId) {
     this.props.setActiveCourse(courseId)
     Actions.lessons()
@@ -51,6 +71,28 @@ class Courses extends Component {
             </View>
           )
         })}
+
+        {this.getDownloadQueue().length > 0 &&
+          <ListItem itemHeader first>
+            <Text style={{fontWeight: 'bold'}}>
+              Download Queue
+            </Text>
+          </ListItem>
+        }
+
+        {this.getDownloadQueue().map(function(object, i){
+          return (
+            <View style={styles.courseButtonContainer}>
+              <Button bordered style={StyleSheet.flatten(styles.courseButton)}>
+                <Text>
+                  {object}
+                </Text>
+              </Button>
+            </View>
+
+          )
+        })}
+
       </View>
     )
   }
@@ -60,7 +102,9 @@ function mapStateToProps(state) {
   return {
     localCourses: state.courses,
     settingsAlignRight: state.settings ? state.settings.get('alignment') : false,
-    getLanguage: state.settings.get('english') ? language.arabic : language.eng
+    getLanguage: state.settings.get('english') ? language.arabic : language.eng,
+    downloadQueue: state.download.get('downloadQueue') || [],
+    storedCourses: state.storedCourses,
   }
 }
 

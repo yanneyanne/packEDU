@@ -13,7 +13,7 @@ import { Map } from 'immutable'
 import { StyleSheet } from 'react-native'
 import BackgroundFetch from 'react-native-background-fetch'
 import { networkStatus } from '../lib/networkStatus'
-  
+
 class Home extends Component {
 
   componentDidMount() {
@@ -21,24 +21,24 @@ class Home extends Component {
     BackgroundFetch.configure( {
       stopOnTerminate: false
     }, (() => {
-      if (networkStatus() === "WIFI") {
         if (this.props.downloadQueue != []) {
           this.props.downloadRemoteCourse(this.props.downloadQueue[0])
-          this.props.removeDownloadQueue(this.props.downloadQueue[0])
-        }
+          if(this.props.localCourses.has(this.props.downloadQueue[0])){
+            this.props.removeDownloadQueue(this.props.downloadQueue[0])
+          }
       }
       BackgroundFetch.finish();
     }), function(error) {
       console.log(error)
     })
   }
-    
+
   render() {
     return (
       <View style={StyleSheet.flatten(styles.content)}>
         <Courses />
         {this.props.lastSession.isEmpty() ?
-            <View></View> 
+            <View></View>
             :
           <ResumeSessionButton style={styles.resumeButton}/>
         }
@@ -50,7 +50,8 @@ class Home extends Component {
 function mapStateToProps(state) {
   return {
     lastSession: state.activeCourse.get('lastSession') || Map(),
-    downloadQueue: state.download.get('downloadQueue') || [] 
+    downloadQueue: state.download.get('downloadQueue') || [],
+    localCourses : state.courses
   }
 }
 

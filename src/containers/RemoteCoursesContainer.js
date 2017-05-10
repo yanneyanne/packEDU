@@ -28,15 +28,15 @@ class RemoteCourses extends Component {
 //***********************************************//
 //The following 5 functions should probably be moved
   startBackgroundListener() {
-    listening = true 
+    listening = true
     timer = BackgroundTimer.setInterval(async () => {
       if (this.props.downloadQueue.length === 0 ) {
         this.stopBackgroundTimer()
         listening = false
+        console.log("Stopped")
       } else {
-        let network_status = await networkStatus()
-        if (network_status === 'WIFI'){ 
-          this.downloadCourse(this.props.downloadQueue[0])
+        this.downloadCourse(this.props.downloadQueue[0])
+        if(this.getLocalCourses().has(this.props.downloadQueue[0])){
           this.props.removeDownloadQueue(this.props.downloadQueue[0])
         }
       }
@@ -52,7 +52,7 @@ class RemoteCourses extends Component {
       return this.getLocalCourses().has(course.get('id'))
     })
   }
- 
+
   //Download a course from the queue
   downloadCourse(courseId) {
     this.props.downloadRemoteCourse(courseId)
@@ -60,9 +60,11 @@ class RemoteCourses extends Component {
 
   // Add a course to the queue to be downloaded
   addDownloadQueue(courseId) {
-    this.props.addDownloadQueue(courseId)
-    if (listening === false) {
-      this.startBackgroundListener()
+    if (!(this.props.downloadQueue.includes(courseId))) {
+      this.props.addDownloadQueue(courseId)
+      if (listening === false) {
+        this.startBackgroundListener()
+      }
     }
   }
 
@@ -132,7 +134,7 @@ function mapStateToProps(state) {
     remoteCourses: state.remoteCourses,
     storedCourses: state.storedCourses,
     online: state.settings.get('online'),
-    downloadQueue: state.download.get('downloadQueue') || []  
+    downloadQueue: state.download.get('downloadQueue') || []
   }
 }
 
