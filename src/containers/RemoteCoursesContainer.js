@@ -35,18 +35,12 @@ class RemoteCourses extends Component {
         listening = false
         console.log("Stopped")
       } else {
-        try {
-          for (let i = 0; i < this.props.downloadQueue.length; i++) {
-            this.downloadCourse(this.props.downloadQueue[0])
-            if(this.getLocalCourses().has(this.props.downloadQueue[0])){
-              this.props.removeDownloadQueue(this.props.downloadQueue[0])
-          }
-        }
-        } catch (e) {
-          console.log(e)
+        this.downloadCourse(this.props.downloadQueue[0])
+        if(this.getLocalCourses().has(this.props.downloadQueue[0])){
+          this.props.removeDownloadQueue(this.props.downloadQueue[0])
         }
       }
-    }, 1000 * 60 * 30) //Check once every half-hour
+    }, 1000 * 10 * 1) //Check once every half-hour
   }
 
   stopBackgroundTimer() {
