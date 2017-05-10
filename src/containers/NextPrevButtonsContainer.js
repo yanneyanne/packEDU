@@ -7,6 +7,7 @@ import { Content, Text, Button } from 'native-base'
 import styles from '../assets/styles/slide_styles'
 import { View } from 'react-native'
 import { StyleSheet } from 'react-native'
+import * as language from '../assets/styles/language_strings'
 
 class NextPrevButtons extends Component {
 
@@ -21,20 +22,21 @@ class NextPrevButtons extends Component {
 
   render() {
     let flexDir = this.props.alignRight ? 'row' : 'row-reverse'
+
     return (
       <View style = {StyleSheet.flatten([styles.nextPrevButtonsContainer, {flexDirection: flexDir}])}>
         {this.isLastSlide() ?
           <Button large bordered key={'finish'} style={StyleSheet.flatten(styles.nextPrevButton)}
             onPress={() => Actions.finishedLesson()}>
             <Text style={StyleSheet.flatten(styles.nextPrevButtonText)}>
-              Finish
+              {this.props.getLanguage.finish}
             </Text>
           </Button>
           :
           <Button large bordered key={'next'} style={StyleSheet.flatten(styles.nextPrevButton)}
             onPress = {() => this.props.nextSlide(this.props.currentSlidePos, this.props.lessonMaterial)}>
             <Text style={StyleSheet.flatten(styles.nextPrevButtonText)}>
-              Next
+              {this.props.getLanguage.next}
             </Text>
           </Button>
         }
@@ -43,7 +45,7 @@ class NextPrevButtons extends Component {
             <Button large bordered key={'prev'} style={StyleSheet.flatten(styles.nextPrevButton)}
               onPress = {() => this.props.previousSlide(this.props.currentSlidePos, this.props.lessonMaterial)} >
             <Text numberOfLines={1} style={StyleSheet.flatten(styles.nextPrevButtonText)}>
-              Previous
+              {this.props.getLanguage.previous}
             </Text>
           </Button>
         }
@@ -56,7 +58,8 @@ function mapStateToProps(state) {
   return {
     currentSlidePos: state.activeCourse.get('currentSlidePos'),
     lessonMaterial: state.activeCourse.get('lessonMaterial') || "",
-    alignRight: state.settings ? state.settings.get('alignment') : false
+    alignRight: state.settings ? state.settings.get('alignment') : false,
+    getLanguage : state.settings.get('english') ? language.arabic : language.eng
   }
 }
 

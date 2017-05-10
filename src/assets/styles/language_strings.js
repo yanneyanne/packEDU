@@ -7,18 +7,19 @@ export let eng= {
 	settings: 'Settings',
 	next: 'Next',
 	previous: 'Previous',
+	finish: 'Finish',
 	change_lang: 'Change language to Arabic'
 }
 
 export let arabic = {
-	mycourses : 'ﺎﻟﺩﻭﺭﺎﺗ ﺎﻠﻤﺤﻠﻳﺓ',
+	mycourses : 'الدورات',
 	achievements: 'موهلات',
 	home: 'الصفحة الرئيسية',
 	download: 'تحميل',
 	profile: 'الملف الشخصي',
 	settings: 'خيارات',
-	next: 'بعد ذلك مباشرة',
+	next: 'التالي',
 	previous: 'سابق',
+	finish: 'إنهاء',
 	change_lang: 'تغيير اللغة إلى اللغة الإنجليزية'
 }
-
