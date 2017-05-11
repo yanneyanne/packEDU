@@ -11,8 +11,6 @@ import profileImg from '../assets/imgs/profile.png'
 import achievementsImg from '../assets/imgs/achievements.png'
 import downloadImg from '../assets/imgs/download.png'
 import { Image } from 'react-native'
-import getTheme from '../../native-base-theme/components'
-import commonColor from '../../native-base-theme/variables/commonColor'
 
 class FooterBar extends Component {
 

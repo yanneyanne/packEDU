@@ -12,12 +12,14 @@ class MultipleChoice extends Interaction {
       alignSelf: 'center',
       margin: 5,
       borderRadius: 0,
-    } 
+    }
   }
 
   getStandardChoiceStyle() {
     let style = {
-      borderColor: 'white'
+      borderColor: 'white',
+      width: 230,
+      justifyContent: 'center'
     }
     return Object.assign(style, this.getBaseChoiceStyle())
   }
@@ -25,7 +27,9 @@ class MultipleChoice extends Interaction {
   getIncorrectChoiceStyle() {
     let style = {
       borderColor: 'red',
-      backgroundColor: 'red'
+      backgroundColor: 'red',
+      width: 230,
+      justifyContent: 'center'
     }
     return Object.assign(style, this.getBaseChoiceStyle())
   }
@@ -33,7 +37,9 @@ class MultipleChoice extends Interaction {
   getCorrectChoiceStyle() {
     let style = {
       borderColor: 'green',
-      backgroundColor: 'green'
+      backgroundColor: 'green',
+      width: 230,
+      justifyContent: 'center'
     }
     return Object.assign(style, this.getBaseChoiceStyle())
   }
@@ -41,7 +47,7 @@ class MultipleChoice extends Interaction {
   getChoiceTextStyle() {
     return {
       backgroundColor: 'rgba(0,0,0,0)',
-      color: 'white' 
+      color: 'white'
     }
   }
 
