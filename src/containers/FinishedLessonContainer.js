@@ -49,9 +49,9 @@ class FinishedLesson extends Component {
           <SlideText>
             Congratulations! You just completed
           </SlideText>
-          <SlideText>
+          <Heading>
             {this.props.activeLesson}
-          </SlideText>
+          </Heading>
           <Circle borderWidth = {0.5} size = {width/2} progress = {percentageAnswers} color={'rgba(255,255,255,1)'} marginBottom={20}/>
           <View style={StyleSheet.flatten(styles.resultsContainer)}>
             <Text style={StyleSheet.flatten(styles.resultsText)}>
