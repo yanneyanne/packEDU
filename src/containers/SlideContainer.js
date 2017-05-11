@@ -11,14 +11,14 @@ import * as language from '../assets/styles/language_strings'
 import NextPrevButtons from './NextPrevButtonsContainer'
 import styles from '../assets/styles/slide_styles'
 import LinearGradient from 'react-native-linear-gradient'
-import { StyleSheet, Dimensions } from 'react-native'
+import { StyleSheet, Dimensions, ScrollView } from 'react-native'
 
 class Slide extends Component {
 
   componentWillUnmount() {
    console.log("Unmounting the slide")
-    this.props.saveSlidePos(this.props.courseId, 
-      this.props.activeLesson, 
+    this.props.saveSlidePos(this.props.courseId,
+      this.props.activeLesson,
       this.props.currentSlidePos,
       this.props.lessonMaterial.length
     )
@@ -42,9 +42,13 @@ class Slide extends Component {
         <Bar progress={this.getProgress()} borderWidth={0} color={'rgba(255,255,255,1)'}
           width={width} borderRadius={0} style={styles.progress}/>
         <View style={StyleSheet.flatten(styles.slideElements)}>
-          { this.getSlideMaterial().map(elt => {
-            return elt
-          })}
+          <ScrollView style={{overflow: 'hidden'}}>
+            <View>
+              { this.getSlideMaterial().map(elt => {
+                return elt
+              })}
+            </View>
+          </ScrollView>
         </View>
         <View style={styles.footer}>
           <NextPrevButtons onFinnish={this.finishLesson}/>

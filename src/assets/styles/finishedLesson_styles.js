@@ -7,7 +7,7 @@ var styles = StyleSheet.create({
         flex: 1
     },
 
-    slideElements: {
+    finishedElements: {
         flex: 1,
         alignItems:'center',
         justifyContent:'center',
@@ -26,17 +26,15 @@ var styles = StyleSheet.create({
         right: 5,
     },
 
-    nextPrevButtonsContainer: {
-        justifyContent: 'space-between'
+    resultsContainer: {
+      marginBottom: 10,
+      backgroundColor: 'rgba(0,0,0,0)'
     },
 
-    nextPrevButton: {
-        borderRadius: 0,
-        borderColor: 'white',
-        paddingRight: 10,
-        paddingLeft: 10,
-        width: 150,
-        justifyContent: 'center'
+    resultsText: {
+      justifyContent: 'center',
+      fontSize: 30,
+      color: 'white'
     },
 
     chooseNewLessonButton: {
@@ -47,7 +45,7 @@ var styles = StyleSheet.create({
       justifyContent: 'center'
     },
 
-    nextPrevButtonText: {
+    finishedLessonButtonText: {
         color: 'white'
     }
 })

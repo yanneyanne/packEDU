@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { bindActionCreators } from 'redux'
 import { ActionCreators } from '../../actions'
 import { View, Text } from 'native-base'
+import {ScrollView} from 'react-native'
 
 export default class SlideText extends Component {
 
@@ -16,7 +17,7 @@ export default class SlideText extends Component {
     return {
       fontSize: 20,
       color: 'white'
-    } 
+    }
   }
 
   render() {
@@ -26,6 +27,6 @@ export default class SlideText extends Component {
           {this.props.children}
         </Text>
       </View>
-    ) 
+    )
   }
 }

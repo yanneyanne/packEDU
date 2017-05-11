@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { ActionCreators } from '../actions'
 import { Actions } from 'react-native-router-flux'
-import { Footer, FooterTab, Button, Text, View, Icon } from 'native-base'
+import { Container, Content, Footer, FooterTab, Button, Text, View, Icon, StyleProvider } from 'native-base'
 import Alignment from './AlignmentContainer'
 import * as language from '../assets/styles/language_strings'
 import homeImg from '../assets/imgs/home.png'
@@ -11,7 +11,6 @@ import profileImg from '../assets/imgs/profile.png'
 import achievementsImg from '../assets/imgs/achievements.png'
 import downloadImg from '../assets/imgs/download.png'
 import { Image } from 'react-native'
-
 
 class FooterBar extends Component {
 
@@ -21,7 +20,7 @@ class FooterBar extends Component {
 
  render() {
     let homePage =
-      <Button  active={this.isActiveTab("home")} onPress = {() => Actions.home()} key={"home"}>
+      <Button active={this.isActiveTab("home")} onPress = {() => Actions.home()} key={"home"}>
       <Image style={{width: 30, height: 30}} source = {homeImg} />
       </Button>
 
@@ -46,11 +45,13 @@ class FooterBar extends Component {
     return (
       <View>
         {this.props.activeTab != "slide" && this.props.activeTab != "finishedLesson" ?
+
           <Footer>
-            <FooterTab>
+            <FooterTab style={{backgroundColor: 'white'}}>
               {pageList}
             </FooterTab>
           </Footer>
+
           :
           null
         }
