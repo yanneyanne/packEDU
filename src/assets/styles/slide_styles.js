@@ -11,7 +11,8 @@ var styles = StyleSheet.create({
         flex: 1,
         alignItems:'center',
         justifyContent:'center',
-        padding: 15
+        padding: 15,
+        marginBottom: 60
     },
 
     progress: {
@@ -22,7 +23,7 @@ var styles = StyleSheet.create({
         position: 'absolute',
         bottom: 5,
         left: 5,
-        right: 5
+        right: 5,
     },
 
     nextPrevButtonsContainer: {
