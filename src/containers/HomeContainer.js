@@ -4,30 +4,54 @@ import { bindActionCreators } from 'redux'
 import { ActionCreators } from '../actions'
 import ReactNative from 'react-native'
 import { Actions } from 'react-native-router-flux'
-const {
-  View,
-  TouchableHighlight
-} = ReactNative
-
-import { Container, Content, Footer, FooterTab, Button, Icon, Badge, Text } from 'native-base'
-import styles from '../assets/styles/home_styles'
+import { Content, Text } from 'native-base'
 import Courses from './CoursesContainer.js'
-import RemoteCourses from './RemoteCoursesContainer.js'
+import styles from '../assets/styles/home_styles'
+import ResumeSessionButton from './ResumeSessionButtonContainer'
+import { View } from 'native-base'
+import { Map } from 'immutable'
+import { StyleSheet } from 'react-native'
+import BackgroundFetch from 'react-native-background-fetch'
+import { networkStatus } from '../lib/networkStatus'
 
 class Home extends Component {
+
+  componentDidMount() {
+    this.props.loadLastSession()
+    BackgroundFetch.configure( {
+      stopOnTerminate: false
+    }, (() => {
+        if (this.props.downloadQueue != []) {
+          this.props.downloadRemoteCourse(this.props.downloadQueue[0])
+          if(this.props.localCourses.has(this.props.downloadQueue[0])){
+            this.props.removeDownloadQueue(this.props.downloadQueue[0])
+          }
+      }
+      BackgroundFetch.finish();
+    }), function(error) {
+      console.log(error)
+    })
+  }
+
   render() {
     return (
-      <Container style={{marginTop: 63}}>
-        <View style={styles.displayContainer}>
-          <Courses/>
-        </View>
-      </Container>
+      <View style={StyleSheet.flatten(styles.content)}>
+        <Courses />
+        {this.props.lastSession.isEmpty() ?
+            <View></View>
+            :
+          <ResumeSessionButton style={styles.resumeButton}/>
+        }
+      </View>
     )
   }
 }
 
 function mapStateToProps(state) {
   return {
+    lastSession: state.activeCourse.get('lastSession') || Map(),
+    downloadQueue: state.download.get('downloadQueue') || [],
+    localCourses : state.courses
   }
 }
 

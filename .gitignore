@@ -61,3 +61,4 @@ jest/*
 .*.swp
 .*.swo
 
+android/gradle.properties

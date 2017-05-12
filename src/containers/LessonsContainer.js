@@ -3,16 +3,26 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { ActionCreators } from '../actions'
 import { Actions } from 'react-native-router-flux'
-import { Content, Button, Text} from 'native-base'
+import { Content, Button, Text } from 'native-base'
+import { Bar } from 'react-native-progress'
+import Storage from '../lib/storage.js'
+import Alignment from './AlignmentContainer'
+import ReactNative from 'react-native'
+import styles from '../assets/styles/lessons_styles'
+import { StyleSheet } from 'react-native'
+
+const {
+  View
+} = ReactNative
 
 class Lessons extends Component {
 
   getLessons() {
-    return this.props.lessons || [] 
+    return this.props.lessons || []
   }
 
   getCourseId() {
-    return this.props.courseId 
+    return this.props.courseId
   }
 
   startLesson(courseId, lesson) {
@@ -20,19 +30,42 @@ class Lessons extends Component {
     Actions.slide()
   }
 
+  removeCourse(courseId) {
+    this.props.removeLocalCourse(courseId).then(() => {
+      if(this.props.lastSessionCourseId == courseId){
+        this.props.removeLastSession()
+      }
+      Actions.home()
+    })
+  }
+
+
   render() {
     return (
-      <Content style={{marginTop: 65}}>
+      <View style={StyleSheet.flatten(styles.content)}>
         {this.getLessons().map((lesson) => {
           return (
-            <Button key={lesson} onPress = {() => this.startLesson(this.getCourseId(), lesson)}>
-              <Text>
-                {lesson}
-              </Text>
-            </Button>
+            <View key={lesson.get('name')} style={styles.lessonButtonContainer}>
+              <Button bordered style={StyleSheet.flatten(styles.lessonButton)}
+                onPress = {() => this.startLesson(this.getCourseId(), lesson.get('name'))}>
+                <Text>
+                  {lesson.get('name')}
+                </Text>
+              </Button>
+              <Bar style={styles.progress} height={3} width={230} borderRadius={0} borderWidth={0}
+                progress={lesson.get('progress')}/>
+            </View>
           )
         })}
-      </Content>
+        <View style = {styles.removeCourseContainer}>
+          <Button transparent block style = {StyleSheet.flatten(styles.removeCourseButton)}
+            onPress = {() => this.removeCourse(this.getCourseId())}>
+            <Text style={StyleSheet.flatten(styles.removeCourseButtonText)}>
+              Delete this course
+            </Text>
+          </Button>
+        </View>
+      </View>
     )
   }
 }
@@ -40,7 +73,8 @@ class Lessons extends Component {
 function mapStateToProps(state) {
   return {
     courseId: state.activeCourse.get('id'),
-    lessons: state.activeCourse.get('lessons')
+    lessons: state.activeCourse.get('lessons'),
+    lastSessionCourseId: state.activeCourse.get('lastSession').get('courseId')
   }
 }
 

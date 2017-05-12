@@ -24,11 +24,11 @@ class Api {
   }
 
   static xhr(route, params, verb) {
-    const host = 'http://localhost:3000'
+    const host = 'https://packedu-rest.herokuapp.com'
     const url = `${host}${route}`
     let options = Object.assign({ method: verb }, params ? { body: JSON.stringify(params) } : null );
     options.headers = Api.headers()
-    
+
     return fetch(url,options).then((response) => {
       let json = response.json()
       if(response.ok) {

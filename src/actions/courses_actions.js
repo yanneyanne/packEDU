@@ -7,25 +7,54 @@ export function loadLocalCourses() {
   return (dispatch, getState) => {
     console.log("Loading local courses in actions")
     return Storage.getCourses().then( localCourses => {
-      dispatch(dispatchAddLocalCourses({
+      dispatch(dispatchLocalCourses({
         courses: localCourses
       }))
     })
   }
 }
 
-function dispatchAddLocalCourses({ courses }) {
+export function loadOfflineCourses() {
+  return (dispatch, getState) => {
+    return Storage.getOfflineCourses().then (offlineCourses => {
+      dispatch(dispatchOfflineCourses({
+        courses: offlineCourses
+      }))
+    })
+  }
+}
+
+export function removeLocalCourse(courseId) {
+  return(dispatch, getState) => {
+    return Storage.removeCourse(courseId).then( () => {
+      return Storage.getCourses().then( localCourses => {
+        dispatch(dispatchLocalCourses({
+          courses: localCourses
+        }))
+      })
+    })
+  }
+}
+
+function dispatchLocalCourses({ courses }) {
   return {
     type: types.LOAD_LOCAL_COURSES,
     courses
   }
 }
 
+function dispatchOfflineCourses({ courses }) {
+  return {
+    type: types.SET_STORED_REMOTE_COURSES,
+    courses
+  }
+}
+
 export function downloadRemoteCourse(courseId) {
   return (dispatch, getState) => {
-    const route = '/courseMaterial/' + courseId
+    const route = '/course/material/' + courseId
     return Api.get(route).then((resp) => {
-      return retrieveEvaluators(resp.material).then(() =>{
+      return retrieveEvaluators(resp.lessons).then(() =>{
         dispatch(dispatchDownloadRemoteCourse({
           course: resp 
         }))
@@ -34,14 +63,22 @@ export function downloadRemoteCourse(courseId) {
   }
 }
 
-async function retrieveEvaluators(material) {
-  let ids = identifyEvaluators(material)
+function dispatchDownloadRemoteCourse({ course }) {
+  return {
+    type: types.DOWNLOAD_REMOTE_COURSE,
+    course
+  }
+}
+
+async function retrieveEvaluators(lessons) {
+  let ids = identifyEvaluators(lessons)
   const neededEvaluators = await Storage.evaluatorsToDownload(ids)
   downloadNeededEvaluators(neededEvaluators)
 }
 
 async function downloadNeededEvaluators(needed) {
-  const route = '/getEvaluator/'
+  if (!needed) return
+  const route = '/course/getEvaluator/'
   needed.forEach((id) => {
     Api.get(route + id).then((resp) => {
       Storage.saveEvaluator(resp.id, resp.script) 
@@ -49,35 +86,27 @@ async function downloadNeededEvaluators(needed) {
   }) 
 }
 
-function identifyEvaluators(courseMaterial) {
-  //Loop through the material looking for evaluators
+function identifyEvaluators(lessons) {
+  //Loop through the material for each lesson looking for evaluators
   let evaluators = []
   let searchTerm = "evaluator"
   let alphanumeric = /\w+/
   let idx = 0
-  courseMaterial.forEach((lesson) => {
-    let lessonMaterial = lesson[1]
+  lessons.forEach((lesson) => {
     while (idx != -1) {
-      idx = lessonMaterial.indexOf(searchTerm, idx)
+      idx = lesson.material.indexOf(searchTerm, idx)
       if (idx != -1) {
         idx += searchTerm.length
-        while (!alphanumeric.test(lessonMaterial.charAt(idx)) && idx < lessonMaterial.length) {
+        while (!alphanumeric.test(lesson.material.charAt(idx)) && idx < lesson.material.length) {
           idx++
         }
         let keyEnd = idx+1
-        while (alphanumeric.test(lessonMaterial.charAt(keyEnd)) && keyEnd < lessonMaterial.length) {
+        while (alphanumeric.test(lesson.material.charAt(keyEnd)) && keyEnd < lesson.material.length) {
           keyEnd++
         }
-        evaluators.push(lessonMaterial.slice(idx, keyEnd))
+        evaluators.push(lesson.material.slice(idx, keyEnd))
       }
     }
   })
   return evaluators
-}
-
-function dispatchDownloadRemoteCourse({ course }) {
-  return {
-    type: types.DOWNLOAD_REMOTE_COURSE,
-    course
-  }
 }
